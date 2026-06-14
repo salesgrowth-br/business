@@ -830,6 +830,9 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-right {
@@ -1428,8 +1431,7 @@ footer {
     <div class="portrait-wrap">
       <div class="portrait-glow"></div>
       <div class="portrait-ring"></div>
-      <div class="portrait-inner">
-        <svg style="width:100%;height:100%;padding:17px;background:#030a30;" width="500" height="399" viewBox="0 0 500 399" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="portrait-inner"><svg style="width:100%;height:100%;padding:17px;background:#030a30;" width="500" height="399" viewBox="0 0 500 399" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L36.4463 348.376L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364H436.584C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589V244.59L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L411.683 48.208L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L83.2139 97.542L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z" fill="url(#paint0_linear_55_2)" stroke="black"/>
 <defs>
 <linearGradient id="paint0_linear_55_2" x1="-9.30021e-06" y1="399" x2="499.259" y2="-0.538086" gradientUnits="userSpaceOnUse">
@@ -1438,8 +1440,7 @@ footer {
 </linearGradient>
 </defs>
 </svg>
-
-      </div>
+</div>
       <img src="data:image/png;base64,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" alt="Perfil verificado" class="verify-badge" title="Perfil verificado">
     </div>
 
@@ -1447,7 +1448,7 @@ footer {
       Sales <span class="hero-name-alt">Growth</span>
     </h1>
 
-    <div class="hero-role">Gestor de tráfego pago</div>
+    <div class="hero-role">Tráfego Pago & Performance</div>
 
     <p class="hero-desc">
       Expert no <em>Meta Ads</em> & <em>Google Ads</em>.
