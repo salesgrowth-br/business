@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Growth Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Tema Claro (default) */
+  --bg:#f4f4f6;--w:#fff;--sf2:#f9f9fb;--sf3:#f2f2f4;
+  --b:#e2e2e8;--b2:#c4c4cc;
+  --t:#0a0a10;--t2:#3a3a48;--t3:#6e6e80;--t4:#9898a8;
+  --blue:#0011CE;--blue2:#0015FF;--blueg:rgba(0,17,206,.08);--blueb:rgba(0,17,206,.18);
+  --green:#007a50;--gbg:#ebf7f1;--gbr:rgba(0,122,80,.2);
+  --red:#b83030;--rbg:#fef0ee;--rbr:rgba(184,48,48,.18);
+  --amber:#8f6000;--abg:#fdf3e3;--abr:rgba(143,96,0,.2);
+  --fd:'Inclusive Sans',system-ui,sans-serif;
+  --fs:'Inter',system-ui,sans-serif;
+  --r:12px;--rs:8px;
+  --sh:0 1px 2px rgba(0,0,0,.04),0 3px 10px rgba(0,0,0,.04);
+  --sh2:0 2px 8px rgba(0,0,0,.07),0 12px 32px rgba(0,0,0,.08);
+  --sb-w:228px;
+}
+/* Tema Escuro */
+[data-theme="dark"]{
+  --bg:#0d0d12;--w:#16161e;--sf2:#1c1c26;--sf3:#222230;
+  --b:rgba(255,255,255,.07);--b2:rgba(255,255,255,.14);
+  --t:#f0f0f8;--t2:#c0c0d0;--t3:#7878a0;--t4:#5050688;
+  --blueg:rgba(0,17,206,.18);--gbg:rgba(0,122,80,.12);--abg:rgba(143,96,0,.12);--rbg:rgba(184,48,48,.12);
+  --sh:0 1px 3px rgba(0,0,0,.3);--sh2:0 4px 20px rgba(0,0,0,.5);
+}
+html,body{background:var(--bg);color:var(--t);font-family:var(--fd);-webkit-font-smoothing:antialiased;min-height:100vh;font-size:14px;line-height:1.5;transition:background .2s,color .2s}
+
+/* ════ LAYOUT ════ */
+.app{display:flex;min-height:100vh}
+/* ── SIDEBAR ── */
+.sb{
+  width:var(--sb-w);flex-shrink:0;
+  background:var(--w);border-right:1px solid var(--b);
+  position:fixed;top:0;left:0;height:100vh;
+  z-index:90;overflow:hidden;
+  transition:width .28s cubic-bezier(.4,0,.2,1),background .2s,border-color .2s;
+}
+.sb-inner{display:flex;flex-direction:column;height:100%;min-width:var(--sb-w);overflow-y:auto;overflow-x:hidden}
+/* Logo */
+.sb-logo{display:flex;align-items:center;gap:9px;padding:18px 16px;border-bottom:1px solid var(--b);text-decoration:none;color:var(--t);white-space:nowrap;overflow:hidden;transition:opacity .15s;flex-shrink:0}
+.sb-logo:hover{opacity:.75}
+.sb-logo:hover .sb-logo-name{color:var(--blue)}
+.sb-logo-name{transition:color .15s;font-family:var(--fs);font-size:13px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.sb-logo-pill{font-family:var(--fs);font-size:9px;background:var(--blueg);color:var(--blue);border:1px solid var(--blueb);padding:2px 7px;border-radius:10px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;transition:opacity .18s}
+/* Toggle button */
+.sb-toggle{display:none}
+.sb-toggle-fixed{position:fixed;top:17px;left:calc(var(--sb-w) - 13px);width:26px;height:26px;background:var(--w);border:1px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--t4);box-shadow:var(--sh);transition:left .28s cubic-bezier(.4,0,.2,1),all .15s;z-index:95}
+.sb-toggle-fixed:hover{color:var(--t);border-color:var(--b2);box-shadow:var(--sh2)}
+/* Clients toggle */
+.sb-item .sb-arrow{font-size:12px;margin-left:auto;color:var(--t4);transition:transform .22s;flex-shrink:0}
+.sb-item.sub-open .sb-arrow{transform:rotate(180deg)}
+.sb-sub{overflow:hidden;transition:max-height .28s ease,opacity .2s ease;max-height:0;opacity:0}
+.sb-sub.open{max-height:320px;opacity:1}
+.sb-logo-name{font-family:var(--fs);font-size:13px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.sb-logo-pill{font-family:var(--fs);font-size:9px;background:var(--blueg);color:var(--blue);border:1px solid var(--blueb);padding:2px 7px;border-radius:10px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.sb-body{flex:1;padding:10px 10px;overflow-y:auto}
+.sb-sec{font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--t4);padding:14px 8px 6px;white-space:nowrap}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--rs);font-size:13px;color:var(--t3);cursor:pointer;transition:all .12s;border:none;background:none;width:100%;text-align:left;font-family:var(--fd);white-space:nowrap}
+.sb-item:hover{color:var(--t2);background:var(--sf3)}
+.sb-item.on{color:var(--t);background:var(--sf3);font-weight:500}
+.sb-item.on .sb-ic{color:var(--blue)}
+.sb-ic{font-size:17px;flex-shrink:0;color:var(--t4);transition:color .12s;width:20px;text-align:center}
+.sb-item:hover .sb-ic{color:var(--t3)}
+.sb-badge{margin-left:auto;font-family:var(--fs);font-size:9px;font-weight:700;background:var(--rbg);color:var(--red);padding:2px 7px;border-radius:10px;border:1px solid var(--rbr)}
+/* client sub-list */
+.sb-sub{padding-left:30px;margin-top:2px;margin-bottom:4px}
+.sb-si{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--rs);font-size:12px;color:var(--t3);cursor:pointer;transition:all .12s;border:none;background:none;width:100%;text-align:left;font-family:var(--fd)}
+.sb-si:hover{color:var(--t);background:var(--sf3)}
+.sb-av{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:8px;font-weight:700;flex-shrink:0;overflow:hidden;border:1px solid var(--b)}
+.sb-av img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.sb-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-left:auto}
+/* footer */
+.sb-foot{padding:10px;border-top:1px solid var(--b)}
+.sb-theme{display:flex;background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:2px;gap:1px;margin-bottom:10px}
+.sb-th{flex:1;padding:5px 4px;border-radius:6px;font-family:var(--fs);font-size:10px;font-weight:500;cursor:pointer;color:var(--t4);transition:all .12s;border:none;background:none;text-align:center;white-space:nowrap}
+.sb-th.on{background:var(--w);color:var(--t);box-shadow:var(--sh)}
+.sb-user{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:var(--rs);cursor:pointer;transition:background .12s}
+.sb-user:hover{background:var(--sf3)}
+.sb-uav{width:30px;height:30px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sb-uname{font-size:12px;font-weight:600;font-family:var(--fs);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-urole{font-size:10px;color:var(--t4);margin-top:1px;white-space:nowrap}
+/* vsw in sidebar footer */
+.vsw{display:flex;background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:2px;gap:1px;margin-bottom:8px}
+.vs{flex:1;padding:5px 8px;border-radius:6px;font-family:var(--fs);font-size:11px;font-weight:500;cursor:pointer;color:var(--t4);transition:all .12s;border:none;background:none;text-align:center}
+.vs.on{background:var(--w);color:var(--t);box-shadow:var(--sh)}
+.chip{font-size:9px;font-weight:600;padding:2px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;font-family:var(--fs);letter-spacing:.04em;text-transform:uppercase}
+.chip-a{background:var(--blueg);color:var(--blue);border:1px solid var(--blueb)}
+.chip-c{background:var(--gbg);color:var(--green);border:1px solid var(--gbr)}
+
+/* CONTENT */
+.content{margin-left:var(--sb-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.wrap{max-width:960px;width:100%;margin:0 auto;padding:28px 28px 80px}
+
+/* ════ COMMON ════ */
+.pg{display:none}.pg.on{display:block}
+.ph{margin-bottom:22px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ph h1{font-family:var(--fs);font-size:20px;font-weight:700;letter-spacing:-.025em}
+.ph p{font-size:12px;color:var(--t4);margin-top:3px}
+.slbl{font-family:var(--fs);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--t4);margin:22px 0 11px;display:flex;align-items:center;gap:8px}
+.slbl::after{content:'';flex:1;height:1px;background:var(--b)}
+.bx{font-family:var(--fs);font-size:9px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase}
+.bok{background:var(--gbg);color:var(--green);border:1px solid var(--gbr)}
+.bwn{background:var(--abg);color:var(--amber);border:1px solid var(--abr)}
+.bdk{background:var(--rbg);color:var(--red);border:1px solid var(--rbr)}
+.up{color:var(--green)}.dn{color:var(--red)}.wc{color:var(--amber)}
+
+/* ════ BUTTONS ════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 16px;border-radius:var(--rs);font-size:13px;font-weight:500;cursor:pointer;transition:all .14s;border:none;font-family:var(--fs);letter-spacing:-.01em}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#000faa}
+.btn-g{background:var(--gbg);color:var(--green);border:1px solid var(--gbr)}.btn-g:hover{background:#d2eee3}
+.btn-out{background:var(--w);color:var(--t);border:1px solid var(--b)}.btn-out:hover{border-color:var(--b2)}
+.btn-sm{padding:6px 12px;font-size:12px}.btn-full{width:100%}
+
+/* ════ BOX / CARD ════ */
+.box{background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
+.box-t{font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:13px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.ir{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--b)}.ir:last-child{border-bottom:none}
+.irl{font-size:11px;color:var(--t4)}.irv{font-size:13px;font-weight:500}
+
+/* ════ CLIENT GRID ════ */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ck{background:var(--w);border:1px solid var(--b);border-radius:var(--r);cursor:pointer;transition:all .15s;box-shadow:var(--sh);overflow:hidden}
+.ck:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:var(--sh2)}
+.ck-h{padding:15px 16px 13px;display:flex;align-items:flex-start;gap:11px}
+.ck-av{width:38px;height:38px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:11px;font-weight:700;overflow:hidden;border:1px solid var(--b)}
+.ck-av img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ck-n{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t)}
+.ck-s{font-size:11px;color:var(--t4);margin-top:2px}
+.ck-f{border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(3,1fr)}
+.cs{text-align:center;padding:11px 6px;border-right:1px solid var(--b)}.cs:last-child{border-right:none}
+.csv{font-family:var(--fs);font-size:15px;font-weight:700;letter-spacing:-.02em}
+.csl{font-size:9px;color:var(--t4);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+
+/* ════ DASHBOARD ════ */
+.dash-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fc{background:var(--w);border:1px solid var(--b);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.fc-hd{padding:13px 16px 12px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between}
+.fc-ht{font-family:var(--fs);font-size:13px;font-weight:600}
+.fc-hs{font-size:11px;color:var(--t4)}
+.fc-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--b);cursor:pointer;transition:background .1s}
+.fc-row:last-child{border-bottom:none}.fc-row:hover{background:var(--sf3)}
+.fc-av{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:9px;font-weight:700;flex-shrink:0;overflow:hidden;border:1px solid var(--b)}
+.fc-av img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.fc-name{font-size:13px;font-weight:500;flex:1}
+.fc-info{font-size:10px;color:var(--t4);margin-top:1px}
+
+/* ════ FICHA ════ */
+.back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--t4);cursor:pointer;margin-bottom:20px;transition:color .1s;background:none;border:none;font-family:var(--fd);padding:0}
+.back:hover{color:var(--t)}
+.fhead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.fav{width:46px;height:46px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:13px;font-weight:700;overflow:hidden;border:1px solid var(--b)}
+.fav img{width:100%;height:100%;object-fit:cover}
+.fn{font-family:var(--fs);font-size:19px;font-weight:700;letter-spacing:-.025em}
+.fs2{font-size:11px;color:var(--t4);margin-top:3px}
+
+/* ════ TABS ════ */
+.tabs{display:flex;border-bottom:1px solid var(--b);margin:14px 0 20px}
+.tb{padding:9px 14px;font-size:13px;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;background:none;border-left:none;border-right:none;border-top:none;font-family:var(--fd)}
+.tb:hover{color:var(--t2)}.tb.on{color:var(--t);border-bottom-color:var(--blue);font-weight:500}
+.tc{display:none}.tc.on{display:block}
+
+/* ════ PERIOD ════ */
+.period-bar{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.psel{position:relative}
+.pbtn{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--b);border-radius:var(--rs);background:var(--w);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--fd);color:var(--t);box-shadow:var(--sh);transition:border-color .12s}
+.pbtn:hover{border-color:var(--b2)}
+.pdrop{position:absolute;top:calc(100%+7px);left:0;background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:8px;box-shadow:var(--sh2);display:none;z-index:50;width:244px}
+.pdrop.open{display:block}
+.pdy{font-family:var(--fs);font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);padding:4px 6px 7px}
+.pdm{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.pm{padding:8px 4px;text-align:center;border-radius:var(--rs);font-size:12px;cursor:pointer;color:var(--t2);transition:all .1s;font-weight:500;border:none;background:none;font-family:var(--fd)}
+.pm:hover:not(.em){background:var(--sf3)}.pm.on{background:var(--blue);color:#fff}.pm.em{color:var(--b2);cursor:default}
+.pdsep{height:1px;background:var(--b);margin:6px 0}
+.add-btn{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:var(--rs);background:var(--t);color:#fff;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:var(--fs);transition:all .13s}
+.add-btn:hover{opacity:.85}
+
+/* ════ WEEKS ════ */
+.wk{background:var(--w);border:1px solid var(--b);border-radius:var(--r);margin-bottom:8px;overflow:hidden;box-shadow:var(--sh);transition:border-color .13s}
+.wk:hover{border-color:var(--b2)}
+.wk-h{display:flex;align-items:stretch;cursor:pointer;user-select:none;min-height:66px}
+.wk-lbl{display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;width:72px;background:var(--sf3);border-right:1px solid var(--b);padding:0;text-align:center;transition:background .12s}
+.wk-h:hover .wk-lbl{background:#e8e8ec}
+[data-theme="dark"] .wk-h:hover .wk-lbl{background:var(--sf2)}
+.wk-num{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--t);letter-spacing:-.04em;line-height:1}
+.wk-tag{font-family:var(--fs);font-size:8px;font-weight:500;color:var(--t4);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.wk-body{flex:1;padding:14px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.wk-per{font-family:var(--fs);font-size:14px;font-weight:500;color:var(--t);letter-spacing:-.01em}
+.wk-sub-row{display:flex;align-items:center;gap:6px;margin-top:5px}
+.wk-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.wk-dot-g{background:var(--green)}.wk-dot-a{background:var(--amber)}.wk-dot-gr{background:var(--t4);opacity:.4}
+.wk-sub-txt{font-size:11px;color:var(--t4)}
+.wk-sub-hi{color:var(--t2);font-weight:500}
+.wk-right{display:flex;align-items:center;gap:10px;padding:0 14px;flex-shrink:0;border-left:1px solid var(--b)}
+.wk-roas{font-family:var(--fs);font-size:16px;font-weight:700;min-width:40px;text-align:right}
+.wk-del{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--t4);cursor:pointer;padding:5px 9px;border-radius:6px;border:1px solid transparent;background:none;transition:all .12s;font-family:var(--fd)}
+.wk-del:hover{color:var(--red);border-color:var(--rbr);background:var(--rbg)}
+.wk-chev{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--b);color:var(--t4);background:var(--w);transition:all .14s;flex-shrink:0}
+.wk-h:hover .wk-chev{border-color:var(--b2)}
+.wk-b{display:none;border-top:1px solid var(--b)}.wk-b.open{display:block}
+
+/* ════ WEEK SUMMARY ════ */
+.wsum{padding:16px}
+/* indicadores na nova ordem: Invest, Leads, Vendas, Fat.Bruto, Lucro, ROAS */
+.wsum-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:10px}
+.wki{background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 8px;text-align:center}
+.wki.hi{background:var(--gbg);border-color:var(--gbr)}
+.wki-v{font-family:var(--fs);font-size:16px;font-weight:700;letter-spacing:-.025em;line-height:1}
+.wki-l{font-size:9px;color:var(--t4);margin-top:5px;text-transform:uppercase;letter-spacing:.07em}
+.wsum-meta{display:flex;gap:14px;background:var(--sf3);padding:10px 16px;border-top:1px solid var(--b);font-size:10px;color:var(--t4);align-items:center;flex-wrap:wrap}
+.wm-v{font-family:var(--fs);font-weight:500;color:var(--t2);margin-left:3px}
+
+/* ════ SPLIT PANELS ════ */
+.sp2{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.pn{background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:15px}
+.ptag{font-family:var(--fs);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;margin-bottom:11px}
+.tsg{background:var(--blueg);color:var(--blue);border:1px solid var(--blueb)}
+.tcl{background:var(--gbg);color:var(--green);border:1px solid var(--gbr)}
+.ptt{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t);margin-bottom:4px}
+.pss{font-size:11px;color:var(--t4);line-height:1.6;margin-bottom:13px}
+
+/* ════ FILE DROP ════ */
+.fd{border:1.5px dashed var(--b2);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;transition:all .15s;background:var(--w)}
+.fd:hover{border-color:var(--blue);background:var(--blueg)}
+.fd.has{border-color:var(--green);background:var(--gbg);border-style:solid;cursor:default}
+.fd.loading{border-color:var(--blue);background:var(--blueg);cursor:wait;border-style:solid}
+.fd-ic{font-size:20px;color:var(--t4);display:block;margin-bottom:6px}
+.fd-t{font-size:11px;color:var(--t3)}
+.fd-done{font-size:12px;color:var(--green);font-weight:500;display:flex;align-items:center;justify-content:center;gap:6px}
+.fd-ai{font-size:10px;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:5px}
+.spin{animation:sp .8s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ai-tag{font-family:var(--fs);font-size:9px;font-weight:600;background:var(--blueg);color:var(--blue);padding:2px 6px;border-radius:3px;border:1px solid var(--blueb)}
+/* PDF action buttons */
+.pdf-acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pdf-btn-sm{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;cursor:pointer;padding:5px 11px;border-radius:6px;border:1px solid var(--b);background:var(--w);color:var(--t2);transition:all .12s;font-family:var(--fs);text-decoration:none}
+.pdf-btn-sm:hover{border-color:var(--b2);color:var(--t)}
+.pdf-btn-sm.primary{background:var(--blueg);border-color:var(--blueb);color:var(--blue)}
+.pdf-btn-sm.primary:hover{background:rgba(0,17,206,.14)}
+.pdf-btn-sm.danger:hover{color:var(--red);border-color:var(--rbr);background:var(--rbg)}
+
+/* ════ META DATA ════ */
+.mdata{margin-top:13px}
+.mdata-h{font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--t4);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.mdata-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mi{background:var(--w);border:1px solid var(--b);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;transition:border-color .12s}
+.mi:hover{border-color:var(--b2)}
+.mi-left{display:flex;flex-direction:column;min-width:0}
+.mil{font-size:9px;font-weight:500;color:var(--t4);text-transform:uppercase;letter-spacing:.1em}
+.miv{font-family:var(--fs);font-size:15px;font-weight:700;color:var(--t);letter-spacing:-.01em;margin-top:3px}
+.mi-edt{font-size:9px;color:var(--t4);cursor:pointer;padding:3px 8px;border-radius:5px;border:1px solid var(--b);background:var(--sf3);transition:all .1s;white-space:nowrap;flex-shrink:0;margin-left:8px;font-family:var(--fs)}
+.mi-edt:hover{border-color:var(--blue);color:var(--blue);background:var(--blueg)}
+.mi-inp{font-family:var(--fs);font-size:14px;font-weight:700;border:1px solid var(--blue);border-radius:5px;padding:3px 8px;width:100px;outline:none;text-align:right;background:var(--w);color:var(--t)}
+
+/* ════ FORM ════ */
+.fg{margin-bottom:12px}
+.fl{font-family:var(--fs);font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:5px;display:block}
+.fi{width:100%;border:1px solid var(--b);border-radius:var(--rs);padding:9px 12px;font-size:14px;font-weight:400;color:var(--t);outline:none;background:var(--w);transition:border-color .15s;font-family:var(--fd)}
+.fi:focus{border-color:var(--blue)}.fi::placeholder{color:var(--t4);font-size:12px}
+select.fi{appearance:none;cursor:pointer;font-weight:500}
+textarea.fi{resize:none;font-size:13px;line-height:1.6}
+.fip{position:relative}.fip .sym{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--t4);pointer-events:none;font-family:var(--fs)}.fip .fi{padding-left:28px}
+
+/* ════ CALC PREVIEW ════ */
+.cp{background:var(--blueg);border:1px solid var(--blueb);border-radius:var(--rs);padding:13px;margin-bottom:12px;display:none}
+.cp-lbl{font-family:var(--fs);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:9px;font-weight:500}
+.cp-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cpi{text-align:center}
+.cpv{font-family:var(--fs);font-size:16px;font-weight:600}
+.cpl{font-size:9px;color:var(--t4);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ════ STATS CARD ════ */
+.stat-card{background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card.blue::after{background:var(--blue)}
+.stat-card.green::after{background:var(--green)}
+.stat-card.amber::after{background:var(--amber)}
+.stat-card.neutral::after{background:var(--b2)}
+.stat-v{font-family:var(--fs);font-size:24px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.stat-l{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);font-family:var(--fs)}
+.stat-sub{font-size:11px;color:var(--t4);margin-top:4px;display:flex;align-items:center;gap:5px}
+
+/* ════ CONTRACT LIST ROW ════ */
+.ct-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--b);transition:background .12s;cursor:pointer}
+.ct-row:last-child{border-bottom:none}
+.ct-row:hover{background:var(--sf3)}
+.ct-row-av{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:11px;font-weight:700;overflow:hidden;border:1px solid var(--b)}
+.ct-row-av img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ct-row-info{flex:1;min-width:0}
+.ct-row-name{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t)}
+.ct-row-meta{font-size:11px;color:var(--t4);margin-top:2px;display:flex;align-items:center;gap:8px}
+.ct-row-dot{width:3px;height:3px;border-radius:50%;background:var(--t4);flex-shrink:0}
+.ct-row-val{font-family:var(--fs);font-size:14px;font-weight:700;color:var(--t);flex-shrink:0}
+.ct-row-date{font-size:11px;color:var(--t4);text-align:right;flex-shrink:0}
+
+/* ════ NOTIF ════ */
+.ni{display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid var(--b);transition:background .12s}
+.ni:last-child{border-bottom:none}
+.ni:hover{background:var(--sf3)}
+.nic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ni-body{flex:1;min-width:0}
+.nit{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t);line-height:1.3}
+.nib{font-size:12px;color:var(--t4);margin-top:4px;line-height:1.6}
+.ni-foot{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.nitm{font-size:10px;color:var(--t4);font-family:var(--fs)}
+.ni-action{font-size:10px;color:var(--blue);font-family:var(--fs);font-weight:500;cursor:pointer;background:none;border:none;padding:0}
+.ni-unread{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:3px}
+
+/* ════ PDF UPLOAD ZONE ════ */
+.upload-zone{border:2px dashed var(--b2);border-radius:var(--r);padding:32px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--sf3);position:relative}
+.upload-zone:hover{border-color:var(--blue);background:var(--blueg)}
+.upload-zone.has{border-color:var(--green);background:var(--gbg);border-style:solid;cursor:default}
+.upload-zone.loading{border-color:var(--blue);background:var(--blueg);border-style:solid}
+.uz-icon{width:48px;height:48px;border-radius:12px;background:var(--w);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:var(--t3);box-shadow:var(--sh)}
+.uz-title{font-family:var(--fs);font-size:14px;font-weight:600;color:var(--t);margin-bottom:5px}
+.uz-sub{font-size:11px;color:var(--t4);line-height:1.6}
+.uz-badge{display:inline-flex;align-items:center;gap:5px;background:var(--w);border:1px solid var(--b);border-radius:20px;padding:4px 12px;font-size:10px;color:var(--t4);margin-top:12px;font-family:var(--fs)}
+/* uploaded state */
+.uz-done{display:flex;align-items:center;gap:14px;text-align:left}
+.uz-done-icon{width:44px;height:44px;border-radius:10px;background:var(--gbg);border:1px solid var(--gbr);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--green);flex-shrink:0}
+.uz-done-name{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--green)}
+.uz-done-meta{font-size:11px;color:var(--t4);margin-top:2px;display:flex;align-items:center;gap:6px}
+.uz-actions{display:flex;gap:7px;margin-top:14px;justify-content:center;flex-wrap:wrap}
+
+/* ════ CONTRACT ROW — redesigned ════ */
+.ct-row{display:grid;grid-template-columns:44px 1fr auto auto;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--b);transition:background .12s;cursor:pointer}
+.ct-row:last-child{border-bottom:none}
+.ct-row:hover{background:var(--sf3)}
+.ct-row-av{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:11px;font-weight:700;overflow:hidden;border:1px solid var(--b)}
+.ct-row-av img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ct-row-info{min-width:0}
+.ct-row-name{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct-row-meta{font-size:11px;color:var(--t4);margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ct-row-dot{width:3px;height:3px;border-radius:50%;background:var(--b2);flex-shrink:0}
+.ct-row-mid{text-align:center;min-width:100px}
+.ct-row-val{font-family:var(--fs);font-size:15px;font-weight:700;color:var(--t)}
+.ct-row-val-l{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--t4);margin-top:2px;font-family:var(--fs)}
+.ct-row-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+
+/* ════ NOTIF — responsivo ════ */
+.notif-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;min-width:0}
+.ni{display:flex;gap:14px;padding:18px 20px 20px;border-bottom:1px solid var(--b);transition:background .12s;align-items:flex-start}
+.ni:last-child{border-bottom:none}
+.ni:hover{background:var(--sf3)}
+.nic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;margin-top:1px}
+.ni-body{flex:1;min-width:0;padding-right:0}
+.nit{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t);line-height:1.35}
+.nib{font-size:12px;color:var(--t4);margin-top:5px;line-height:1.7}
+.ni-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px}
+.nitm{font-size:10px;color:var(--t4);font-family:var(--fs);display:flex;align-items:center;gap:5px}
+.ni-action{font-size:11px;color:var(--blue);font-family:var(--fs);font-weight:600;cursor:pointer;background:var(--blueg);border:1px solid var(--blueb);padding:5px 12px;border-radius:6px;white-space:nowrap;transition:all .12s;margin-right:0}
+.ni-action:hover{background:rgba(0,17,206,.14)}
+.ni-unread{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px;box-shadow:0 0 0 3px var(--blueg)}
+
+/* ════ CLIENT CONTRACT INFO GRID ════ */
+.cv-ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.cv-ct-cell{background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:13px 14px}
+.cv-ct-cell.highlight{background:var(--gbg);border-color:var(--gbr)}
+.cv-ct-cell.alert{background:var(--abg);border-color:var(--abr)}
+.cv-ct-cell-l{font-family:var(--fs);font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.cv-ct-cell-v{font-family:var(--fs);font-size:15px;font-weight:700;color:var(--t)}
+.cv-ct-cell-s{font-size:11px;color:var(--t4);margin-top:3px}
+
+/* ════ HINT ════ */
+.hint{font-size:10px;color:var(--t4);background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:9px 11px;display:flex;align-items:center;gap:7px;margin-bottom:12px}
+
+/* ════ LOGO UPLOAD ════ */
+.logo-up{width:70px;height:70px;border-radius:11px;border:1.5px dashed var(--b2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;background:var(--sf3);flex-shrink:0}
+.logo-up:hover{border-color:var(--blue)}.logo-up img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.logo-up-l{font-size:9px;color:var(--t4);text-align:center;line-height:1.5;z-index:1}
+.logo-up input{display:none}
+.logo-up-ov{position:absolute;inset:0;background:rgba(0,0,0,.32);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .14s;z-index:2}
+.logo-up:hover .logo-up-ov{opacity:1}
+
+/* ════ CONTRACT STRIPS ════ */
+.cts{background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:13px 18px;margin-bottom:9px;box-shadow:var(--sh);display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .13s}
+.cts:hover{border-color:var(--b2)}.cts.warn{border-color:var(--abr);background:var(--abg)}
+.cts-av{width:34px;height:34px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:10px;font-weight:700;overflow:hidden;border:1px solid var(--b)}
+.cts-av img{width:100%;height:100%;object-fit:cover}
+.cts-n{font-family:var(--fs);font-size:13px;font-weight:600}.cts-m{font-size:10px;color:var(--t4);margin-top:1px}
+.cts-v{font-family:var(--fs);font-size:14px;font-weight:700}.cts-d{font-size:10px;color:var(--t4);margin-top:1px;text-align:right}
+
+/* ════ INVITE ════ */
+.inv-card{background:var(--t);border-radius:var(--r);padding:20px;margin-top:14px;color:#fff}
+.inv-t{font-family:var(--fs);font-size:14px;font-weight:700;margin-bottom:5px}
+.inv-s{font-size:11px;opacity:.5;line-height:1.8;margin-bottom:14px}
+.inv-link{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:var(--rs);padding:10px 13px;font-size:11px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px}
+.inv-link span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.6;font-family:var(--fs)}
+.inv-copy{font-family:var(--fs);font-size:11px;font-weight:500;color:#fff;cursor:pointer;padding:4px 11px;border-radius:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);transition:all .1s;white-space:nowrap;flex-shrink:0}
+.inv-copy:hover{background:rgba(255,255,255,.2)}
+
+/* ════ NOTIF ════ */
+.ni{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--b)}.ni:last-child{border-bottom:none}
+.nic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.nit{font-family:var(--fs);font-size:13px;font-weight:600}.nib{font-size:11px;color:var(--t4);margin-top:3px;line-height:1.6}
+.nitm{font-size:10px;color:var(--t4);margin-top:3px}
+
+/* ════ SUCCESS ════ */
+.sbox{text-align:center;padding:22px;border:1px solid var(--gbr);background:var(--gbg);border-radius:var(--r)}
+.sbox-ico{font-size:26px;margin-bottom:7px}
+.sbox-t{font-family:var(--fs);font-size:14px;font-weight:700;color:var(--green)}
+.sbox-s{font-size:11px;color:var(--t4);margin-top:4px;line-height:1.7}
+
+/* ════ MODAL ════ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:200;display:none;align-items:flex-start;justify-content:center;padding-top:60px;backdrop-filter:blur(4px)}
+.overlay.on{display:flex}
+.modal{background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:22px;width:460px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.14)}
+.modal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-t{font-family:var(--fs);font-size:15px;font-weight:700;letter-spacing:-.02em}
+.modal-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--t4);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all .1s;padding:0}
+.modal-x:hover{background:var(--sf3);color:var(--t)}
+.mfg{margin-bottom:13px}
+.ml{font-family:var(--fs);font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:5px;display:block}
+.mi2{width:100%;border:1px solid var(--b);border-radius:var(--rs);padding:9px 12px;font-size:13px;color:var(--t);outline:none;font-family:var(--fd);transition:border-color .15s;background:var(--w)}
+.mi2:focus{border-color:var(--blue)}.mi2::placeholder{color:var(--t4)}
+select.mi2{appearance:none;cursor:pointer}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mfd{border:1.5px dashed var(--b2);border-radius:var(--rs);padding:13px;text-align:center;cursor:pointer;font-size:11px;color:var(--t3);transition:all .15s;background:var(--sf3);font-family:var(--fs)}
+.mfd:hover{border-color:var(--blue)}.mfd.has{border-color:var(--green);background:var(--gbg);color:var(--green);border-style:solid;font-weight:500}
+.mbr{display:flex;gap:9px;margin-top:5px}
+
+/* ════ CONFIRM ════ */
+.confirm-box{background:var(--w);border:1px solid var(--rbr);border-radius:var(--r);padding:18px;position:fixed;bottom:24px;right:24px;z-index:300;display:none;max-width:290px;box-shadow:var(--sh2)}
+.confirm-box.on{display:block}
+.confirm-t{font-family:var(--fs);font-size:13px;font-weight:600;margin-bottom:4px}
+.confirm-s{font-size:10px;color:var(--t4);margin-bottom:13px;line-height:1.6}
+.confirm-btns{display:flex;gap:8px}
+
+/* ════ PDF VIEWER ════ */
+.pdf-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400;display:none;flex-direction:column;backdrop-filter:blur(4px)}
+.pdf-ov.on{display:flex}
+.pdf-bar{background:var(--t);display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;flex-shrink:0;gap:12px}
+.pdf-fname{font-size:12px;color:rgba(255,255,255,.65);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-acts-bar{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pdf-bar-btn{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;cursor:pointer;padding:6px 13px;border-radius:var(--rs);border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;transition:all .12s;font-family:var(--fs);text-decoration:none}
+.pdf-bar-btn:hover{background:rgba(255,255,255,.16)}
+.pdf-close{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.65);font-size:18px;transition:all .12s}
+.pdf-close:hover{background:rgba(255,255,255,.14);color:#fff}
+.pdf-body{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:24px;background:rgba(0,0,0,.45)}
+.pdf-ph{background:var(--w);border-radius:var(--r);width:100%;max-width:680px;min-height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--t3);padding:48px 32px;text-align:center}
+.pdf-ph i{font-size:48px;color:var(--b2)}
+.pdf-ph-t{font-family:var(--fs);font-size:15px;font-weight:600;color:var(--t2)}
+.pdf-ph-s{font-size:11px;color:var(--t4);line-height:1.7;max-width:320px}
+
+/* ════ CLIENT VIEW ════ */
+.cv-wrap{max-width:680px;margin:0 auto}
+.cv-hero{border-radius:var(--r);margin-bottom:20px;overflow:hidden;border:1px solid var(--b);box-shadow:var(--sh2)}
+.cv-hero-top{background:var(--t);padding:24px;position:relative;overflow:hidden}
+.cv-hero-top::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(0,17,206,.35),transparent 65%);pointer-events:none}
+.cv-logo-row{display:flex;align-items:center;gap:13px;margin-bottom:18px;position:relative;z-index:1}
+.cv-logo{width:42px;height:42px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:12px;font-weight:700;flex-shrink:0;color:#fff}
+.cv-logo img{width:100%;height:100%;object-fit:cover}
+.cv-brand{font-size:9px;color:rgba(255,255,255,.38);letter-spacing:.12em;text-transform:uppercase;font-family:var(--fs)}
+.cv-cname{font-family:var(--fs);font-size:18px;font-weight:700;color:#fff;margin-top:2px;letter-spacing:-.02em}
+/* KPIs nova ordem: Invest, Leads, Vendas, Fat.Bruto, Lucro, ROAS */
+.cv-kpis{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cvhs{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:12px;text-align:center}
+.cvhs.hi{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.07)}
+.cvhs-v{font-family:var(--fs);font-size:16px;font-weight:700;color:#fff}
+.cvhs-l{font-size:9px;color:rgba(255,255,255,.38);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.cv-hero-bot{background:var(--sf3);border-top:1px solid var(--b);padding:10px 24px;display:flex;align-items:center;gap:7px;font-size:10px;color:var(--t4)}
+.cv-pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.cv-sec{font-family:var(--fs);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--t4);margin:20px 0 11px;display:flex;align-items:center;gap:8px}
+.cv-sec::after{content:'';flex:1;height:1px;background:var(--b)}
+.cv-fill{padding:16px}
+.cv-notice{background:var(--gbg);border:1px solid var(--gbr);border-radius:var(--rs);padding:11px 13px;font-size:10px;color:var(--green);display:flex;align-items:flex-start;gap:7px;margin-bottom:15px;line-height:1.7}
+.cv-ct{background:var(--w);border:1px solid var(--b);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
+
+/* ════ CONTRACT ADMIN TAB ════ */
+.ct-dark{background:var(--t);border-radius:var(--r);padding:22px;margin-bottom:12px;position:relative;overflow:hidden}
+.ct-dark::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,17,206,.4),transparent 70%);pointer-events:none}
+.ct-dark-inner{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between}
+.ct-plan-lbl{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:6px;font-family:var(--fs)}
+.ct-plan-val{font-family:var(--fs);font-size:26px;font-weight:700;letter-spacing:-.025em;color:#fff}
+.ct-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.ct-cell{background:var(--w);border:1px solid var(--b);border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)}
+.ct-cell-l{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:6px;font-family:var(--fs)}
+.ct-cell-v{font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t)}
+
+/* ════ EMPRESA LOGO ════ */
+.emp-logo-wrap{width:90px;height:90px;border-radius:14px;border:1.5px dashed var(--b2);cursor:pointer;position:relative;overflow:hidden;background:var(--sf3);transition:border-color .15s}
+.emp-logo-wrap:hover{border-color:var(--blue)}
+.emp-logo-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:1}
+.emp-logo-inner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:0}
+.emp-logo-ov{position:absolute;inset:0;background:rgba(0,0,0,.36);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;z-index:2}
+.emp-logo-wrap:hover .emp-logo-ov{opacity:1}
+
+/* ════ CONTRACT SECTION CARD ════ */
+.ct-section-card{background:var(--w);border:1px solid var(--b);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;min-width:0}
+.ct-section-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--b);background:var(--sf3)}
+.ct-section-title{display:flex;align-items:center;gap:8px;font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t)}
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:1024px){
+  :root{--sb-w:200px}
+  .wsum-kpis{grid-template-columns:repeat(3,1fr)}
+  .cv-kpis{grid-template-columns:repeat(3,1fr)}
+}
+/* mobile overlay bg */
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:89;backdrop-filter:blur(2px)}
+.sb-overlay.on{display:block}
+@media(max-width:900px){
+  .sb{transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);box-shadow:none;width:var(--sb-w)!important}
+  .sb.open{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,.14)}
+  .content{margin-left:0!important}
+  .hamburger{display:flex}
+  .sb-toggle-fixed{display:none!important}
+  .cg,.g2,.sp2,.ct-3,.mrow{grid-template-columns:1fr}
+  .wsum-kpis{grid-template-columns:repeat(3,1fr)}
+  .mdata-grid{grid-template-columns:1fr}
+  .cv-kpis{grid-template-columns:repeat(3,1fr)}
+  .wrap{padding:20px 16px 60px}
+}
+@media(max-width:520px){
+  .wsum-kpis{grid-template-columns:repeat(2,1fr)}
+  .cv-kpis{grid-template-columns:repeat(2,1fr)}
+  .notif-stats{grid-template-columns:1fr}
+  .ct-row{grid-template-columns:40px 1fr;gap:10px}
+  .ct-row-mid,.ct-row-right{display:none}
+  .cv-ct-grid{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .notif-stats{grid-template-columns:1fr 1fr}
+  .ct-row{grid-template-columns:40px 1fr auto}
+  .ct-row-mid{display:none}
+  .ni{padding:16px}
+  .wrap{padding:20px 16px 60px}
+}
+.hamburger{display:none;position:fixed;top:14px;left:14px;z-index:95;width:38px;height:38px;border-radius:10px;background:var(--w);border:1px solid var(--b);align-items:center;justify-content:center;cursor:pointer;font-size:19px;color:var(--t3);box-shadow:var(--sh);transition:all .12s}
+.hamburger:hover{border-color:var(--b2);color:var(--t)}
+</style>
+</head>
+<body>
+
+<!-- PDF VIEWER -->
+<div class="pdf-ov" id="pdf-ov">
+  <div class="pdf-bar">
+    <i class="ti ti-file-type-pdf" style="font-size:18px;color:rgba(255,255,255,.5);flex-shrink:0"></i>
+    <div class="pdf-fname" id="pdf-fname">documento.pdf</div>
+    <div class="pdf-acts-bar">
+      <a class="pdf-bar-btn" href="#" id="pdf-dl-btn" download onclick="return false"><i class="ti ti-download" style="font-size:13px"></i>Baixar</a>
+      <div class="pdf-close" onclick="closePDF()">×</div>
+    </div>
+  </div>
+  <div class="pdf-body">
+    <div class="pdf-ph">
+      <i class="ti ti-file-type-pdf"></i>
+      <div class="pdf-ph-t" id="pdf-ph-name">documento.pdf</div>
+      <div class="pdf-ph-s">No ambiente de produção o PDF abre aqui em tela cheia. Use o botão abaixo para baixar.</div>
+      <a class="btn btn-blue" href="#" id="pdf-dl-btn2" download onclick="dlSim();return false" style="margin-top:8px;text-decoration:none"><i class="ti ti-download"></i>Baixar PDF</a>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: perfil do admin -->
+<div class="overlay" id="ov-profile" onclick="if(event.target===this)cM('ov-profile')">
+  <div class="modal" style="width:400px">
+    <div class="modal-h"><div class="modal-t">Meu perfil</div><button class="modal-x" onclick="cM('ov-profile')">×</button></div>
+    <!-- Avatar upload -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--b)">
+      <div style="position:relative;flex-shrink:0">
+        <div id="profile-av-big" style="width:64px;height:64px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:22px;font-weight:700;color:#fff;overflow:hidden;cursor:pointer" onclick="document.getElementById('profile-img-inp').click()">G</div>
+        <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;background:var(--t);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--w)" onclick="document.getElementById('profile-img-inp').click()"><i class="ti ti-camera" style="font-size:11px;color:#fff"></i></div>
+        <input type="file" id="profile-img-inp" accept="image/*" style="display:none" onchange="updateAdminPhoto(this)">
+      </div>
+      <div>
+        <div style="font-family:var(--fs);font-size:14px;font-weight:600" id="profile-name-preview">Gabriel</div>
+        <div style="font-size:11px;color:var(--t4);margin-top:2px">Administrador · Sales Growth</div>
+        <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;padding:0;margin-top:5px;font-family:var(--fs)" onclick="document.getElementById('profile-img-inp').click()">Alterar foto</button>
+      </div>
+    </div>
+    <div class="mfg"><label class="ml">Nome</label><input class="mi2" id="profile-name" value="Gabriel" oninput="document.getElementById('profile-name-preview').textContent=this.value||'Gabriel'"></div>
+    <div class="mfg"><label class="ml">E-mail</label><input class="mi2" id="profile-email" type="email" placeholder="gabriel@salesgrowth.com.br"></div>
+    <div class="mfg"><label class="ml">WhatsApp</label><input class="mi2" id="profile-tel" placeholder="(00) 99999-0000"></div>
+    <div class="mfg"><label class="ml">Agência</label><input class="mi2" id="profile-agency" value="Sales Growth"></div>
+    <div class="mbr">
+      <button class="btn btn-out" onclick="cM('ov-profile')" style="flex:1">Cancelar</button>
+      <button class="btn btn-blue" onclick="saveProfile()" style="flex:1"><i class="ti ti-check"></i>Salvar perfil</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="confirm-box" id="confirm-box">
+  <div class="confirm-t" id="confirm-t">Confirmar exclusão</div>
+  <div class="confirm-s" id="confirm-s">Esta ação não pode ser desfeita.</div>
+  <div class="confirm-btns">
+    <button class="btn btn-out btn-sm" onclick="cancelConfirm()" style="flex:1">Cancelar</button>
+    <button class="btn btn-sm" id="confirm-ok" style="flex:1;background:var(--red);color:#fff">Excluir</button>
+  </div>
+</div>
+
+<!-- MODAL: adicionar semana -->
+<div class="overlay" id="ov-wk" onclick="if(event.target===this)cM('ov-wk')">
+  <div class="modal" style="width:370px">
+    <div class="modal-h"><div class="modal-t">Adicionar semana</div><button class="modal-x" onclick="cM('ov-wk')">×</button></div>
+    <div class="mfg"><label class="ml">De</label><input type="date" class="mi2" id="wk-de"></div>
+    <div class="mfg"><label class="ml">Até</label><input type="date" class="mi2" id="wk-ate"></div>
+    <div class="mbr"><button class="btn btn-out" onclick="cM('ov-wk')" style="flex:1">Cancelar</button><button class="btn btn-blue" onclick="addWk()" style="flex:1"><i class="ti ti-plus"></i>Criar</button></div>
+  </div>
+</div>
+
+<!-- MODAL: editar contrato -->
+<div class="overlay" id="ov-ct" onclick="if(event.target===this)cM('ov-ct')">
+  <div class="modal">
+    <div class="modal-h"><div class="modal-t">Editar contrato</div><button class="modal-x" onclick="cM('ov-ct')">×</button></div>
+    <div class="mfg"><label class="ml">Plano</label><select class="mi2" id="m-plano"><option>Pro</option><option>Básico</option><option>Premium</option></select></div>
+    <div class="mfg"><label class="ml">Valor mensal (R$)</label><input class="mi2" id="m-val" placeholder="Ex: 1800"></div>
+    <div class="mrow">
+      <div class="mfg"><label class="ml">Início</label><input type="date" class="mi2" id="m-ini"></div>
+      <div class="mfg"><label class="ml">Vencimento</label><input type="date" class="mi2" id="m-venc"></div>
+    </div>
+    <div class="mrow">
+      <div class="mfg"><label class="ml">Status</label><select class="mi2" id="m-status"><option>Ativo</option><option>Suspenso</option><option>Encerrado</option></select></div>
+      <div class="mfg"><label class="ml">Dia de pagamento</label><input class="mi2" id="m-pgto" placeholder="Ex: Todo dia 10" value="Todo dia 10"></div>
+    </div>
+    <div class="mfg"><label class="ml">Contrato assinado (PDF)</label><div class="mfd" id="mfd" onclick="tgMFD()"><i class="ti ti-upload"></i> Clique para anexar</div></div>
+    <div class="mbr"><button class="btn btn-out" onclick="cM('ov-ct')" style="flex:1">Cancelar</button><button class="btn btn-blue" onclick="saveCT()" style="flex:1"><i class="ti ti-check"></i>Salvar</button></div>
+  </div>
+</div>
+
+<!-- MODAL: novo cliente -->
+<div class="overlay" id="ov-nc" onclick="if(event.target===this)cM('ov-nc')">
+  <div class="modal" style="width:520px">
+    <div class="modal-h">
+      <div>
+        <div class="modal-t">Novo cliente</div>
+        <div style="font-size:11px;color:var(--t4);margin-top:2px">Preencha os dados para criar o perfil e enviar o convite de acesso.</div>
+      </div>
+      <button class="modal-x" onclick="cM('ov-nc')">×</button>
+    </div>
+
+    <!-- Logo + nome lado a lado -->
+    <div style="display:flex;align-items:flex-start;gap:16px;padding:16px;background:var(--sf3);border-radius:var(--rs);margin-bottom:18px;border:1px solid var(--b)">
+      <div style="flex-shrink:0;text-align:center">
+        <div class="emp-logo-wrap" style="width:70px;height:70px" id="nc-lb" onclick="document.getElementById('nc-li').click()">
+          <div class="emp-logo-inner" style="width:70px;height:70px">
+            <i class="ti ti-building-store" style="font-size:20px;color:var(--t4);display:block;margin-bottom:3px"></i>
+            <div style="font-size:9px;color:var(--t4)">Logo</div>
+          </div>
+          <div class="emp-logo-ov"><i class="ti ti-upload" style="font-size:15px;color:#fff"></i></div>
+          <input type="file" id="nc-li" accept="image/*" onchange="prevLogo('nc-lb','nc-li',null)" style="display:none">
+        </div>
+        <div style="font-size:9px;color:var(--t4);margin-top:5px">PNG/JPG</div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="mfg" style="margin-bottom:10px"><label class="ml">Nome da agência *</label><input class="mi2" id="nc-name" placeholder="Ex: Top Viagens"></div>
+        <div class="mfg" style="margin-bottom:0"><label class="ml">Razão social</label><input class="mi2" id="nc-rs" placeholder="Top Viagens Ltda."></div>
+      </div>
+    </div>
+
+    <!-- Dados fiscais -->
+    <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:8px">Dados fiscais <span style="flex:1;height:1px;background:var(--b);display:inline-block"></span></div>
+    <div class="mrow" style="margin-bottom:14px">
+      <div class="mfg" style="margin-bottom:0"><label class="ml">CNPJ</label><input class="mi2" id="nc-cnpj" placeholder="00.000.000/0001-00"></div>
+      <div class="mfg" style="margin-bottom:0"><label class="ml">Segmento</label><select class="mi2" id="nc-seg"><option>Agência de viagens</option><option>Clínica odontológica</option><option>E-commerce</option><option>Outro</option></select></div>
+    </div>
+
+    <!-- Contato -->
+    <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:8px">Contato <span style="flex:1;height:1px;background:var(--b);display:inline-block"></span></div>
+    <div class="mrow" style="margin-bottom:14px">
+      <div class="mfg" style="margin-bottom:0"><label class="ml">E-mail *</label><input class="mi2" type="email" id="nc-email" placeholder="responsavel@agencia.com.br"></div>
+      <div class="mfg" style="margin-bottom:0"><label class="ml">WhatsApp</label><input class="mi2" id="nc-tel" placeholder="(00) 99999-0000"></div>
+    </div>
+
+    <!-- Contrato -->
+    <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:8px">Contrato <span style="flex:1;height:1px;background:var(--b);display:inline-block"></span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+      <div class="mfg" style="margin-bottom:0"><label class="ml">Plano</label><select class="mi2" id="nc-plano"><option>Pro</option><option>Básico</option><option>Premium</option></select></div>
+      <div class="mfg" style="margin-bottom:0"><label class="ml">Valor (R$)</label><input class="mi2" id="nc-val" placeholder="1800"></div>
+      <div class="mfg" style="margin-bottom:0"><label class="ml">Início</label><input type="date" class="mi2" id="nc-ini"></div>
+    </div>
+
+    <!-- CTA -->
+    <div style="display:flex;gap:10px;padding-top:4px;border-top:1px solid var(--b)">
+      <button class="btn btn-out" onclick="cM('ov-nc')" style="flex:0 0 auto">Cancelar</button>
+      <button class="btn btn-blue btn-full" onclick="createC()">
+        <i class="ti ti-send"></i>Criar perfil e enviar convite
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HAMBURGER (mobile) -->
+<div class="hamburger" id="hamburger" onclick="toggleSB()"><i class="ti ti-menu-2"></i></div>
+<!-- SIDEBAR TOGGLE (desktop) -->
+<div class="sb-toggle-fixed" id="sb-toggle-btn" onclick="toggleSBCollapse()" title="Fechar/abrir menu"><i class="ti ti-chevron-left" id="sb-toggle-ic"></i></div>
+<div class="sb-overlay" id="sb-overlay" onclick="closeSB()"></div>
+
+<!-- APP SHELL -->
+<div class="app">
+
+<!-- ══ SIDEBAR ══ -->
+<div class="sb" id="sidebar">
+<div class="sb-inner">
+  <a class="sb-logo" href="#" onclick="location.reload()" title="Recarregar aplicativo" id="sb-logo-link">
+    <svg width="20" height="16" viewBox="0 0 588 470" fill="none"><path d="M155.687 14.541C160.936 5.538 170.583 0 181.017 0H505.198c5.653 0 9.176 6.12 6.332 10.997L457.697 103.638c-3.927 6.785-11.181 10.964-19.031 10.964H239.615c-15.655 0-30.13 8.312-38 21.822L117.729 280.406c-3.936 6.755-11.173 10.911-19 10.911H7.338c-5.648 0-9.172-6.111-6.337-10.988L97.352 114.602 155.687 14.54z" fill="url(#a1)"/><path d="M368.969 459.081C365.035 465.841 357.795 470 349.965 470H20.258c-5.647 0-9.171-6.109-6.338-10.986l54.502-94.412c3.943-6.726 11.164-10.86 18.97-10.86H286.225c15.698 0 30.204-8.357 38.061-21.925l27.516-47.525H470.13L368.97 459.08z" fill="url(#a2)"/><path d="M513.425 177.71c7.79.03 18.27-1.475 22.193 5.243l46.439 79.515c3.986 6.824 8.351 19.112 4.371 25.941l-59.43 92.531c-2.825 4.834-9.139 4.877-11.971.046L473.613 278.891H355.466L408.26 188.59c3.895-6.663 11.009-10.794 18.735-10.881l26.162-.317 60.268.318z" fill="url(#a3)"/><defs><linearGradient id="a1" x1="0" y1="470" x2="588" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#0011CE"/><stop offset="1" stop-color="#0015FF"/></linearGradient><linearGradient id="a2" x1="0" y1="470" x2="588" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#0011CE"/><stop offset="1" stop-color="#0015FF"/></linearGradient><linearGradient id="a3" x1="0" y1="470" x2="588" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#0011CE"/><stop offset="1" stop-color="#0015FF"/></linearGradient></defs></svg>
+    <div class="sb-logo-name">Sales Growth</div>
+    <div class="sb-logo-pill">Insights</div>
+  </a>
+
+  <div class="sb-body" id="sb-admin-body">
+    <div class="sb-sec">Clientes</div>
+    <button class="sb-item on" id="sbn-list" onclick="sbNavClients(this)"><i class="ti ti-users sb-ic"></i>Clientes<i class="ti ti-chevron-down sb-arrow"></i></button>
+    <div class="sb-sub" id="sb-sub">
+      <button class="sb-si" onclick="oc('VE')"><div class="sb-av" id="sba-VE" style="background:#edf0ff;color:#2244bb">VE</div>Viagens Europa<div class="sb-dot" style="background:var(--green)"></div></button>
+      <button class="sb-si" onclick="oc('TR')"><div class="sb-av" id="sba-TR" style="background:#edf8f8;color:#006677">TR</div>Top Roteiros<div class="sb-dot" style="background:var(--green)"></div></button>
+      <button class="sb-si" onclick="oc('DM')"><div class="sb-av" id="sba-DM" style="background:#fdf3e3;color:#8f6000">DM</div>Dream Places<div class="sb-dot" style="background:var(--amber)"></div></button>
+      <button class="sb-si" onclick="oc('AV')"><div class="sb-av" id="sba-AV" style="background:#fef0ee;color:#b83030">AV</div>Avante Turismo<div class="sb-dot" style="background:var(--red)"></div></button>
+      <button class="sb-si" onclick="oM('ov-nc')" style="color:var(--blue);font-weight:500"><i class="ti ti-plus" style="font-size:13px;flex-shrink:0"></i>Novo cliente</button>
+    </div>
+    <div class="sb-sec">Gestão</div>
+    <button class="sb-item" id="sbn-cts" onclick="sbNav('cts',this)"><i class="ti ti-file-text sb-ic"></i>Contratos</button>
+    <button class="sb-item" id="sbn-notif" onclick="sbNav('notif',this)"><i class="ti ti-bell sb-ic"></i>Notificações<span class="sb-badge">5</span></button>
+  </div>
+
+  <div class="sb-foot">
+    <!-- Theme switcher -->
+    <div class="sb-theme">
+      <button class="sb-th on" id="th-light" onclick="setTheme('light')"><i class="ti ti-sun" style="font-size:12px"></i> Claro</button>
+      <button class="sb-th" id="th-dark" onclick="setTheme('dark')"><i class="ti ti-moon" style="font-size:12px"></i> Escuro</button>
+      <button class="sb-th" id="th-sys" onclick="setTheme('system')"><i class="ti ti-device-laptop" style="font-size:12px"></i> Sistema</button>
+    </div>
+
+    <!-- User -->
+    <div class="sb-user" onclick="oM('ov-profile')" title="Editar perfil">
+      <div class="sb-uav" id="admin-av-sb">G</div>
+      <div style="min-width:0;flex:1">
+        <div class="sb-uname" id="admin-name-sb">Gabriel</div>
+        <div class="sb-urole">Sales Growth · Admin</div>
+      </div>
+      <i class="ti ti-pencil" style="font-size:14px;color:var(--t4);flex-shrink:0"></i>
+    </div>
+  </div>
+</div><!-- /sb-inner -->
+</div><!-- /sidebar -->
+
+<!-- ══ CONTENT ══ -->
+<div class="content" id="content">
+<div class="wrap">
+<div id="av">
+
+  <!-- LISTA CLIENTES -->
+  <div class="pg on" id="pg-list">
+    <div class="ph"><div><h1>Clientes</h1><p>Selecione um cliente para ver a ficha completa.</p></div><button class="btn btn-blue" onclick="oM('ov-nc')"><i class="ti ti-plus"></i>Novo cliente</button></div>
+    <div class="cg" id="lg"></div>
+  </div>
+
+  <!-- CONTRATOS -->
+  <div class="pg" id="pg-cts">
+    <div class="ph">
+      <div><h1>Contratos</h1><p>Gerencie todos os contratos e receita do portfólio.</p></div>
+      <button class="btn btn-blue" onclick="oM('ov-nc')"><i class="ti ti-plus"></i>Novo cliente</button>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px">
+      <div class="stat-card blue">
+        <div class="stat-l">Contratos ativos</div>
+        <div class="stat-v" style="color:var(--blue)">14</div>
+        <div class="stat-sub"><i class="ti ti-trending-up" style="color:var(--green)"></i>+2 este mês</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-l">MRR</div>
+        <div class="stat-v" style="color:var(--green)">R$ 18.400</div>
+        <div class="stat-sub"><i class="ti ti-coin" style="color:var(--t4)"></i>Receita mensal</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-l">Vencendo em breve</div>
+        <div class="stat-v" style="color:var(--amber)">2</div>
+        <div class="stat-sub"><i class="ti ti-clock" style="color:var(--amber)"></i>Próximos 30 dias</div>
+      </div>
+      <div class="stat-card neutral">
+        <div class="stat-l">ARR projetado</div>
+        <div class="stat-v">R$ 220k</div>
+        <div class="stat-sub"><i class="ti ti-chart-line" style="color:var(--t4)"></i>Receita anual</div>
+      </div>
+    </div>
+
+    <!-- Alertas -->
+    <div class="ct-section-card" style="margin-bottom:12px;border-color:var(--abr)">
+      <div class="ct-section-hd" style="background:var(--abg)">
+        <div class="ct-section-title" style="color:var(--amber)">
+          <i class="ti ti-alert-triangle" style="font-size:16px"></i>Atenção necessária
+        </div>
+        <span class="bx bwn">2 contratos</span>
+      </div>
+      <div class="ct-row" onclick="oc('DM');sbNav('cl',null);st(document.querySelectorAll('#pg-cl .tb')[1],'tc-ct')">
+        <div class="ct-row-av" style="background:#fdf3e3;color:#8f6000">MM</div>
+        <div class="ct-row-info">
+          <div class="ct-row-name">Maravilhas do Mar</div>
+          <div class="ct-row-meta"><span class="bx bwn" style="font-size:8px">Urgente</span><div class="ct-row-dot"></div>Plano Básico</div>
+        </div>
+        <div class="ct-row-mid">
+          <div class="ct-row-val">R$ 1.100</div>
+          <div class="ct-row-val-l">por mês</div>
+        </div>
+        <div class="ct-row-right">
+          <div style="text-align:right">
+            <div style="font-family:var(--fs);font-size:12px;font-weight:600;color:var(--amber)">Vence em 11 dias</div>
+            <div style="font-size:10px;color:var(--t4);margin-top:2px">30/06/2026</div>
+          </div>
+          <i class="ti ti-chevron-right" style="font-size:14px;color:var(--t4)"></i>
+        </div>
+      </div>
+      <div class="ct-row" onclick="oc('DM');sbNav('cl',null);st(document.querySelectorAll('#pg-cl .tb')[1],'tc-ct')">
+        <div class="ct-row-av" style="background:#fdf3e3;color:#8f6000">DM</div>
+        <div class="ct-row-info">
+          <div class="ct-row-name">Dream Places</div>
+          <div class="ct-row-meta"><span class="bx bwn" style="font-size:8px">Atenção</span><div class="ct-row-dot"></div>Plano Básico</div>
+        </div>
+        <div class="ct-row-mid">
+          <div class="ct-row-val">R$ 1.200</div>
+          <div class="ct-row-val-l">por mês</div>
+        </div>
+        <div class="ct-row-right">
+          <div style="text-align:right">
+            <div style="font-family:var(--fs);font-size:12px;font-weight:600;color:var(--amber)">Vence em 41 dias</div>
+            <div style="font-size:10px;color:var(--t4);margin-top:2px">01/08/2026</div>
+          </div>
+          <i class="ti ti-chevron-right" style="font-size:14px;color:var(--t4)"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todos os contratos -->
+    <div class="ct-section-card">
+      <div class="ct-section-hd">
+        <div class="ct-section-title">
+          <i class="ti ti-file-text" style="font-size:16px;color:var(--blue)"></i>Todos os contratos
+        </div>
+        <span style="font-family:var(--fs);font-size:10px;color:var(--t4)">4 clientes cadastrados</span>
+      </div>
+      <div id="ctl"></div>
+    </div>
+  </div>
+
+  <!-- NOTIFICAÇÕES -->
+  <div class="pg" id="pg-notif">
+    <div class="ph">
+      <div><h1>Notificações</h1><p>Atualizações automáticas sobre clientes, contratos e campanhas.</p></div>
+      <button class="btn btn-out btn-sm" onclick="markAllRead()"><i class="ti ti-checks" style="font-size:13px"></i>Marcar todas como lidas</button>
+    </div>
+
+    <!-- Stats de notif -->
+    <div class="notif-stats">
+      <div class="stat-card amber">
+        <div class="stat-l">Pendentes hoje</div>
+        <div class="stat-v" style="color:var(--amber)">3</div>
+        <div class="stat-sub"><i class="ti ti-clock" style="color:var(--amber)"></i>Relatórios sem preencher</div>
+      </div>
+      <div class="stat-card neutral">
+        <div class="stat-l">Contratos vencendo</div>
+        <div class="stat-v">2</div>
+        <div class="stat-sub"><i class="ti ti-calendar-event" style="color:var(--t4)"></i>Próximos 30 dias</div>
+      </div>
+      <div class="stat-card neutral">
+        <div class="stat-l">Total este mês</div>
+        <div class="stat-v">18</div>
+        <div class="stat-sub"><i class="ti ti-bell" style="color:var(--t4)"></i>Notificações enviadas</div>
+      </div>
+    </div>
+
+    <!-- Hoje -->
+    <div class="ct-section-card" style="margin-bottom:12px">
+      <div class="ct-section-hd">
+        <div class="ct-section-title"><i class="ti ti-calendar-today" style="font-size:15px;color:var(--blue)"></i>Hoje</div>
+        <span style="font-family:var(--fs);font-size:10px;color:var(--t4)">22 jun 2026</span>
+      </div>
+
+      <div class="ni">
+        <div class="ni-unread"></div>
+        <div class="nic" style="background:var(--abg)"><i class="ti ti-clock" style="color:var(--amber);font-size:17px"></i></div>
+        <div class="ni-body">
+          <div class="nit">Dream Places não preencheu o relatório</div>
+          <div class="nib">Semana 25 já passou e o relatório ainda não foi preenchido. Lembrete automático enviado ao cliente às 18h com a mensagem padrão.</div>
+          <div class="ni-foot">
+            <div class="nitm"><i class="ti ti-clock-hour-4" style="font-size:11px"></i> Hoje · 18:00</div>
+            <button class="ni-action" onclick="oc('DM');sbNav('cl',null)">Ver cliente →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ni">
+        <div class="ni-unread"></div>
+        <div class="nic" style="background:var(--abg)"><i class="ti ti-clock" style="color:var(--amber);font-size:17px"></i></div>
+        <div class="ni-body">
+          <div class="nit">Avante Turismo — 2º lembrete enviado</div>
+          <div class="nib">Sem preenchimento desde a semana 23. O cliente foi notificado novamente. Considere entrar em contato diretamente.</div>
+          <div class="ni-foot">
+            <div class="nitm"><i class="ti ti-clock-hour-4" style="font-size:11px"></i> Hoje · 18:00</div>
+            <button class="ni-action" onclick="oc('AV');sbNav('cl',null)">Ver cliente →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ni">
+        <div class="ni-unread"></div>
+        <div class="nic" style="background:var(--abg)"><i class="ti ti-file-invoice" style="color:var(--amber);font-size:17px"></i></div>
+        <div class="ni-body">
+          <div class="nit">Contrato vencendo — Maravilhas do Mar</div>
+          <div class="nib">Vence em 30/06/2026. Restam apenas 11 dias. Recomendamos entrar em contato para renovação antes do vencimento.</div>
+          <div class="ni-foot">
+            <div class="nitm"><i class="ti ti-clock-hour-4" style="font-size:11px"></i> Hoje · 09:00</div>
+            <button class="ni-action" onclick="sbNav('cts',document.getElementById('sbn-cts'))">Ver contratos →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ontem -->
+    <div class="ct-section-card" style="margin-bottom:12px">
+      <div class="ct-section-hd">
+        <div class="ct-section-title"><i class="ti ti-calendar" style="font-size:15px;color:var(--t3)"></i>Ontem</div>
+        <span style="font-family:var(--fs);font-size:10px;color:var(--t4)">21 jun 2026</span>
+      </div>
+      <div class="ni">
+        <div style="width:8px;flex-shrink:0"></div>
+        <div class="nic" style="background:var(--rbg)"><i class="ti ti-chart-line-down" style="color:var(--red);font-size:17px"></i></div>
+        <div class="ni-body">
+          <div class="nit">ROAS crítico — Avante Turismo (1.6x)</div>
+          <div class="nib">Abaixo do mínimo de 2x configurado. Revisão de criativos e segmentação urgente recomendada para recuperar o desempenho.</div>
+          <div class="ni-foot">
+            <div class="nitm"><i class="ti ti-clock-hour-4" style="font-size:11px"></i> 21 jun · 16:32</div>
+            <button class="ni-action" onclick="oc('AV');sbNav('cl',null)">Ver cliente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mês -->
+    <div class="ct-section-card">
+      <div class="ct-section-hd">
+        <div class="ct-section-title"><i class="ti ti-calendar-month" style="font-size:15px;color:var(--t3)"></i>Início do mês</div>
+        <span style="font-family:var(--fs);font-size:10px;color:var(--t4)">Junho 2026</span>
+      </div>
+      <div class="ni">
+        <div style="width:8px;flex-shrink:0"></div>
+        <div class="nic" style="background:var(--gbg)"><i class="ti ti-file-check" style="color:var(--green);font-size:17px"></i></div>
+        <div class="ni-body">
+          <div class="nit">Relatório mensal disponível — junho/2026</div>
+          <div class="nib">Consolidado do mês pronto para exportar em PDF ou compartilhar por link com os clientes.</div>
+          <div class="ni-foot">
+            <div class="nitm"><i class="ti ti-clock-hour-4" style="font-size:11px"></i> 01 jun · 08:00</div>
+            <button class="ni-action">Exportar relatório →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FICHA CLIENTE -->
+  <div class="pg" id="pg-cl">
+    <button class="back" onclick="backToList()"><i class="ti ti-arrow-left"></i>Voltar para clientes</button>
+    <div class="fhead">
+      <div class="fav" id="fav"></div>
+      <div><div class="fn" id="fn"></div><div class="fs2" id="fs2"></div></div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button class="btn btn-out btn-sm" onclick="tgInv()"><i class="ti ti-send" style="font-size:12px"></i>Convite</button>
+        <div id="fbx"></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tb on" onclick="st(this,'tc-rel')">Relatórios</button>
+      <button class="tb" onclick="st(this,'tc-ct')">Contrato</button>
+      <button class="tb" onclick="st(this,'tc-emp')">Empresa</button>
+    </div>
+
+    <!-- TAB: RELATÓRIOS -->
+    <div class="tc on" id="tc-rel">
+      <div class="period-bar">
+        <div class="psel" id="psel">
+          <div class="pbtn" onclick="tgPD()" id="pbtn"><i class="ti ti-calendar" style="font-size:14px;color:var(--t4)"></i><span id="plbl">Jun/2026</span><i class="ti ti-chevron-down" style="font-size:11px;color:var(--t4)"></i></div>
+          <div class="pdrop" id="pdrop">
+            <div class="pdy">2026</div>
+            <div class="pdm"><button class="pm em">Jan</button><button class="pm em">Fev</button><button class="pm em">Mar</button><button class="pm em">Abr</button><button class="pm em">Mai</button><button class="pm on" onclick="sP(this,'Jun','2026')">Jun</button><button class="pm em">Jul</button><button class="pm em">Ago</button><button class="pm em">Set</button><button class="pm em">Out</button><button class="pm em">Nov</button><button class="pm em">Dez</button></div>
+            <div class="pdsep"></div>
+            <div class="pdy">2025</div>
+            <div class="pdm"><button class="pm em">Jan</button><button class="pm em">Fev</button><button class="pm em">Mar</button><button class="pm em">Abr</button><button class="pm em">Mai</button><button class="pm em">Jun</button><button class="pm em">Jul</button><button class="pm em">Ago</button><button class="pm em">Set</button><button class="pm em">Out</button><button class="pm em">Nov</button><button class="pm em">Dez</button></div>
+          </div>
+        </div>
+        <button class="add-btn" onclick="oM('ov-wk')"><i class="ti ti-plus"></i>Adicionar semana</button>
+      </div>
+
+      <div id="ww">
+        <!-- SEM 25 -->
+        <div class="wk" id="wk-25">
+          <div class="wk-h" onclick="twk(this)">
+            <div class="wk-lbl"><div class="wk-num">25</div><div class="wk-tag">Semana</div></div>
+            <div class="wk-body"><div class="wk-per">09 – 15 jun 2026</div><div class="wk-sub-row"><div class="wk-dot wk-dot-g"></div><span class="wk-sub-txt"><span class="wk-sub-hi">PDF anexado</span> · aguardando cliente preencher</span></div></div>
+            <div class="wk-right" onclick="event.stopPropagation()">
+              <div class="wk-roas wc">—</div><span class="bx bwn">Pendente</span>
+              <button class="wk-del" onclick="confirmDelWk('wk-25','Semana 25')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button>
+              <div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div>
+            </div>
+          </div>
+          <div class="wk-b open">
+            <div class="sp2">
+              <div class="pn">
+                <div class="ptag tsg"><i class="ti ti-shield" style="font-size:10px"></i>Apenas admin</div>
+                <div class="ptt">Relatório semanal de mídia</div>
+                <div class="pss">Anexe o PDF. A IA extrai os dados automaticamente. Você pode editar qualquer campo.</div>
+                <div class="upload-zone has" id="fd25">
+                  <div class="uz-done">
+                    <div class="uz-done-icon"><i class="ti ti-file-type-pdf"></i></div>
+                    <div>
+                      <div class="uz-done-name">relatorio_sem25.pdf</div>
+                      <div class="uz-done-meta">
+                        <i class="ti ti-sparkles" style="font-size:11px;color:var(--green)"></i>
+                        <span style="color:var(--green)">Dados extraídos com IA</span>
+                        <span style="color:var(--b2)">·</span>
+                        <span>2,4 MB</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uz-actions">
+                    <button class="pdf-btn-sm primary" onclick="openPDF('relatorio_sem25.pdf')"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar</button>
+                    <a class="pdf-btn-sm" href="#" onclick="dlSim('relatorio_sem25.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a>
+                    <button class="pdf-btn-sm" onclick="replF('fd25')"><i class="ti ti-replace" style="font-size:12px"></i>Trocar arquivo</button>
+                    <button class="pdf-btn-sm danger" onclick="confirmDelPDF('fd25','25')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button>
+                  </div>
+                </div>
+                <div class="mdata">
+                  <div class="mdata-h">Dados do período <span class="ai-tag">IA · editável</span></div>
+                  <div class="mdata-grid">
+                    <div class="mi"><div class="mi-left"><div class="mil">Investimento</div><div class="miv" id="i25">R$ 3.800</div></div><button class="mi-edt" onclick="eMi('i25','R$ 3.800')">editar</button></div>
+                    <div class="mi"><div class="mi-left"><div class="mil">Alcance</div><div class="miv" id="alc25">38.240</div></div><button class="mi-edt" onclick="eMi('alc25','38.240')">editar</button></div>
+                    <div class="mi"><div class="mi-left"><div class="mil">Cliques</div><div class="miv" id="c25">1.243</div></div><button class="mi-edt" onclick="eMi('c25','1.243')">editar</button></div>
+                    <div class="mi"><div class="mi-left"><div class="mil">Custo por clique</div><div class="miv" id="cpc25">R$ 3,06</div></div><button class="mi-edt" onclick="eMi('cpc25','R$ 3,06')">editar</button></div>
+                    <div class="mi"><div class="mi-left"><div class="mil">Leads gerados</div><div class="miv" id="l25">47</div></div><button class="mi-edt" onclick="eMi('l25','47')">editar</button></div>
+                    <div class="mi"><div class="mi-left"><div class="mil">Custo por lead</div><div class="miv" id="cpl25">R$ 80,85</div></div><button class="mi-edt" onclick="eMi('cpl25','R$ 80,85')">editar</button></div>
+                    <div class="mi" style="grid-column:1/-1"><div class="mi-left"><div class="mil">CTR</div><div class="miv" id="ctr25">3,26%</div></div><button class="mi-edt" onclick="eMi('ctr25','3,26%')">editar</button></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pn" id="cl25">
+                <div class="ptag tcl"><i class="ti ti-user" style="font-size:10px"></i>Cliente preenche</div>
+                <div class="ptt">Resultados da semana</div>
+                <div class="pss">Nova ordem: Investimento → Leads → Vendas → Faturamento Bruto → Lucro Líquido → ROAS</div>
+                <div class="hint"><i class="ti ti-lock" style="font-size:12px"></i>Somente o cliente pode preencher este lado</div>
+                <div class="fg"><label class="fl">Vendas fechadas</label><input class="fi" type="number" placeholder="Ex: 9" id="v25" oninput="calcR('25',3800,47)"></div>
+                <div class="fg"><label class="fl">Faturamento Bruto (valor total dos pacotes)</label><div class="fip"><span class="sym">R$</span><input class="fi" type="number" placeholder="Ex: 90000" id="fat25" oninput="calcR('25',3800,47)"></div></div>
+                <div class="fg"><label class="fl">Lucro Líquido</label><div class="fip"><span class="sym">R$</span><input class="fi" type="number" placeholder="Ex: 9000" id="com25" oninput="calcR('25',3800,47)"></div></div>
+                <div class="cp" id="rp25"><div class="cp-lbl">Resultado calculado automaticamente</div><div class="cp-g"><div class="cpi"><div class="cpv" id="rr25">—</div><div class="cpl">ROAS</div></div><div class="cpi"><div class="cpv" id="rt25">—</div><div class="cpl">Ticket</div></div><div class="cpi"><div class="cpv" id="rc25">—</div><div class="cpl">Custo/lead</div></div></div></div>
+                <div class="fg"><label class="fl">Observação (opcional)</label><textarea class="fi" rows="2" placeholder="Feriado, novo pacote, queda de volume..."></textarea></div>
+                <button class="btn btn-blue btn-full" onclick="saveW('25',3800,47)"><i class="ti ti-check"></i>Salvar resultados</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEM 24 -->
+        <div class="wk" id="wk-24">
+          <div class="wk-h" onclick="twk(this)">
+            <div class="wk-lbl"><div class="wk-num">24</div><div class="wk-tag">Semana</div></div>
+            <div class="wk-body"><div class="wk-per">02 – 08 jun 2026</div><div class="wk-sub-row"><div class="wk-dot wk-dot-g"></div><span class="wk-sub-txt"><span class="wk-sub-hi">7 vendas · Lucro R$ 6.200</span> · PDF anexado</span></div></div>
+            <div class="wk-right" onclick="event.stopPropagation()">
+              <div class="wk-roas up">5.8x</div><span class="bx bok">Completo</span>
+              <button class="wk-del" onclick="confirmDelWk('wk-24','Semana 24')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button>
+              <div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div>
+            </div>
+          </div>
+          <div class="wk-b">
+            <!-- Summary nova ordem: Invest, Leads, Vendas, Fat.Bruto, Lucro, ROAS -->
+            <div class="wsum">
+              <div class="wsum-kpis">
+                <div class="wki"><div class="wki-v">R$ 3.200</div><div class="wki-l">Investimento</div></div>
+                <div class="wki"><div class="wki-v">47</div><div class="wki-l">Leads</div></div>
+                <div class="wki"><div class="wki-v">7</div><div class="wki-l">Vendas</div></div>
+                <div class="wki"><div class="wki-v" style="font-size:13px">R$ 42.000</div><div class="wki-l">Fat. Bruto</div></div>
+                <div class="wki"><div class="wki-v" style="font-size:13px">R$ 6.200</div><div class="wki-l">Lucro Líquido</div></div>
+                <div class="wki hi"><div class="wki-v up">5.8x</div><div class="wki-l">ROAS</div></div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+                <div style="background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);text-align:center;padding:9px 4px"><div style="font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t2)">R$ 885</div><div style="font-size:9px;color:var(--t4);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Ticket médio</div></div>
+                <div style="background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);text-align:center;padding:9px 4px"><div style="font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t2)">R$ 68,08</div><div style="font-size:9px;color:var(--t4);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Custo / lead</div></div>
+                <div style="background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);text-align:center;padding:9px 4px"><div style="font-family:var(--fs);font-size:13px;font-weight:600;color:var(--t2)">R$ 457</div><div style="font-size:9px;color:var(--t4);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Custo / venda</div></div>
+              </div>
+            </div>
+            <div class="wsum-meta">
+              <i class="ti ti-percentage"></i>CTR:<span class="wm-v">2,98%</span>
+              <i class="ti ti-cursor-text" style="margin-left:14px"></i>Cliques:<span class="wm-v">1.087</span>
+              <div style="margin-left:auto">
+                <button class="pdf-btn-sm primary" onclick="openPDF('relatorio_sem24.pdf')" style="margin-right:6px"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar relatório</button>
+                <a class="pdf-btn-sm" href="#" onclick="dlSim('relatorio_sem24.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEM 23 -->
+        <div class="wk" id="wk-23">
+          <div class="wk-h" onclick="twk(this)">
+            <div class="wk-lbl"><div class="wk-num">23</div><div class="wk-tag">Semana</div></div>
+            <div class="wk-body"><div class="wk-per">26 mai – 01 jun 2026</div><div class="wk-sub-row"><div class="wk-dot wk-dot-a"></div><span class="wk-sub-txt"><span class="wk-sub-hi">PDF anexado</span> · aguardando cliente preencher</span></div></div>
+            <div class="wk-right" onclick="event.stopPropagation()">
+              <div class="wk-roas wc">—</div><span class="bx bwn">Pendente</span>
+              <button class="wk-del" onclick="confirmDelWk('wk-23','Semana 23')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button>
+              <div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div>
+            </div>
+          </div>
+          <div class="wk-b"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CONTRATO -->
+    <div class="tc" id="tc-ct">
+      <!-- Cabeçalho -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div style="font-family:var(--fs);font-size:16px;font-weight:700;letter-spacing:-.02em">Contrato ativo</div>
+          <div style="font-size:11px;color:var(--t4);margin-top:3px;display:flex;align-items:center;gap:5px"><i class="ti ti-shield" style="font-size:12px"></i>Somente o admin pode editar</div>
+        </div>
+        <button class="btn btn-blue btn-sm" onclick="oM('ov-ct')"><i class="ti ti-pencil"></i>Editar contrato</button>
+      </div>
+
+      <!-- Hero escuro: plano + valor -->
+      <div class="ct-dark" style="margin-bottom:10px">
+        <div class="ct-dark-inner">
+          <div>
+            <div class="ct-plan-lbl">Plano contratado</div>
+            <div class="ct-plan-val" id="ct-p-big">Pro</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.02em" id="ct-name-big"></div>
+          </div>
+          <div style="text-align:right">
+            <div class="ct-plan-lbl">Investimento mensal</div>
+            <div class="ct-plan-val" id="ct-v">R$ 1.800</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.04em;text-transform:uppercase">por mês · recorrente</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status + datas: cards horizontais -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px">
+        <div class="ct-cell" style="position:relative;overflow:hidden">
+          <div class="ct-cell-l">Status do contrato</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px">
+            <span id="ct-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;display:inline-block"></span>
+            <span class="ct-cell-v" id="ct-s-txt" style="color:var(--green)">Ativo</span>
+          </div>
+        </div>
+        <div class="ct-cell" style="background:var(--t);border-color:var(--t)">
+          <div class="ct-cell-l" style="color:rgba(255,255,255,.45)">Data de pagamento</div>
+          <div class="ct-cell-v" id="ct-pgto" style="color:#fff;font-size:16px">Todo dia 10</div>
+        </div>
+        <div class="ct-cell">
+          <div class="ct-cell-l">Data de início</div>
+          <div class="ct-cell-v" id="ct-i">01/01/2025</div>
+        </div>
+        <div class="ct-cell">
+          <div class="ct-cell-l">Renovação do contrato</div>
+          <div class="ct-cell-v" id="ct-vc">01/01/2027</div>
+        </div>
+      </div>
+
+      <!-- Contrato assinado -->
+      <div class="ct-section-card" style="margin-bottom:10px">
+        <div class="ct-section-hd">
+          <div class="ct-section-title"><i class="ti ti-file-certificate" style="font-size:16px;color:var(--blue)"></i>Documento assinado</div>
+          <button class="pdf-btn-sm" onclick="oM('ov-ct')"><i class="ti ti-upload" style="font-size:12px"></i>Anexar PDF</button>
+        </div>
+        <div id="ct-pdf">
+          <div class="upload-zone" onclick="oM('ov-ct')" style="border-radius:0;border:none;border-top:1px dashed var(--b2);padding:24px">
+            <div class="uz-icon"><i class="ti ti-file-certificate"></i></div>
+            <div class="uz-title">Nenhum contrato anexado</div>
+            <div class="uz-sub">Clique aqui ou em "Editar contrato" para<br>fazer upload do contrato assinado.</div>
+            <div class="uz-badge"><i class="ti ti-upload" style="font-size:11px"></i>Aceita PDF · máx. 20 MB</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Link de convite -->
+      <div class="ct-section-card">
+        <div class="ct-section-hd">
+          <div class="ct-section-title"><i class="ti ti-link" style="font-size:16px;color:var(--blue)"></i>Acesso do cliente</div>
+          <button class="btn btn-blue btn-sm" onclick="tgInv()"><i class="ti ti-send" style="font-size:12px"></i>Ver link</button>
+        </div>
+        <div id="inv-area" style="display:none;padding:0 0 4px">
+          <div style="font-size:11px;color:var(--t4);margin-bottom:12px;line-height:1.7">Envie este link para o cliente acessar a área dele e preencher os dados semanais.</div>
+          <div class="inv-link" style="margin-bottom:10px"><span id="inv-url">https://insights.salesgrowth.com.br/cliente/ve</span><button class="inv-copy" onclick="cpLink()">Copiar</button></div>
+          <button class="btn btn-out btn-sm" onclick="sendInvite()" style="width:auto"><i class="ti ti-mail"></i>Enviar convite por e-mail</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: EMPRESA -->
+    <div class="tc" id="tc-emp">
+      <!-- Cabeçalho -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div style="font-family:var(--fs);font-size:16px;font-weight:700;letter-spacing:-.02em">Dados da empresa</div>
+          <div style="font-size:11px;color:var(--t4);margin-top:3px">O cliente pode atualizar pelo portal dele a qualquer momento.</div>
+        </div>
+        <button class="btn btn-blue btn-sm" onclick="saveEmp()"><i class="ti ti-check"></i>Salvar alterações</button>
+      </div>
+
+      <!-- Logo + identidade -->
+      <div class="ct-section-card" style="margin-bottom:10px">
+        <div class="ct-section-hd">
+          <div class="ct-section-title"><i class="ti ti-building-store" style="font-size:16px;color:var(--blue)"></i>Identidade visual</div>
+        </div>
+        <div style="padding:18px;display:flex;align-items:flex-start;gap:20px">
+          <!-- Logo upload -->
+          <div style="flex-shrink:0;text-align:center">
+            <div class="emp-logo-wrap" id="emp-logo-wrap" onclick="document.getElementById('emp-li').click()" title="Clique para alterar a logo">
+              <div class="emp-logo-inner" id="emp-lb">
+                <i class="ti ti-photo" style="font-size:22px;color:var(--t4);display:block;margin-bottom:4px"></i>
+                <div style="font-size:9px;color:var(--t4)">Logo</div>
+              </div>
+              <div class="emp-logo-ov"><i class="ti ti-camera" style="font-size:17px;color:#fff"></i></div>
+              <input type="file" id="emp-li" accept="image/*" onchange="prevLogo('emp-lb','emp-li','cur')" style="display:none">
+            </div>
+            <div style="font-size:9px;color:var(--t4);margin-top:7px;text-align:center">PNG / JPG</div>
+          </div>
+          <div style="flex:1">
+            <div class="fg"><label class="fl">Nome da agência</label><input class="fi" id="e-name" placeholder="Ex: Top Viagens"></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Razão social</label><input class="fi" id="e-rs" placeholder="Top Viagens Ltda."></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dados fiscais -->
+      <div class="ct-section-card" style="margin-bottom:10px">
+        <div class="ct-section-hd">
+          <div class="ct-section-title"><i class="ti ti-file-invoice" style="font-size:16px;color:var(--blue)"></i>Dados fiscais</div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="fg" style="margin-bottom:0"><label class="fl">CNPJ</label><input class="fi" id="e-cnpj" placeholder="00.000.000/0001-00"></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Inscrição estadual</label><input class="fi" id="e-ie" placeholder="Opcional"></div>
+          </div>
+          <div class="fg" style="margin-top:12px;margin-bottom:0"><label class="fl">Endereço completo</label><input class="fi" id="e-end" placeholder="Rua, número – Bairro – Cidade/UF – CEP"></div>
+        </div>
+      </div>
+
+      <!-- Contato -->
+      <div class="ct-section-card">
+        <div class="ct-section-hd">
+          <div class="ct-section-title"><i class="ti ti-address-book" style="font-size:16px;color:var(--blue)"></i>Contato e responsável</div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="fg" style="margin-bottom:0"><label class="fl">Responsável</label><input class="fi" id="e-resp" placeholder="Nome completo"></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Cargo</label><input class="fi" id="e-cargo" placeholder="Ex: Diretor comercial"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div class="fg" style="margin-bottom:0"><label class="fl">E-mail</label><input class="fi" type="email" id="e-email" placeholder="responsavel@agencia.com.br"></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">WhatsApp</label><input class="fi" id="e-tel" placeholder="(00) 99999-0000"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save bottom -->
+      <div style="display:flex;justify-content:flex-end;margin-top:16px;gap:10px">
+        <button class="btn btn-out btn-sm">Descartar alterações</button>
+        <button class="btn btn-blue" onclick="saveEmp()"><i class="ti ti-check"></i>Salvar alterações</button>
+      </div>
+    </div>
+  </div><!-- /pg-cl -->
+
+</div><!-- /av -->
+
+<!-- ══ CLIENT VIEW ══ -->
+<div id="cv" style="display:none">
+  <div class="cv-wrap">
+    <div class="cv-hero">
+      <div class="cv-hero-top">
+        <div class="cv-logo-row">
+          <div class="cv-logo" id="cv-logo-el">VE</div>
+          <div><div class="cv-brand">Sales Growth Insights</div><div class="cv-cname" id="cv-name-el">Viagens Europa</div></div>
+        </div>
+        <!-- KPIs nova ordem: Invest, Leads, Vendas, Fat.Bruto, Lucro, ROAS -->
+        <div class="cv-kpis">
+          <div class="cvhs"><div class="cvhs-v">R$ 3.200</div><div class="cvhs-l">Investimento</div></div>
+          <div class="cvhs"><div class="cvhs-v">47</div><div class="cvhs-l">Leads</div></div>
+          <div class="cvhs"><div class="cvhs-v">7</div><div class="cvhs-l">Vendas</div></div>
+          <div class="cvhs"><div class="cvhs-v">R$ 42k</div><div class="cvhs-l">Fat. Bruto</div></div>
+          <div class="cvhs"><div class="cvhs-v">R$ 6.200</div><div class="cvhs-l">Lucro Líquido</div></div>
+          <div class="cvhs hi"><div class="cvhs-v" style="color:#4ade80">5.8x</div><div class="cvhs-l">ROAS</div></div>
+        </div>
+      </div>
+      <div class="cv-hero-bot"><div class="cv-pulse"></div>Área do cliente · Dados atualizados semanalmente</div>
+    </div>
+
+    <div class="cv-sec">Junho / 2026</div>
+
+    <!-- SEM 25 cliente — preencher -->
+    <div class="wk" style="border-color:var(--abr);margin-bottom:10px">
+      <div class="wk-h" onclick="twk(this)">
+        <div class="wk-lbl"><div class="wk-num">25</div><div class="wk-tag">Semana</div></div>
+        <div class="wk-body"><div class="wk-per">09 – 15 jun 2026</div><div class="wk-sub-row"><div class="wk-dot wk-dot-a"></div><span class="wk-sub-txt" style="color:var(--amber);font-weight:500">Preencha agora · relatório disponível</span></div></div>
+        <div class="wk-right"><span class="bx bwn">Preencher</span><div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div></div>
+      </div>
+      <div class="wk-b open">
+        <div class="cv-fill" id="cvf25">
+          <div class="cv-notice"><i class="ti ti-file-check" style="font-size:13px;flex-shrink:0"></i>A Sales Growth já enviou o relatório. Preencha os resultados abaixo para que a gente mensure o retorno e continue otimizando.</div>
+          <!-- Nova ordem de campos -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px">
+            <div class="fg" style="margin-bottom:0"><label class="fl">Vendas fechadas</label><input class="fi" type="number" placeholder="Ex: 9" id="cv-v25" oninput="calcCV('25',3800,47)"></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Leads gerados (confirme)</label><input class="fi" type="number" placeholder="Ex: 47" id="cv-l25"></div>
+          </div>
+          <div class="fg"><label class="fl">Faturamento Bruto (valor total dos pacotes vendidos)</label><div class="fip"><span class="sym">R$</span><input class="fi" type="number" placeholder="Ex: 90000" id="cv-fat25" oninput="calcCV('25',3800,47)"></div></div>
+          <div class="fg"><label class="fl">Lucro Líquido</label><div class="fip"><span class="sym">R$</span><input class="fi" type="number" placeholder="Ex: 9000" id="cv-com25" oninput="calcCV('25',3800,47)"></div></div>
+          <div class="cp" id="cvrp25">
+            <div class="cp-lbl">Seus resultados calculados em tempo real</div>
+            <div class="cp-g">
+              <div class="cpi"><div class="cpv" id="cvr25">—</div><div class="cpl">ROAS</div></div>
+              <div class="cpi"><div class="cpv" id="cvt25">—</div><div class="cpl">Ticket médio</div></div>
+              <div class="cpi"><div class="cpv" id="cvc25">—</div><div class="cpl">Custo/lead</div></div>
+            </div>
+          </div>
+          <div class="fg"><label class="fl">Observação (opcional)</label><textarea class="fi" rows="2" placeholder="Feriado, novo pacote para Cancún, WhatsApp caiu..."></textarea></div>
+          <button class="btn btn-blue btn-full" onclick="saveCV25()"><i class="ti ti-check"></i>Enviar resultados da semana</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 24 cliente — completa -->
+    <div class="wk">
+      <div class="wk-h" onclick="twk(this)">
+        <div class="wk-lbl"><div class="wk-num">24</div><div class="wk-tag">Semana</div></div>
+        <div class="wk-body"><div class="wk-per">02 – 08 jun 2026</div><div class="wk-sub-row"><div class="wk-dot wk-dot-g"></div><span class="wk-sub-txt">Boa semana · ROAS acima da meta</span></div></div>
+        <div class="wk-right"><div class="wk-roas up">5.8x</div><span class="bx bok">Enviado</span><div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div></div>
+      </div>
+      <div class="wk-b">
+        <div class="wsum">
+          <div class="wsum-kpis">
+            <div class="wki"><div class="wki-v">R$ 3.200</div><div class="wki-l">Investimento</div></div>
+            <div class="wki"><div class="wki-v">47</div><div class="wki-l">Leads</div></div>
+            <div class="wki"><div class="wki-v">7</div><div class="wki-l">Vendas</div></div>
+            <div class="wki"><div class="wki-v" style="font-size:13px">R$ 42.000</div><div class="wki-l">Fat. Bruto</div></div>
+            <div class="wki"><div class="wki-v" style="font-size:13px">R$ 6.200</div><div class="wki-l">Lucro Líquido</div></div>
+            <div class="wki hi"><div class="wki-v up">5.8x</div><div class="wki-l">ROAS</div></div>
+          </div>
+        </div>
+        <div class="wsum-meta">
+          <div style="margin-left:auto">
+            <button class="pdf-btn-sm primary" onclick="openPDF('relatorio_sem24.pdf')" style="margin-right:6px"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar relatório</button>
+            <a class="pdf-btn-sm" href="#" onclick="dlSim('relatorio_sem24.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contrato cliente -->
+    <div class="cv-sec">Seu contrato</div>
+    <div class="cv-ct">
+
+      <!-- Hero: plano + valor -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--b)">
+        <div>
+          <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:6px">Plano contratado</div>
+          <div style="font-family:var(--fs);font-size:22px;font-weight:700;letter-spacing:-.025em;color:var(--t)">Pro</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:6px">Investimento mensal</div>
+          <div style="font-family:var(--fs);font-size:22px;font-weight:700;letter-spacing:-.025em;color:var(--blue)">R$ 1.800</div>
+        </div>
+      </div>
+
+      <!-- Grid de informações do contrato -->
+      <div class="cv-ct-grid">
+
+        <!-- Status -->
+        <div class="cv-ct-cell highlight">
+          <div class="cv-ct-cell-l"><i class="ti ti-circle-check" style="font-size:12px;color:var(--green)"></i>Status do contrato</div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:2px">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0"></span>
+            <div class="cv-ct-cell-v" id="cv-status-v" style="color:var(--green)">Ativo</div>
+          </div>
+          <div class="cv-ct-cell-s">Contrato em vigor e vigente</div>
+        </div>
+
+        <!-- Data de pagamento -->
+        <div class="cv-ct-cell" style="background:var(--t);border-color:var(--t)">
+          <div class="cv-ct-cell-l" style="color:rgba(255,255,255,.5)"><i class="ti ti-calendar-due" style="font-size:12px"></i>Data de pagamento</div>
+          <div id="cv-pgto-v" style="font-family:var(--fs);font-size:22px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-top:2px">Todo dia 10</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.45);margin-top:4px">Vencimento mensal recorrente</div>
+        </div>
+
+        <!-- Início -->
+        <div class="cv-ct-cell">
+          <div class="cv-ct-cell-l"><i class="ti ti-calendar-plus" style="font-size:12px"></i>Início do contrato</div>
+          <div class="cv-ct-cell-v" id="cv-ini-v">01/01/2025</div>
+          <div class="cv-ct-cell-s">Data de início dos serviços</div>
+        </div>
+
+        <!-- Renovação -->
+        <div class="cv-ct-cell">
+          <div class="cv-ct-cell-l"><i class="ti ti-calendar-repeat" style="font-size:12px"></i>Renovação</div>
+          <div class="cv-ct-cell-v" id="cv-ren-v">01/01/2027</div>
+          <div class="cv-ct-cell-s">Próxima renovação do contrato</div>
+        </div>
+
+      </div>
+
+      <!-- Texto institucional -->
+      <div style="background:var(--sf3);border:1px solid var(--b);border-radius:var(--rs);padding:13px 15px;font-size:11px;color:var(--t4);line-height:1.8;margin-bottom:14px">
+        <span style="color:var(--t);font-weight:600">Sales Growth</span> é responsável pela gestão das suas campanhas de tráfego pago. Qualquer dúvida sobre valores, datas de pagamento ou renovação, entre em contato diretamente com sua equipe.
+      </div>
+
+      <!-- Contrato assinado -->
+      <div>
+        <div style="font-family:var(--fs);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:6px"><i class="ti ti-file-certificate" style="font-size:13px;color:var(--blue)"></i>Contrato assinado</div>
+        <div id="cv-ct-pdf-area">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--sf3);border:1px dashed var(--b2);border-radius:var(--rs)">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--w);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <i class="ti ti-file-off" style="font-size:20px;color:var(--t4);opacity:.35"></i>
+            </div>
+            <div>
+              <div style="font-family:var(--fs);font-size:12px;font-weight:500;color:var(--t2)">Nenhum arquivo disponível</div>
+              <div style="font-size:11px;color:var(--t4);margin-top:3px;line-height:1.6">Assim que o contrato for assinado e enviado pela Sales Growth, ele aparecerá aqui para visualização e download.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div><!-- /cv -->
+
+</div><!-- /wrap -->
+</div><!-- /content -->
+</div><!-- /app -->
+
+<script>
+const DB={
+  VE:{name:'Viagens Europa',rs:'Viagens Europa Turismo Ltda.',cnpj:'12.345.678/0001-90',bg:'#edf0ff',c:'#2244bb',bk:'bok',bt:'Saudável',roas:'6.2x',rc:'var(--green)',plano:'Pro',val:'1800',ini:'2025-01-01',venc:'2027-01-01',resp:'Ana Carvalho',email:'ana@viagenseuropa.com.br',tel:'(79) 99999-0001',slug:'ve'},
+  TR:{name:'Top Roteiros',rs:'Top Roteiros Viagens Ltda.',cnpj:'98.765.432/0001-10',bg:'#edf8f8',c:'#006677',bk:'bok',bt:'Saudável',roas:'4.8x',rc:'var(--green)',plano:'Pro',val:'1600',ini:'2025-03-01',venc:'2027-03-01',resp:'Marcos Lima',email:'marcos@toproteiros.com.br',tel:'(11) 98888-0002',slug:'tr'},
+  DM:{name:'Dream Places',rs:'Dream Places Turismo Eireli',cnpj:'11.222.333/0001-44',bg:'#fdf3e3',c:'#8f6000',bk:'bwn',bt:'Atenção',roas:'2.9x',rc:'var(--amber)',plano:'Básico',val:'1200',ini:'2024-08-01',venc:'2026-08-01',resp:'Paula Meireles',email:'paula@dreamplaces.com.br',tel:'(21) 97777-0003',slug:'dm'},
+  AV:{name:'Avante Turismo',rs:'Avante Turismo S.A.',cnpj:'55.666.777/0001-88',bg:'#fef0ee',c:'#b83030',bk:'bdk',bt:'Em risco',roas:'1.6x',rc:'var(--red)',plano:'Básico',val:'1000',ini:'2024-11-01',venc:'2026-11-01',resp:'Ricardo Faro',email:'ricardo@avanteturismo.com.br',tel:'(31) 96666-0004',slug:'av'}
+};
+let logos={},curCode='VE';
+
+function buildCK(code){
+  const c=DB[code];
+  const avH=logos[code]?`<img src="${logos[code]}" alt="">`:`${code}`;
+  const avBg=logos[code]?'#f5f5f7':c.bg;const avC=logos[code]?'#333':c.c;
+  const vendas={VE:36,TR:24,DM:9,AV:4}[code];
+  const fat={VE:'R$ 58k',TR:'R$ 34k',DM:'Pendente',AV:'Pendente'}[code];
+  const fatC=['DM','AV'].includes(code)?'color:var(--amber)':'';
+  return`<div class="ck" onclick="oc('${code}')"><div class="ck-h"><div class="ck-av" style="background:${avBg};color:${avC}">${avH}</div><div style="flex:1"><div class="ck-n">${c.name}</div><div class="ck-s">${c.cnpj}</div></div><span class="bx ${c.bk}">${c.bt}</span></div><div class="ck-f"><div class="cs"><div class="csv" style="color:${c.rc}">${c.roas}</div><div class="csl">ROAS</div></div><div class="cs"><div class="csv">${vendas}</div><div class="csl">Vendas</div></div><div class="cs"><div class="csv" style="${fatC}">${fat}</div><div class="csl">Fat. Bruto</div></div></div></div>`;
+}
+function buildCTS(code){
+  const c=DB[code];
+  const avH=logos[code]?`<img src="${logos[code]}" alt="">`:`${code.slice(0,2)}`;
+  const avBg=logos[code]?'#f5f5f7':c.bg;const avC=logos[code]?'#333':c.c;
+  const venc=c.venc.split('-').reverse().join('/');
+  const val=parseInt(c.val).toLocaleString('pt-BR');
+  const isWarn=['DM','AV'].includes(code);
+  const bk=code==='AV'?'bdk':code==='DM'?'bwn':'bok';
+  const bt=code==='AV'?'Em risco':code==='DM'?'Atenção':'Ativo';
+  return`<div class="ct-row" onclick="oc('${code}');sbNav('cl',null);st(document.querySelectorAll('#pg-cl .tb')[1],'tc-ct')">
+    <div class="ct-row-av" style="background:${avBg};color:${avC}">${avH}</div>
+    <div class="ct-row-info">
+      <div class="ct-row-name">${c.name}</div>
+      <div class="ct-row-meta">
+        <span class="bx ${bk}" style="font-size:8px">${bt}</span>
+        <div class="ct-row-dot"></div>
+        Plano ${c.plano}
+        <div class="ct-row-dot"></div>
+        ${c.cnpj}
+      </div>
+    </div>
+    <div class="ct-row-mid">
+      <div class="ct-row-val">R$ ${val}</div>
+      <div class="ct-row-val-l">por mês</div>
+    </div>
+    <div class="ct-row-right">
+      <div style="text-align:right">
+        <div style="font-family:var(--fs);font-size:12px;font-weight:500;color:var(--t2)">Vence ${venc}</div>
+        <div style="font-size:10px;color:var(--t4);margin-top:2px">Renovação anual</div>
+      </div>
+      <i class="ti ti-chevron-right" style="font-size:14px;color:var(--t4)"></i>
+    </div>
+  </div>`;
+}
+function renderAll(){
+  const lg=document.getElementById('lg');if(lg)lg.innerHTML=Object.keys(DB).map(buildCK).join('');
+  const cl=document.getElementById('ctl');if(cl)cl.innerHTML=Object.keys(DB).map(buildCTS).join('');
+  Object.keys(DB).forEach(code=>{
+    ['dd-','sba-'].forEach(pre=>{
+      const el=document.getElementById(pre+code);if(!el)return;
+      if(logos[code]){el.innerHTML=`<img src="${logos[code]}" alt="">`;el.style.background='';}
+      else{el.textContent=code.slice(0,2);el.style.background=DB[code].bg;el.style.color=DB[code].c;}
+    });
+  });
+}
+renderAll();
+
+function gp(id){
+  document.querySelectorAll('#av .pg').forEach(p=>p.classList.remove('on'));
+  const p=document.getElementById('pg-'+id);if(p)p.classList.add('on');
+  cPD();
+}
+function sbNav(id,el){
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
+  if(el)el.classList.add('on');
+  else{const m={'list':'sbn-list','cts':'sbn-cts','notif':'sbn-notif','cl':'sbn-list'};const btn=document.getElementById(m[id]);if(btn)btn.classList.add('on');}
+  gp(id);
+}
+function backToList(){sbNav('list',document.getElementById('sbn-list'));}
+function oc(code){
+  curCode=code;const c=DB[code];
+  const av=document.getElementById('fav');
+  if(logos[code]){av.innerHTML=`<img src="${logos[code]}" alt="" style="width:100%;height:100%;object-fit:cover">`;av.style.background='#f5f5f7';}
+  else{av.innerHTML='';av.style.cssText=`background:${c.bg};color:${c.c};width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:13px;font-weight:700;flex-shrink:0;overflow:hidden;border:1px solid var(--b)`;av.textContent=code;}
+  document.getElementById('fn').textContent=c.name;
+  document.getElementById('fs2').textContent=c.rs+' · '+c.cnpj;
+  document.getElementById('fbx').innerHTML=`<span class="bx ${c.bk}">${c.bt}</span>`;
+  document.getElementById('ct-p-big').textContent=c.plano;
+  document.getElementById('ct-name-big').textContent=c.name;
+  document.getElementById('ct-v').textContent='R$ '+parseInt(c.val).toLocaleString('pt-BR');
+  document.getElementById('ct-i').textContent=c.ini.split('-').reverse().join('/');
+  // sync client contract cells
+  const _cvIni=document.getElementById('cv-ini-v');if(_cvIni)_cvIni.textContent=c.ini.split('-').reverse().join('/');
+  const _cvRen=document.getElementById('cv-ren-v');if(_cvRen)_cvRen.textContent=c.venc.split('-').reverse().join('/');
+  document.getElementById('ct-vc').textContent=c.venc.split('-').reverse().join('/');
+  document.getElementById('e-name').value=c.name;document.getElementById('e-rs').value=c.rs;document.getElementById('e-cnpj').value=c.cnpj||'';
+  // emp logo reset
+  const empLb=document.getElementById('emp-lb');
+  if(empLb){
+    const existImg=empLb.querySelector('img');if(existImg)existImg.remove();
+    const ic=empLb.querySelector('i');if(ic)ic.style.opacity='';
+    const lbl=empLb.querySelector('div');if(lbl)lbl.style.opacity='';
+    if(logos[code]){
+      const img=document.createElement('img');img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:3';img.src=logos[code];empLb.appendChild(img);
+    }
+  }
+  document.getElementById('e-resp').value=c.resp;document.getElementById('e-email').value=c.email;document.getElementById('e-tel').value=c.tel;
+  document.getElementById('m-plano').value=c.plano;document.getElementById('m-val').value=c.val;document.getElementById('m-ini').value=c.ini;document.getElementById('m-venc').value=c.venc;
+  document.getElementById('inv-url').textContent='https://insights.salesgrowth.com.br/cliente/'+c.slug;
+  document.getElementById('inv-area').style.display='none';
+  const cvLogo=document.getElementById('cv-logo-el');
+  if(logos[code]){cvLogo.innerHTML=`<img src="${logos[code]}" alt="" style="width:100%;height:100%;object-fit:cover">`;cvLogo.style.background='';}
+  else{cvLogo.textContent=code;cvLogo.style.background='rgba(255,255,255,.1)';}
+  document.getElementById('cv-name-el').textContent=c.name;
+  const eb=document.getElementById('emp-lb');
+  if(logos[code]){let img=eb.querySelector('img');if(!img){img=document.createElement('img');img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:1';eb.appendChild(img);}img.src=logos[code];}
+  else{const img=eb.querySelector('img');if(img)img.remove();}
+  st(document.querySelectorAll('#pg-cl .tb')[0],'tc-rel');
+  sbNav('cl',null);
+}
+
+function st(el,id){
+  el.closest('.tabs').querySelectorAll('.tb').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.tc').forEach(c=>c.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+}
+
+function tgPD(){const d=document.getElementById('pdrop'),b=document.getElementById('pbtn');const o=d.classList.contains('open');d.classList.toggle('open',!o);b.style.borderColor=o?'':'var(--blue)';}
+function cPD(){const d=document.getElementById('pdrop'),b=document.getElementById('pbtn');if(d)d.classList.remove('open');if(b)b.style.borderColor='';}
+document.addEventListener('click',e=>{const s=document.getElementById('psel');if(s&&!s.contains(e.target))cPD();});
+function sP(el,m,y){if(el.classList.contains('em'))return;document.querySelectorAll('.pm').forEach(x=>x.classList.remove('on'));el.classList.add('on');document.getElementById('plbl').textContent=m+'/'+y;cPD();}
+
+// Add week
+let wkN=25;
+function addWk(){
+  const de=document.getElementById('wk-de').value,ate=document.getElementById('wk-ate').value;
+  if(!de||!ate){alert('Selecione o período.');return;}
+  wkN++;const fmt=d=>d.split('-').reverse().join('/');const id='wk-new-'+wkN;
+  const html=`<div class="wk" id="${id}"><div class="wk-h" onclick="twk(this)"><div class="wk-lbl"><div class="wk-num">${wkN}</div><div class="wk-tag">Semana</div></div><div class="wk-body"><div class="wk-per">${fmt(de)} – ${fmt(ate)}</div><div class="wk-sub-row"><div class="wk-dot wk-dot-gr"></div><span class="wk-sub-txt">Sem relatório ainda</span></div></div><div class="wk-right" onclick="event.stopPropagation()"><div class="wk-roas wc">—</div><span class="bx bwn">Aguardando</span><button class="wk-del" onclick="confirmDelWk('${id}','Semana ${wkN}')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button><div class="wk-chev"><i class="ti ti-chevron-down" style="font-size:13px"></i></div></div></div><div class="wk-b open"><div class="sp2"><div class="pn"><div class="ptag tsg"><i class="ti ti-shield" style="font-size:10px"></i>Apenas admin</div><div class="ptt">Relatório semanal de mídia</div><div class="pss">Anexe o PDF desta semana. A IA extrai os dados.</div><div class="fd" onclick="upFD(this)" id="fd-n${wkN}" role="button"><i class="ti ti-file-upload fd-ic"></i><div class="fd-t">Clique para anexar o PDF</div></div><div class="mdata"><div class="mdata-h">Dados do período</div><div class="mdata-grid"><div class="mi"><div class="mi-left"><div class="mil">Investimento</div><div class="miv">—</div></div></div><div class="mi"><div class="mi-left"><div class="mil">Alcance</div><div class="miv">—</div></div></div><div class="mi"><div class="mi-left"><div class="mil">Cliques</div><div class="miv">—</div></div></div><div class="mi"><div class="mi-left"><div class="mil">Custo por clique</div><div class="miv">—</div></div></div><div class="mi"><div class="mi-left"><div class="mil">Leads gerados</div><div class="miv">—</div></div></div><div class="mi"><div class="mi-left"><div class="mil">Custo por lead</div><div class="miv">—</div></div></div><div class="mi" style="grid-column:1/-1"><div class="mi-left"><div class="mil">CTR</div><div class="miv">—</div></div></div></div></div></div><div class="pn"><div class="ptag tcl"><i class="ti ti-user" style="font-size:10px"></i>Cliente preenche</div><div class="ptt">Resultados da semana</div><div class="pss">Disponível após o PDF ser anexado.</div><div class="hint"><i class="ti ti-lock" style="font-size:12px"></i>Somente o cliente pode preencher</div></div></div></div></div>`;
+  document.getElementById('ww').insertAdjacentHTML('afterbegin',html);
+  cM('ov-wk');document.getElementById('wk-de').value='';document.getElementById('wk-ate').value='';
+}
+
+function upFD(fd){
+  fd.className='fd loading';fd.onclick=null;
+  fd.innerHTML='<span class="spin" style="font-size:20px;display:block;text-align:center;margin-bottom:5px">⟳</span><div class="fd-t" style="color:var(--blue)">Extraindo dados com IA...</div>';
+  setTimeout(()=>{
+    fd.className='upload-zone has';
+    fd.innerHTML=`<div class="uz-done"><div class="uz-done-icon"><i class="ti ti-file-type-pdf"></i></div><div><div class="uz-done-name">relatorio.pdf</div><div class="uz-done-meta"><i class="ti ti-sparkles" style="font-size:11px;color:var(--green)"></i><span style="color:var(--green)">Dados extraídos com IA</span></div></div></div><div class="uz-actions"><button class="pdf-btn-sm primary" onclick="openPDF('relatorio.pdf')"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar</button><a class="pdf-btn-sm" href="#" onclick="dlSim('relatorio.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a><button class="pdf-btn-sm" onclick="replFD('${fdId}')"><i class="ti ti-replace" style="font-size:12px"></i>Trocar arquivo</button><button class="pdf-btn-sm danger" onclick="confirmDelPDFById('${fdId}')"><i class="ti ti-trash" style="font-size:12px"></i>Excluir</button></div>`;
+    const mivs=fd.closest('.pn').querySelectorAll('.miv');
+    ['R$ 3.400','41.200','1.087','R$ 3,13','41','R$ 82,93','2,98%'].forEach((v,i)=>{if(mivs[i])mivs[i].textContent=v;});
+  },2000);
+}
+function replF(fdId){
+  const fd=document.getElementById(fdId);if(!fd)return;
+  const nb=fd.nextElementSibling;if(nb&&nb.classList.contains('pdf-acts'))nb.remove();
+  fd.className='upload-zone';fd.innerHTML='<div class="uz-icon"><i class="ti ti-file-upload"></i></div><div class="uz-title">Clique para anexar um novo PDF</div>';fd.onclick=()=>upFD(fd);
+}
+function replFD(fdId){replF(fdId);}
+function confirmDelWk(id,label){showConfirm('Excluir '+label,'Todos os dados e PDFs serão removidos.',()=>{const el=document.getElementById(id);if(el)el.remove();});}
+function confirmDelPDF(fdId,suffix){
+  showConfirm('Excluir PDF','Os dados extraídos também serão removidos.',()=>{
+    const fd=document.getElementById(fdId);if(!fd)return;
+    const nb=fd.nextElementSibling;if(nb&&nb.classList.contains('pdf-acts'))nb.remove();
+    fd.className='upload-zone';fd.innerHTML='<div class="uz-icon"><i class="ti ti-file-upload"></i></div><div class="uz-title">Clique para anexar o PDF</div>';fd.onclick=()=>upFD(fd);
+    if(suffix){['i','alc','c','cpc','l','cpl','ctr'].forEach(k=>{const el=document.getElementById(k+suffix);if(el)el.textContent='—';});}
+  });
+}
+function confirmDelPDFById(fdId){confirmDelPDF(fdId,null);}
+function showConfirm(title,sub,cb){document.getElementById('confirm-t').textContent=title;document.getElementById('confirm-s').textContent=sub;document.getElementById('confirm-ok').onclick=()=>{cb();cancelConfirm();};document.getElementById('confirm-box').classList.add('on');}
+function cancelConfirm(){document.getElementById('confirm-box').classList.remove('on');}
+function twk(el){el.nextElementSibling.classList.toggle('open');}
+
+function calcR(n,inv,leads){
+  const v=parseInt(document.getElementById('v'+n)?.value)||0;
+  const fat=parseFloat(document.getElementById('fat'+n)?.value)||0;
+  const com=parseFloat(document.getElementById('com'+n)?.value)||0;
+  const base=com>0?com:fat;const rp=document.getElementById('rp'+n);
+  if(base>0&&rp){rp.style.display='block';const r=(base/inv).toFixed(1)+'x';const col=parseFloat(r)>=3?'var(--green)':parseFloat(r)>=2?'var(--amber)':'var(--red)';document.getElementById('rr'+n).textContent=r;document.getElementById('rr'+n).style.color=col;document.getElementById('rt'+n).textContent=v>0?'R$ '+(base/v).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,'.'):'—';document.getElementById('rc'+n).textContent='R$ '+(inv/leads).toFixed(2).replace('.',',');}
+  else if(rp)rp.style.display='none';
+}
+function saveW(n,inv,leads){
+  const v=document.getElementById('v'+n)?.value||'0';
+  const com=parseFloat(document.getElementById('com'+n)?.value)||0;
+  const roas=com>0?(com/inv).toFixed(1)+'x':'—';
+  const p=document.getElementById('cl'+n);
+  if(p)p.innerHTML=`<div class="sbox"><div class="sbox-ico">✅</div><div class="sbox-t">Resultados salvos!</div><div class="sbox-s">${v} vendas · Lucro R$ ${com.toLocaleString('pt-BR')} · ROAS ${roas}</div></div>`;
+}
+function calcCV(n,inv,leads){
+  const v=parseInt(document.getElementById('cv-v'+n)?.value)||0;
+  const fat=parseFloat(document.getElementById('cv-fat'+n)?.value)||0;
+  const com=parseFloat(document.getElementById('cv-com'+n)?.value)||0;
+  const base=com>0?com:fat;const rp=document.getElementById('cvrp'+n);
+  if(base>0&&rp){rp.style.display='block';const r=(base/inv).toFixed(1)+'x';const col=parseFloat(r)>=3?'var(--blue)':parseFloat(r)>=2?'var(--amber)':'var(--red)';document.getElementById('cvr'+n).textContent=r;document.getElementById('cvr'+n).style.color=col;document.getElementById('cvt'+n).textContent=v>0?'R$ '+(base/v).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,'.'):'—';document.getElementById('cvc'+n).textContent='R$ '+(inv/leads).toFixed(2).replace('.',',');}
+  else if(rp)rp.style.display='none';
+}
+function saveCV25(){
+  const v=document.getElementById('cv-v25')?.value||'0';const com=parseFloat(document.getElementById('cv-com25')?.value)||0;const roas=com>0?(com/3800).toFixed(1)+'x':'—';
+  const f=document.getElementById('cvf25');if(f)f.innerHTML=`<div class="sbox"><div class="sbox-ico">✅</div><div class="sbox-t">Resultados enviados!</div><div class="sbox-s">${v} vendas · Lucro R$ ${com.toLocaleString('pt-BR')} · ROAS ${roas}<br>A Sales Growth vai usar esses dados para otimizar suas campanhas. 🚀</div></div>`;
+}
+
+function eMi(id,cur){
+  const el=document.getElementById(id);if(!el)return;
+  const card=el.closest('.mi');const btn=card?card.querySelector('.mi-edt'):null;
+  const inp=document.createElement('input');inp.className='mi-inp';inp.value=cur;
+  if(btn)btn.style.display='none';el.replaceWith(inp);inp.focus();inp.select();
+  const done=()=>{const n=document.createElement('div');n.className='miv';n.id=id;n.textContent=inp.value||cur;inp.replaceWith(n);if(btn)btn.style.display='';};
+  inp.addEventListener('blur',done);inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();});
+}
+
+function oM(id){document.getElementById(id).classList.add('on');}
+function cM(id){document.getElementById(id).classList.remove('on');}
+
+function tgMFD(){const el=document.getElementById('mfd');el.classList.toggle('has');el.textContent=el.classList.contains('has')?'✅ contrato_assinado.pdf — clique para trocar':'📎 Clique para anexar';}
+
+function saveCT(){
+  const plano=document.getElementById('m-plano').value;
+  document.getElementById('ct-p-big').textContent=plano;
+  const v=document.getElementById('m-val').value;if(v)document.getElementById('ct-v').textContent='R$ '+parseInt(v).toLocaleString('pt-BR');
+  const ini=document.getElementById('m-ini').value,venc=document.getElementById('m-venc').value;
+  if(ini)document.getElementById('ct-i').textContent=ini.split('-').reverse().join('/');
+  if(venc)document.getElementById('ct-vc').textContent=venc.split('-').reverse().join('/');
+  const status=document.getElementById('m-status').value;
+  const stxt=document.getElementById('ct-s-txt');
+  if(stxt){stxt.textContent=status;stxt.previousElementSibling.style.background=status==='Ativo'?'var(--green)':status==='Suspenso'?'var(--amber)':'var(--red)';stxt.style.color=status==='Ativo'?'var(--green)':status==='Suspenso'?'var(--amber)':'var(--red)';}
+  // data de pagamento
+  const pgto=document.getElementById('m-pgto')?.value;
+  if(pgto){
+    const ctPgto=document.getElementById('ct-pgto');if(ctPgto)ctPgto.textContent=pgto;
+    const cvPgto=document.getElementById('cv-pgto-v');if(cvPgto)cvPgto.textContent=pgto;
+  }
+  if(document.getElementById('mfd')?.classList.contains('has')){
+    const pdfCard=`<div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--gbg);border:1px solid var(--gbr);border-radius:var(--rs)"><div style="width:44px;height:44px;border-radius:10px;background:var(--w);border:1px solid var(--gbr);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-file-certificate" style="font-size:20px;color:var(--green)"></i></div><div style="flex:1;min-width:0"><div style="font-family:var(--fs);font-size:12px;font-weight:600;color:var(--green)">contrato_assinado.pdf</div><div style="font-size:10px;color:var(--t4);margin-top:3px">Contrato assinado · disponível para visualização</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="pdf-btn-sm primary" onclick="openPDF('contrato_assinado.pdf')"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar</button><a class="pdf-btn-sm" href="#" onclick="dlSim('contrato_assinado.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a></div></div>`;
+    document.getElementById('ct-pdf').innerHTML=`<div style="border-top:1px solid var(--b);padding-top:12px"><div style="font-size:12px;color:var(--green);font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:10px"><i class="ti ti-file-check"></i>contrato_assinado.pdf</div><div class="pdf-acts"><button class="pdf-btn-sm primary" onclick="openPDF('contrato_assinado.pdf')"><i class="ti ti-eye" style="font-size:12px"></i>Visualizar</button><a class="pdf-btn-sm" href="#" onclick="dlSim('contrato_assinado.pdf');return false"><i class="ti ti-download" style="font-size:12px"></i>Baixar</a><button class="pdf-btn-sm" onclick="oM('ov-ct')"><i class="ti ti-replace" style="font-size:12px"></i>Trocar</button></div></div>`;
+    const cvArea=document.getElementById('cv-ct-pdf-area');if(cvArea)cvArea.innerHTML=pdfCard;
+  }
+  cM('ov-ct');
+}
+
+function createC(){const n=document.getElementById('nc-name').value;if(!n){alert('Preencha o nome.');return;}alert('✅ Perfil criado e convite enviado para '+n+'!');cM('ov-nc');}
+
+function sendInvite(){
+  const url=document.getElementById('inv-url').textContent;
+  const email=DB[curCode]?.email||'';
+  alert(`✅ Convite enviado!\n\nDestinatário: ${email}\nLink: ${url}\n\nO cliente receberá o acesso por e-mail.`);
+}
+
+function tgInv(){const a=document.getElementById('inv-area');a.style.display=a.style.display==='none'?'block':'none';if(a.style.display==='block')a.scrollIntoView({behavior:'smooth',block:'nearest'});}
+function cpLink(){const url=document.getElementById('inv-url').textContent;if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>{const btn=event.target;btn.textContent='Copiado!';setTimeout(()=>btn.textContent='Copiar',2000);});else alert(url);}
+
+// Theme
+function setTheme(t){
+  localStorage.setItem('sg-theme',t);
+  ['light','dark','sys'].forEach(x=>document.getElementById('th-'+x)?.classList.remove('on'));
+  document.getElementById('th-'+t)?.classList.add('on');
+  const isDark=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
+}
+(function(){const saved=localStorage.getItem('sg-theme')||'light';setTheme(saved);})();
+window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(localStorage.getItem('sg-theme')==='system')setTheme('system');});
+
+// Mobile sidebar
+function toggleSB(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sb-overlay');
+  sb.classList.toggle('open');
+  if(ov)ov.classList.toggle('on',sb.classList.contains('open'));
+}
+function closeSB(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sb-overlay');
+  sb.classList.remove('open');
+  if(ov)ov.classList.remove('on');
+}
+
+// Admin profile modal
+function updateAdminPhoto(inp){
+  if(!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const src=e.target.result;
+    // update big avatar in modal
+    const big=document.getElementById('profile-av-big');
+    if(big){big.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;big.style.background='transparent';}
+    // update sidebar avatar
+    const sbAv=document.getElementById('admin-av-sb');
+    if(sbAv){sbAv.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;sbAv.style.background='transparent';}
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+function saveProfile(){
+  const name=document.getElementById('profile-name').value||'Gabriel';
+  // update sidebar name
+  const sbName=document.getElementById('admin-name-sb');
+  if(sbName)sbName.textContent=name;
+  cM('ov-profile');
+  // small toast
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;font-size:12px;font-family:var(--fs);padding:9px 18px;border-radius:var(--rs);z-index:500;box-shadow:0 4px 20px rgba(0,0,0,.3);pointer-events:none';
+  t.textContent='✅ Perfil atualizado!';document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2500);
+}
+
+// PDF viewer
+function openPDF(fname){
+  document.getElementById('pdf-fname').textContent=fname;
+  document.getElementById('pdf-ph-name').textContent=fname;
+  document.getElementById('pdf-ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closePDF(){document.getElementById('pdf-ov').classList.remove('on');document.body.style.overflow='';}
+function dlSim(fname){fname=fname||'arquivo.pdf';alert('Download iniciado: '+fname+'\n\nNo ambiente de produção o arquivo seria baixado diretamente.');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePDF();cancelConfirm();}});
+
+// Mark all notifications read
+function markAllRead(){
+  document.querySelectorAll('.ni-unread').forEach(el=>{el.style.opacity='0';});
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;font-size:12px;font-family:var(--fs);padding:9px 18px;border-radius:var(--rs);z-index:500;box-shadow:0 4px 20px rgba(0,0,0,.3);pointer-events:none';
+  t.textContent='✅ Todas as notificações marcadas como lidas';document.body.appendChild(t);setTimeout(()=>t.remove(),2500);
+}
+
+// Empresa save
+function saveEmp(){
+  const name=document.getElementById('e-name').value;
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;font-size:12px;font-family:var(--fs);padding:9px 18px;border-radius:var(--rs);z-index:500;box-shadow:0 4px 20px rgba(0,0,0,.3);pointer-events:none';
+  t.textContent='✅ Dados da empresa salvos!';document.body.appendChild(t);setTimeout(()=>t.remove(),2500);
+}
+
+// Clients toggle in sidebar
+function sbNavClients(el){
+  const sub=document.getElementById('sb-sub');
+  const isOpen=sub.classList.contains('open');
+  if(!isOpen){
+    sub.classList.add('open');
+    el.classList.add('sub-open');
+    // Also navigate to list
+    sbNav('list',el);
+  } else {
+    sub.classList.remove('open');
+    el.classList.remove('sub-open');
+  }
+}
+
+// Sidebar collapse (desktop)
+let sbCollapsed=false;
+function toggleSBCollapse(){
+  sbCollapsed=!sbCollapsed;
+  const sb=document.getElementById('sidebar');
+  const ic=document.getElementById('sb-toggle-ic');
+  const toggleBtn=document.getElementById('sb-toggle-btn');
+  const contentEl=document.getElementById('content');
+  if(sbCollapsed){
+    sb.style.width='0px';
+    if(contentEl)contentEl.style.marginLeft='0';
+    if(toggleBtn)toggleBtn.style.left='0px';
+    if(ic){ic.className='ti ti-layout-sidebar-right';ic.title='Abrir menu';}
+  } else {
+    sb.style.width='var(--sb-w)';
+    if(contentEl)contentEl.style.marginLeft='var(--sb-w)';
+    if(toggleBtn)toggleBtn.style.left='calc(var(--sb-w) - 13px)';
+    if(ic){ic.className='ti ti-chevron-left';ic.title='Fechar menu';}
+  }
+}
+
+// Logo upload
+function prevLogo(boxId,inpId,forCode){
+  const inp=document.getElementById(inpId);if(!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const src=e.target.result;
+    const box=document.getElementById(boxId);
+    if(!box)return;
+    // Check if it's the new emp-logo-inner style
+    const inner=box.classList.contains('emp-logo-inner')?box:null;
+    if(inner){
+      let img=inner.querySelector('img');
+      if(!img){img=document.createElement('img');img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:3';inner.appendChild(img);}
+      img.src=src;
+      inner.querySelectorAll('i,.logo-up-l').forEach(el=>el.style.opacity='0');
+    } else {
+      let img=box.querySelector('img');
+      if(!img){img=document.createElement('img');img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:1';box.appendChild(img);}
+      img.src=src;const lbl=box.querySelector('.logo-up-l');if(lbl)lbl.style.display='none';
+    }
+    if(forCode==='cur'){
+      logos[curCode]=src;renderAll();
+      const fav=document.getElementById('fav');if(fav){fav.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;fav.style.background='#f5f5f7';}
+      const cvl=document.getElementById('cv-logo-el');if(cvl){cvl.innerHTML=`<img src="${src}" alt="" style="width:100%;height:100%;object-fit:cover">`;cvl.style.background='';}
+    }
+  };r.readAsDataURL(inp.files[0]);
+}
+</script>
+</body>
+</html>
