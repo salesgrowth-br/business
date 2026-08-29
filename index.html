@@ -270,13 +270,6 @@ body {
   letter-spacing: -0.005em;
 }
 
-.hero-desc em {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--text);
-}
-
 /* Social icons row */
 .social-row {
   display: flex;
@@ -349,7 +342,7 @@ body {
 
 .stat-num em {
   font-style: normal;
-  color: var(--blue-text);
+  color: var(--blue);
 }
 
 .stat-label {
@@ -493,15 +486,15 @@ body {
   color: var(--blue-text);
 }
 
-/* Featured card — solid blue gradient */
+/* Featured card — solid blue */
 .link-card.featured {
-  background: linear-gradient(135deg, var(--blue) 0%, #0b1fb8 100%);
+  background: var(--blue);
   border-color: rgba(255,255,255,0.14);
 }
 
 .link-card.featured:hover {
   border-color: rgba(255,255,255,0.28);
-  background: linear-gradient(135deg, #1428ff 0%, #0c22c4 100%);
+  background: #1428ff;
 }
 
 .link-card.featured .link-icon {
@@ -727,8 +720,6 @@ footer {
   margin-bottom: 8px;
 }
 
-.modal-title em { color: var(--blue-text); font-style: normal; }
-
 .modal-sub {
   font-size: var(--fs-3);
   color: var(--text-3);
@@ -752,7 +743,7 @@ footer {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(to right, var(--blue), var(--blue-text));
+  background: var(--blue);
   border-radius: 999px;
   transition: width .3s ease;
 }
@@ -862,16 +853,16 @@ footer {
 }
 
 .opt.sel .opt-dot {
-  border-color: var(--blue-text);
-  background: var(--blue);
+  border-color: var(--blue);
+  background: transparent;
 }
 
 .opt.sel .opt-dot::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 4px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--blue);
 }
 
 .err {
@@ -971,8 +962,6 @@ footer {
   margin-bottom: 10px;
 }
 
-.s-title em { color: var(--green); font-style: normal; }
-
 .s-sub {
   font-size: var(--fs-3);
   color: var(--text-3);
@@ -1031,7 +1020,7 @@ footer {
     <div class="hero-handle">@salesgrowth.br</div>
 
     <p class="hero-desc">
-      Ajudamos empresas a vender mais através dos <em>anúncios</em>.
+      Ajudamos empresas a vender mais através dos anúncios.
     </p>
 
     <!-- SOCIAL ROW -->
@@ -1218,8 +1207,8 @@ footer {
 
     <div class="modal-header">
       <div class="modal-tag">Diagnóstico gratuito</div>
-      <div class="modal-title">Vamos entender <em>o seu negócio</em></div>
-      <div class="modal-sub">Preencha com atenção — cada resposta define a estratégia que vou montar para o seu negócio.</div>
+      <div class="modal-title">Vamos entender o seu negócio</div>
+      <div class="modal-sub">Preencha com atenção. Cada resposta define a estratégia que vou montar para o seu negócio.</div>
     </div>
 
     <div class="progress-wrap">
@@ -1297,7 +1286,7 @@ footer {
       <!-- STEP 5 -->
       <div id="s5" style="display:none">
         <div class="step-q">Qual é o faturamento médio mensal da empresa nos últimos 3 meses?</div>
-        <div class="step-hint">Seja preciso — isso define a estratégia compatível com o seu momento atual.</div>
+        <div class="step-hint">Seja preciso. Isso define a estratégia compatível com o seu momento atual.</div>
         <div class="options" id="o5">
           <button class="opt" onclick="pick('o5',this)"><div class="opt-dot"></div>Até R$ 30.000/mês</button>
           <button class="opt" onclick="pick('o5',this)"><div class="opt-dot"></div>R$ 30.000 a R$ 100.000/mês</button>
@@ -1314,7 +1303,7 @@ footer {
       <!-- STEP 6 -->
       <div id="s6" style="display:none">
         <div class="step-q">Qual é a sua meta de faturamento nos próximos 90 dias?</div>
-        <div class="step-hint">Escreva à vontade — essa resposta define o tamanho da estratégia que vou montar.</div>
+        <div class="step-hint">Escreva à vontade. Essa resposta define o tamanho da estratégia que vou montar.</div>
         <textarea class="tfield" id="q6" placeholder="Ex: quero faturar R$ 200.000 nos próximos 90 dias e dobrar o número de clientes ativos..."></textarea>
         <div class="err" id="e6">Por favor, escreva sua meta.</div>
 
@@ -1341,8 +1330,8 @@ footer {
       <div class="s-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="s-title">Diagnóstico <em>enviado!</em></div>
-      <div class="s-sub">Recebi suas respostas e vou analisar com atenção. Fique de olho no WhatsApp — entro em contato em breve.</div>
+      <div class="s-title">Diagnóstico enviado!</div>
+      <div class="s-sub">Recebi suas respostas e vou analisar com atenção. Fique de olho no WhatsApp, entro em contato em breve.</div>
       <button class="btn-next" style="width:100%;" onclick="closeModal()">Fechar</button>
     </div>
 
