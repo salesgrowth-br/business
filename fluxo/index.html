@@ -106,9 +106,9 @@ body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--f
 .sec-num{color:var(--blue2);font-weight:600;font-size:11px}
 .sec-lbl:first-child{padding-top:0}
 
-.step{margin-bottom:10px}
+.step{margin-bottom:12px}
 .step-hdr{background:var(--surf);border:1px solid var(--b2);border-radius:var(--rl);
-  padding:18px 22px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding:18px 22px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;
   transition:border-color .22s,background .22s,box-shadow .22s}
 .step-hdr:hover{border-color:rgba(0,64,255,.3);background:var(--surf2);
   box-shadow:0 4px 20px rgba(0,21,255,.08)}
@@ -120,11 +120,15 @@ body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--f
 .step-lbl.red{color:var(--red)}.step-lbl.gray{color:var(--gray)}
 .step-title{font-size:16px;font-weight:600;color:var(--text);line-height:1.25;letter-spacing:-.015em}
 .step-sub{font-size:13px;color:var(--text3);line-height:1.45}
-.chev{color:var(--text4);font-size:13px;transition:transform .22s,color .22s;flex-shrink:0;margin-top:3px}
-.step-hdr:hover .chev{color:var(--text2)}
-.chev.open{transform:rotate(180deg);color:var(--blue2)}
+.chev{flex:0 0 22px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  color:var(--text3);font-size:0;line-height:0;transition:color .2s ease}
+.chev::before{content:"";display:block;width:10px;height:10px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s ease}
+.step-hdr:hover .chev{color:var(--text)}
+.chev.open{color:var(--blue3)}
+.chev.open::before{transform:rotate(225deg)}
 .step-body{display:none;background:var(--surf2);border:1px solid rgba(0,64,255,.28);
-  border-top:none;border-radius:0 0 var(--rl) var(--rl);padding:20px 22px 24px;
+  border-top:none;border-radius:0 0 var(--rl) var(--rl);padding:18px 22px 20px;
   animation:fadeDown .25s ease}
 .step-body.open{display:block}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
@@ -137,8 +141,8 @@ body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--f
 .gray-step .chev.open{color:var(--gray)}
 
 .msg-box{background:var(--bsoft);border-left:3px solid var(--blue2);
-  border-radius:0 var(--r) var(--r) 0;padding:16px 18px;font-size:14px;line-height:1.8;
-  color:var(--text2);margin:0 0 16px;word-break:break-word}
+  border-radius:0 var(--r) var(--r) 0;padding:15px 18px;font-size:14px;line-height:1.7;
+  color:var(--text2);margin:0 0 14px;word-break:break-word}
 .msg-box.gray{background:var(--gsoft);border-left-color:var(--gray)}
 .msg-box.red{background:var(--rsoft);border-left-color:var(--red)}
 .msg-box.amber{background:rgba(232,168,100,.1);border-left-color:var(--amber)}
@@ -218,6 +222,9 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
   .content{padding:28px 16px 80px}
   .view-title{font-size:26px}
   .tabs .tab{padding:13px 12px;font-size:9.5px}
+  .step-hdr{padding:16px 18px;gap:12px}
+  .step-body{padding:16px 18px 18px}
+  .msg-box{padding:14px 16px;line-height:1.65}
 }
 
 
@@ -233,8 +240,8 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
 /* Step header lift */
 .step-hdr{transform:translateY(0);
   transition:border-color .22s,background .22s,box-shadow .22s,transform .18s ease}
-.step-hdr:hover{transform:translateY(-1px);
-  box-shadow:0 6px 24px rgba(0,21,255,.1),0 2px 6px rgba(0,0,0,.2)}
+.step-hdr:hover{transform:translateY(0);
+  box-shadow:0 4px 20px rgba(0,21,255,.08)}
 .step-hdr.open{transform:translateY(0)}
 
 /* Copy button pulse */
@@ -256,10 +263,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
 .note{transition:border-color .2s,box-shadow .2s}
 .note:hover{border-color:rgba(0,64,255,.45);box-shadow:0 4px 20px rgba(0,21,255,.08)}
 
-/* Chevron bounce */
-.step-hdr:hover .chev{animation:chevBounce .35s ease}
-@keyframes chevBounce{0%{transform:translateY(0)}40%{transform:translateY(3px)}100%{transform:translateY(0)}}
-.step-hdr.open .chev{animation:none}
+/* A seta acompanha o estado do card sem ocupar mais espaço que os textos. */
 
 /* Tag */
 .tag{transition:background .2s,border-color .2s,color .2s}
@@ -317,9 +321,9 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
   <p class="view-sub">Envie na ordem abaixo. Cada botão copia apenas uma mensagem, para colar e enviar separadamente no WhatsApp.</p>
 </div>
 <div class="note"><span>Antes de enviar, confira se você realmente olhou o perfil da agência. Se a pessoa responder, pare a sequência e converse a partir da resposta.</span></div>
-<div class="step"><div class="step-hdr open" onclick="tog('a1',this)"><div class="step-meta"><span class="step-lbl blue">Parte 01</span><span class="step-title">Mensagem 01 · Abertura</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev">▾</span></div><div class="step-body open" id="a1"><div class="msg-box">Eiii, tudo bem? Me chamo Gabriel. Dei uma olhada no Instagram da agência e o perfil passa muita confiança pra quem chega pela primeira vez 👏🏻</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step"><div class="step-hdr open" onclick="tog('a2',this)"><div class="step-meta"><span class="step-lbl blue">Parte 02</span><span class="step-title">Mensagem 02 · O que fazemos</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev">▾</span></div><div class="step-body open" id="a2"><div class="msg-box">Te chamei porque ajudo agências de viagens a atrair mais pessoas interessadas em viajar com tráfego pago e a organizar o atendimento de quem entra em contato com CRM e agentes de IA</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step"><div class="step-hdr open" onclick="tog('a3',this)"><div class="step-meta"><span class="step-lbl blue">Parte 03</span><span class="step-title">Mensagem 03 · Pergunta</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev">▾</span></div><div class="step-body open" id="a3"><div class="msg-box">Me tira uma dúvida 🫣<br>Hoje, aí com vocês, o desafio maior é receber mais contatos ou fechar mais vendas com quem já chama vocês?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step"><div class="step-hdr open" onclick="tog('a1',this)"><div class="step-meta"><span class="step-lbl blue">Parte 01</span><span class="step-title">Mensagem 01 · Abertura</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev open" aria-hidden="true"></span></div><div class="step-body open" id="a1"><div class="msg-box">Eiii, tudo bem? Me chamo Gabriel. Dei uma olhada no Instagram da agência e o perfil passa muita confiança pra quem chega pela primeira vez 👏🏻</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step"><div class="step-hdr open" onclick="tog('a2',this)"><div class="step-meta"><span class="step-lbl blue">Parte 02</span><span class="step-title">Mensagem 02 · O que fazemos</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev open" aria-hidden="true"></span></div><div class="step-body open" id="a2"><div class="msg-box">Te chamei porque ajudo agências de viagens a atrair mais pessoas interessadas em viajar com tráfego pago e a organizar o atendimento de quem entra em contato com CRM e agentes de IA</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step"><div class="step-hdr open" onclick="tog('a3',this)"><div class="step-meta"><span class="step-lbl blue">Parte 03</span><span class="step-title">Mensagem 03 · Pergunta</span><span class="step-sub">Copiar e enviar só esta parte</span></div><span class="chev open" aria-hidden="true"></span></div><div class="step-body open" id="a3"><div class="msg-box">Me tira uma dúvida 🫣<br>Hoje, aí com vocês, o desafio maior é receber mais contatos ou fechar mais vendas com quem já chama vocês?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
 <div class="note"><span>Se a resposta for “mais contatos”, investigue a captação antes de falar de anúncios. Se for “fechar mais vendas”, pergunte como registram e retomam as conversas antes de explicar o CRM e os agentes de IA. Se forem os dois, entenda onde a perda é maior.</span></div></div>
   <div class="view" id="view-followup"><div class="view-hdr">
   <span class="view-eyebrow">02 · Sequência pós-abordagem</span>
@@ -333,7 +337,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">D2 · Olha para o atendimento</span>
       <span class="step-sub">Se não houve resposta até o fim da tarde</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="f1">
     <div class="msg-box">Voltei porque, em agência de viagens, às vezes chegam novos contatos, mas fica difícil acompanhar todas as conversas no meio da rotina. Isso acontece aí também?</div>
@@ -352,7 +356,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">D3 · Pergunta sobre o atendimento</span>
       <span class="step-sub">Escolha texto ou áudio, nunca os dois. Use apenas se o ponto fizer sentido para a agência</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="f2">
     <div class="sub-sec-lbl">Opção A · Texto</div>
@@ -376,7 +380,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">D4 · Fecha com elegância</span>
       <span class="step-sub">Última mensagem da sequência inicial</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="f3">
     <div class="msg-box gray">Tudo bem, vou encerrar por aqui.<br><br>Se em outro momento fizer sentido olhar a captação ou o atendimento dos contatos, é só me chamar. Bons negócios pra vocês.</div>
@@ -403,7 +407,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Já fiz tráfego e não funcionou"</span>
       <span class="step-sub">Valide a frustração e descubra se o problema foi captação ou conversão.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o01">
     <div class="msg-box red">Imagino a frustração. Quando vocês tentaram, o problema foi trazer poucas pessoas interessadas ou os contatos chegavam e não avançavam até a venda?</div>
@@ -417,7 +421,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Já tenho um gestor"</span>
       <span class="step-sub">Reconheça o trabalho atual e pergunte sobre o atendimento depois do anúncio.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o02">
     <div class="msg-box red">Boa, ótimo já ter alguém cuidando dos anúncios. E depois que o contato chega, vocês conseguem acompanhar a conversa até ter uma resposta do cliente?</div>
@@ -431,7 +435,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Não tenho interesse"</span>
       <span class="step-sub">Respeite a resposta e encerre sem pressionar.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o03">
     <div class="msg-box red">Tranquilo, obrigado por responder. Se em outro momento fizer sentido olhar a captação ou o atendimento dos contatos, é só me chamar.</div>
@@ -445,7 +449,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Não tenho verba agora"</span>
       <span class="step-sub">Respeite o orçamento e descubra qual perda seria mais importante resolver.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o04">
     <div class="msg-box red">Entendo, respeito isso. Antes de pensar em investimento, vale entender onde está a maior perda hoje. Faltam pessoas interessadas entrando em contato ou fica difícil acompanhar quem já procurou vocês?</div>
@@ -459,7 +463,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Agora não é o momento"</span>
       <span class="step-sub">Âncora no futuro sem pressionar.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o05">
     <div class="msg-box red">Tudo bem, sem pressa. Quando costuma ser um momento melhor pra vocês olharem captação e atendimento, no fim do mês ou no começo do próximo?</div>
@@ -473,7 +477,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Fazemos tráfego internamente"</span>
       <span class="step-sub">Valide o time e explore o processo depois que o contato chega.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o06">
     <div class="msg-box red">Boa, faz sentido manter o que já funciona aí. Depois que o anúncio gera um novo contato, vocês têm um processo para registrar e retomar a conversa até a decisão do cliente?</div>
@@ -487,7 +491,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Me manda mais informações"</span>
       <span class="step-sub">Pergunte qual parte da entrega a pessoa quer entender.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o07">
     <div class="msg-box red">Consigo sim. Pra te mandar algo útil, o que faz mais sentido pra vocês agora, entender como atraímos pessoas interessadas ou como o CRM com agentes de IA ajuda no atendimento?</div>
@@ -501,7 +505,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Me manda o preço primeiro"</span>
       <span class="step-sub">Explique que o escopo muda o preço e identifique a prioridade.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o08">
     <div class="msg-box red">Consigo te passar os valores. Eles dependem do que vocês precisam implementar. Hoje a prioridade é atrair mais contatos, organizar o atendimento ou cuidar das duas partes?</div>
@@ -515,7 +519,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Já tentei e não deu certo"</span>
       <span class="step-sub">Reconheça que dói, sem minimizar. Curto e direto.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o09">
     <div class="msg-box red">Entendo, é frustrante investir e não ver resultado. O que mais falhou na época, atrair pessoas interessadas ou acompanhar as conversas até o fechamento?</div>
@@ -529,7 +533,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Não tenho tempo pra isso agora"</span>
       <span class="step-sub">Reconheça a rotina e convide para uma conversa curta sobre o processo.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o10">
     <div class="msg-box red">Entendo. A ideia do CRM com agentes de IA é ajudar a equipe nas tarefas de atendimento e acompanhamento, mas preciso entender a rotina de vocês antes. Vale uma conversa rápida de 15 minutos?</div>
@@ -543,7 +547,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Preciso falar com meu sócio"</span>
       <span class="step-sub">Não pressione. Facilite o próximo passo.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o11">
     <div class="msg-box red">Claro, faz sentido alinhar com seu sócio. Se ajudar, posso explicar em uma conversa com vocês dois como funcionariam a captação e o atendimento. Quando conseguem falar sobre isso?</div>
@@ -557,7 +561,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Já estou bem com indicações"</span>
       <span class="step-sub">Valorize a indicação e pergunte como acompanham os contatos.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o12">
     <div class="msg-box red">Indicação é um ótimo canal. Hoje vocês conseguem acompanhar quantas pessoas indicadas entram em contato e quantas acabam fechando?</div>
@@ -571,7 +575,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Não confio em tráfego pago"</span>
       <span class="step-sub">Evite promessas e explique o que precisa ser avaliado.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o13">
     <div class="msg-box red">Entendo a desconfiança. Em vez de prometer resultado, prefiro entender quanto vocês investiriam, que tipo de contato querem atrair e como atenderiam essas pessoas. Posso te mostrar como eu avaliaria isso?</div>
@@ -585,7 +589,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Vou pensar e te dou um retorno"</span>
       <span class="step-sub">Âncora o prazo sem pressionar.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o14">
     <div class="msg-box red">Claro. O que você quer avaliar com mais calma, o investimento, a parte dos anúncios ou como funcionaria o atendimento com CRM e agentes de IA?</div>
@@ -599,7 +603,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Minha agência é pequena demais"</span>
       <span class="step-sub">Pergunte como a equipe registra e retoma cada conversa.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o15">
     <div class="msg-box red">Entendo. Com uma equipe menor, organizar cada novo contato pode fazer diferença. Hoje vocês registram e retomam essas conversas de que jeito?</div>
@@ -613,17 +617,17 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">"Não sei se anúncio funciona pra viagem"</span>
       <span class="step-sub">Conecte a captação ao atendimento e às vendas.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="o16">
     <div class="msg-box red">Faz sentido ter essa dúvida. O anúncio pode trazer pessoas interessadas, mas o resultado depende também de como cada conversa é atendida e acompanhada. Hoje vocês conseguem ver quantos contatos viram vendas?</div>
 <button class="copy-btn" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button>
   </div>
-</div><div class="step red-step"><div class="step-hdr" onclick="tog('o17',this)"><div class="step-meta"><span class="step-lbl red">Objeção 17</span><span class="step-title">"Já usamos CRM"</span><span class="step-sub">Entenda se o problema está no uso e acompanhamento, não na ferramenta.</span></div><span class="chev">▾</span></div><div class="step-body" id="o17"><div class="msg-box red">Ótimo. Hoje o CRM ajuda a equipe a ver quais conversas estão em aberto e quem precisa de retorno, ou isso ainda depende de cada atendente?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step red-step"><div class="step-hdr" onclick="tog('o18',this)"><div class="step-meta"><span class="step-lbl red">Objeção 18</span><span class="step-title">"Não quero robô atendendo meus clientes"</span><span class="step-sub">Esclareça o papel da IA sem prometer uma operação totalmente automática.</span></div><span class="chev">▾</span></div><div class="step-body" id="o18"><div class="msg-box red">Entendo. Em viagem, o atendimento precisa continuar próximo e humano. A ideia é entender quais partes repetitivas podem ser organizadas ou apoiadas por IA e quais devem ficar com a equipe. O que você não abriria mão de manter com uma pessoa?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step red-step"><div class="step-hdr" onclick="tog('o19',this)"><div class="step-meta"><span class="step-lbl red">Objeção 19</span><span class="step-title">"IA não entende viagem"</span><span class="step-sub">Reconheça a complexidade das viagens e descubra os limites necessários.</span></div><span class="chev">▾</span></div><div class="step-body" id="o19"><div class="msg-box red">Faz sentido ter esse cuidado. Planejar uma viagem envolve detalhes que não dá pra tratar com resposta genérica. Em quais partes do atendimento você acha que a equipe sempre precisa entrar?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step red-step"><div class="step-hdr" onclick="tog('o20',this)"><div class="step-meta"><span class="step-lbl red">Objeção 20</span><span class="step-title">"Nossa equipe já responde rápido"</span><span class="step-sub">Explore acompanhamento e fechamento, além da primeira resposta.</span></div><span class="chev">▾</span></div><div class="step-body" id="o20"><div class="msg-box red">Ótimo, responder rápido já ajuda bastante. E depois da primeira conversa, vocês conseguem acompanhar quem ainda não decidiu até ter uma resposta?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
-<div class="step red-step"><div class="step-hdr" onclick="tog('o21',this)"><div class="step-meta"><span class="step-lbl red">Objeção 21</span><span class="step-title">"Implementar CRM vai dar trabalho"</span><span class="step-sub">Entenda o processo atual antes de falar de implantação.</span></div><span class="chev">▾</span></div><div class="step-body" id="o21"><div class="msg-box red">Pode dar trabalho se não combinar com a rotina da equipe. Por isso eu começaria entendendo como vocês recebem, registram e retomam os contatos hoje. Qual parte do processo mais toma tempo aí?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+</div><div class="step red-step"><div class="step-hdr" onclick="tog('o17',this)"><div class="step-meta"><span class="step-lbl red">Objeção 17</span><span class="step-title">"Já usamos CRM"</span><span class="step-sub">Entenda se o problema está no uso e acompanhamento, não na ferramenta.</span></div><span class="chev" aria-hidden="true"></span></div><div class="step-body" id="o17"><div class="msg-box red">Ótimo. Hoje o CRM ajuda a equipe a ver quais conversas estão em aberto e quem precisa de retorno, ou isso ainda depende de cada atendente?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step red-step"><div class="step-hdr" onclick="tog('o18',this)"><div class="step-meta"><span class="step-lbl red">Objeção 18</span><span class="step-title">"Não quero robô atendendo meus clientes"</span><span class="step-sub">Esclareça o papel da IA sem prometer uma operação totalmente automática.</span></div><span class="chev" aria-hidden="true"></span></div><div class="step-body" id="o18"><div class="msg-box red">Entendo. Em viagem, o atendimento precisa continuar próximo e humano. A ideia é entender quais partes repetitivas podem ser organizadas ou apoiadas por IA e quais devem ficar com a equipe. O que você não abriria mão de manter com uma pessoa?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step red-step"><div class="step-hdr" onclick="tog('o19',this)"><div class="step-meta"><span class="step-lbl red">Objeção 19</span><span class="step-title">"IA não entende viagem"</span><span class="step-sub">Reconheça a complexidade das viagens e descubra os limites necessários.</span></div><span class="chev" aria-hidden="true"></span></div><div class="step-body" id="o19"><div class="msg-box red">Faz sentido ter esse cuidado. Planejar uma viagem envolve detalhes que não dá pra tratar com resposta genérica. Em quais partes do atendimento você acha que a equipe sempre precisa entrar?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step red-step"><div class="step-hdr" onclick="tog('o20',this)"><div class="step-meta"><span class="step-lbl red">Objeção 20</span><span class="step-title">"Nossa equipe já responde rápido"</span><span class="step-sub">Explore acompanhamento e fechamento, além da primeira resposta.</span></div><span class="chev" aria-hidden="true"></span></div><div class="step-body" id="o20"><div class="msg-box red">Ótimo, responder rápido já ajuda bastante. E depois da primeira conversa, vocês conseguem acompanhar quem ainda não decidiu até ter uma resposta?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
+<div class="step red-step"><div class="step-hdr" onclick="tog('o21',this)"><div class="step-meta"><span class="step-lbl red">Objeção 21</span><span class="step-title">"Implementar CRM vai dar trabalho"</span><span class="step-sub">Entenda o processo atual antes de falar de implantação.</span></div><span class="chev" aria-hidden="true"></span></div><div class="step-body" id="o21"><div class="msg-box red">Pode dar trabalho se não combinar com a rotina da equipe. Por isso eu começaria entendendo como vocês recebem, registram e retomam os contatos hoje. Qual parte do processo mais toma tempo aí?</div><button class="copy-btn" type="button" onclick="cp(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div></div>
 </div>
   <div class="view" id="view-reativ"><div class="view-hdr">
   <span class="view-eyebrow">04 · Conversas que esfriaram</span>
@@ -641,7 +645,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Sumiu sem motivo claro</span>
       <span class="step-sub">Parou de responder do nada. Tom leve, sem peso.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r1">
     <div class="msg-box gray">Oi, tudo certo? Passando pra saber se hoje faz sentido retomar a conversa sobre atrair mais pessoas interessadas e acompanhar melhor os contatos que já chegam.</div>
@@ -655,7 +659,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Faltou na call marcada</span>
       <span class="step-sub">Não apareceu na reunião. Sem drama, sem cobrança.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r2">
     <div class="msg-box gray">Oi, sem problema, acontece. Ainda faz sentido conversarmos sobre a captação e o atendimento dos contatos? Se sim, me fala um horário melhor pra você.</div>
@@ -669,7 +673,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Esfriou depois do preço</span>
       <span class="step-sub">Sumiu depois de receber o valor. Vá direto, sem rodeio.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r3">
     <div class="msg-box gray">Oi, posso te perguntar uma coisa? O que pesou mais depois da nossa conversa, o investimento ou alguma dúvida sobre o que seria feito na captação e no atendimento?</div>
@@ -683,7 +687,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Planejamento da próxima temporada</span>
       <span class="step-sub">Use apenas quando a agência estiver se preparando para a próxima temporada.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r4">
     <div class="msg-box gray">Oi, tudo bem? Se vocês já estão planejando a próxima temporada, pode ser uma boa hora pra organizar como vão atrair novos contatos e atender quem chegar. Faz sentido retomar a conversa?</div>
@@ -697,7 +701,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Pergunta de diagnóstico</span>
       <span class="step-sub">Retome a conversa com uma pergunta sobre o acompanhamento dos contatos.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r5">
     
@@ -712,7 +716,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Tentativa final</span>
       <span class="step-sub">Última mensagem. Sai com dignidade, sem mágoa.</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="r6">
     <div class="msg-box gray">Tranquilo, vou encerrar por aqui. Quando quiser conversar sobre captação ou atendimento dos contatos, é só me chamar.</div>
@@ -732,7 +736,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Check-in humano</span>
       <span class="step-sub">3 a 5 dias após a reunião sem retorno</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc1">
     <div class="msg-box">Oi, tudo bem? Depois da nossa reunião, ficou alguma dúvida sobre a parte de captação, sobre o atendimento com CRM e agentes de IA ou sobre os próximos passos?</div>
@@ -751,7 +755,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Tira o obstáculo</span>
       <span class="step-sub">Sem resposta ao check-in</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc2">
     <div class="msg-box">Só passando por aqui. Queria entender se o que travou foi o investimento, o momento ou alguma dúvida sobre como anúncios e atendimento entrariam na rotina de vocês.</div>
@@ -770,7 +774,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Fecha o ciclo</span>
       <span class="step-sub">Sem resposta ao obstáculo</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc3">
     <div class="msg-box gray">Tudo bem, vou deixar espaço. Se fizer sentido retomar a conversa sobre o projeto em outro momento, é só me falar.</div>
@@ -789,7 +793,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Cobra o retorno prometido</span>
       <span class="step-sub">No dia seguinte ao prazo combinado</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc4">
     <div class="msg-box">Oi, tudo bem? Você tinha comentado que me daria um retorno. Ainda faz sentido avançar com o que conversamos ou a prioridade mudou por aí?</div>
@@ -809,7 +813,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Logo após enviar o documento</span>
       <span class="step-sub">Confirma envio e ancora próximo passo</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc5">
     <div class="msg-box">Acabei de te mandar a proposta com o escopo que conversamos. Conseguiu receber? Quando acha que pode avaliá-la?</div>
@@ -829,7 +833,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">No dia combinado</span>
       <span class="step-sub">Na data que ele mencionou</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc6">
     <div class="msg-box">Oi, tudo bem? Você comentou que ia conversar com seu sócio sobre a proposta. Conseguiram alinhar o que faz mais sentido pra agência agora?</div>
@@ -850,7 +854,7 @@ footer{border-top:1px solid var(--b1);padding:22px 28px 40px;
       <span class="step-title">Resposta ao pedido de redução</span>
       <span class="step-sub">A pessoa pediu um valor menor</span>
     </div>
-    <span class="chev">▾</span>
+    <span class="chev" aria-hidden="true"></span>
   </div>
   <div class="step-body" id="pc7">
     <div class="msg-box">Entendo. O valor considera o escopo que conversamos. Se ficou acima do esperado, podemos rever o que é prioridade antes de pensar em qualquer ajuste. O que pesou mais pra vocês?</div>
