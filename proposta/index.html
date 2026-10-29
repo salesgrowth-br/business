@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Proposta Comercial</title>
 <meta name="description" content="Proposta comercial de gestão de tráfego pago, CRM e IA.">
-<meta name="theme-color" content="#030308">
+<meta name="theme-color" content="#f6f7fb">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,26 +19,26 @@ document.documentElement.setAttribute('data-theme','dark');
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg:          #030308;
-  --surface:     #08091a;
-  --surface-2:   #0b0d25;
-  --surface-3:   #101438;
+  --bg:          #f6f7fb;
+  --surface:     #ffffff;
+  --surface-2:   #f1f3fa;
+  --surface-3:   #eef1ff;
 
-  --border:      rgba(255, 255, 255, 0.07);
-  --border-2:    rgba(255, 255, 255, 0.11);
-  --border-hi:   rgba(0, 64, 255, 0.35);
+  --border:      rgba(12, 18, 60, 0.08);
+  --border-2:    rgba(12, 18, 60, 0.13);
+  --border-hi:   rgba(0, 21, 255, 0.35);
 
   --blue:        #0015FF;
   --blue-2:      #2a44ff;
-  --blue-glow:   rgba(0, 21, 255, 0.32);
-  --blue-text:   #8aa3ff;
+  --blue-glow:   rgba(0, 21, 255, 0.10);
+  --blue-text:   #1f33e6;
 
-  --text:        #ffffff;
-  --text-2:      #d0d3e0;
-  --text-3:      #8a8ea0;
-  --text-4:      #565a6e;
+  --text:        #0b0d1f;
+  --text-2:      #3a3f57;
+  --text-3:      #62677f;
+  --text-4:      #8a8fa6;
 
-  --green:       #4ade80;
+  --green:       #16a34a;
 
   --font-display: 'Inclusive Sans', system-ui, sans-serif;
   --font-body:    'Inclusive Sans', -apple-system, sans-serif;
@@ -148,8 +148,8 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
+  opacity: 0.02;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -233,7 +233,7 @@ body {
   height: 100%;
   border-radius: 19px;
   overflow: hidden;
-  background: #030a30;
+  background: #eef1ff;
 }
 
 .portrait-inner svg {
@@ -550,7 +550,7 @@ body {
   text-transform: uppercase;
   font-weight: 500;
   color: var(--text-3);
-  background: rgba(255,255,255,0.03);
+  background: rgba(12,18,60,0.03);
   border: 1px solid var(--border);
   padding: 4px 10px;
   border-radius: 5px;
@@ -573,7 +573,7 @@ body {
   cursor: pointer;
   text-decoration: none;
   border: 1px solid var(--border-2);
-  background: rgba(255,255,255,0.02);
+  background: #ffffff;
   color: var(--text-2);
   transition: all 0.2s ease;
 }
@@ -628,7 +628,7 @@ body {
 .addon-jump:hover {
   color: #fff;
   border-color: var(--blue);
-  background: rgba(0, 21, 255, 0.22);
+  background: var(--blue);
 }
 
 /* ─────────────────────────────────────────
@@ -734,7 +734,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(2, 2, 8, 0.72);
+  background: rgba(12, 16, 40, 0.38);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: flex-end;
@@ -1300,6 +1300,86 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===== Efeitos: luz que segue o mouse/dedo, elevação, ícones e entrada em cascata ===== */
+.card,.addon{--mx:-999px;--my:-999px}
+.card{background-image:radial-gradient(320px circle at var(--mx) var(--my),rgba(0,21,255,.12),rgba(0,21,255,.04) 45%,transparent 70%);transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .28s,box-shadow .28s,background-color .28s}
+.addon{background-image:radial-gradient(260px circle at var(--mx) var(--my),rgba(0,21,255,.12),rgba(0,21,255,.04) 45%,transparent 70%);transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .28s,box-shadow .28s}
+.btn-choose,.card.pro .btn,.btn-apply{--bx:-999px;--by:-999px;background-image:radial-gradient(160px circle at var(--bx) var(--by),rgba(255,255,255,.3),transparent 65%)}
+.portrait-wrap{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.portrait-wrap::after{content:"";position:absolute;inset:-6px;border-radius:28px;border:1px solid var(--blue);opacity:0;animation:ring 3.2s ease-out infinite;pointer-events:none}
+@keyframes ring{0%{transform:scale(.92);opacity:.55}100%{transform:scale(1.12);opacity:0}}
+@media (hover:hover){
+  .card:hover{transform:translateY(-4px);border-color:var(--border-hi);box-shadow:0 22px 50px -24px rgba(0,21,255,.45)}
+  .card.pro:hover{transform:translateY(-4px);box-shadow:0 28px 70px -20px rgba(0,21,255,.5)}
+  .addon:hover{transform:translateY(-2px);border-color:var(--border-hi);box-shadow:0 16px 36px -22px rgba(0,21,255,.4)}
+  .step:hover .step-icon{background:var(--blue);border-color:var(--blue);color:#fff}
+  .step:hover .step-icon svg{color:#fff;stroke:#fff}
+  .portrait-wrap:hover{transform:translateY(-2px) rotate(-2deg);box-shadow:0 18px 40px -20px rgba(0,21,255,.55)}
+}
+.bg-spot{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s ease;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,30%),rgba(0,21,255,.13),rgba(0,21,255,.04) 45%,transparent 70%)}
+body.spot-on .bg-spot{opacity:1}
+.fx-in{opacity:0;transform:translateY(14px)}
+.fx-in.on{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){
+  .fx-in{opacity:1;transform:none}
+  .portrait-wrap::after{animation:none}
+  .card:hover,.addon:hover,.portrait-wrap:hover{transform:none}
+  .bg-spot{display:none}
+}
+
+/* ===== Cores por plano, features detalhadas, botões e app ===== */
+.card{--c:#0015FF;--c-soft:rgba(0,21,255,.08);--c-line:rgba(0,21,255,.28);--c-hover:#1428ff;border-top:3px solid var(--c)}
+.card[data-plan="Start"]{--c:#3d5cff;--c-soft:rgba(61,92,255,.09);--c-line:rgba(61,92,255,.32);--c-hover:#2a4bff}
+.card[data-plan="Essencial"]{--c:#3d5cff;--c-soft:rgba(61,92,255,.09);--c-line:rgba(61,92,255,.32);--c-hover:#2a4bff}
+.card{background-image:radial-gradient(320px circle at var(--mx) var(--my),var(--c-soft),transparent 70%)}
+.card.pro{border-top-width:1px;background-color:#f3f5ff}
+.plan-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.plan-head .plan-name{margin-bottom:2px}
+.plan-head .plan-tagline{margin-bottom:0}
+.plan-ic{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:var(--c-soft);border:1px solid var(--c-line);color:var(--c);transition:background .28s,color .28s,transform .28s}
+.plan-ic svg{width:21px;height:21px}
+.card .inherit{background:var(--c-soft);border-color:var(--c-line);color:var(--c)}
+.features li.feat{display:grid;grid-template-columns:24px 1fr;gap:11px;padding:11px 0;align-items:start}
+.feat-ic{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--c-soft);color:var(--c);margin-top:1px}
+.feat-ic svg{width:12px;height:12px}
+.feat-ic.app{background:var(--c);color:#fff}
+.feat-ic.app svg{width:12px;height:10px}
+.feat-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.feat-tx b{font-weight:600;font-size:13.5px;color:var(--text);line-height:1.35}
+.feat-tx small{font-size:12px;color:var(--text-3);line-height:1.45}
+.feat-app{background:var(--c-soft);border:1px solid var(--c-line)!important;border-radius:12px;padding:11px 12px!important;margin-bottom:6px}
+.feat-tag{font-style:normal;font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--c);padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:2px}
+.features li.feature-extra .ico{color:var(--c)}
+.features li.feature-extra .extra-tag{color:var(--c);background:var(--c-soft);border-color:var(--c-line)}
+/* botões */
+.addon-jump{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1px dashed var(--c-line);color:var(--c);border-radius:12px;padding:12px;font-weight:600}
+.addon-jump svg{width:15px;height:15px;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.addon-jump:hover{background:var(--c-soft);border-style:solid;border-color:var(--c);color:var(--c)}
+.addon-jump:hover svg{transform:rotate(90deg)}
+.card .btn-choose,.card.pro .btn{background-color:var(--c);border-color:var(--c);color:#fff;font-weight:600;padding:15px 16px;box-shadow:0 12px 26px -16px var(--c)}
+.card .btn-choose:hover,.card.pro .btn:hover{background-color:var(--c-hover);color:#fff;transform:translateY(-2px);box-shadow:0 16px 30px -14px var(--c)}
+.card .btn-choose:hover .btn-arrow{transform:translateX(4px)}
+.card .method{background:var(--surface);}
+@media (hover:hover){
+  .card:hover{border-color:var(--c-line);border-top-color:var(--c);box-shadow:0 22px 50px -26px var(--c)}
+  .card:hover .plan-ic{background:var(--c);color:#fff;transform:rotate(-6deg)}
+}
+/* painel do app */
+.app-panel{border:1px solid var(--border-2);border-radius:20px;background:var(--surface);padding:24px;margin-bottom:8px;--mx:-999px;--my:-999px;background-image:radial-gradient(420px circle at var(--mx) var(--my),rgba(0,21,255,.08),transparent 70%)}
+.app-head{max-width:560px}
+.app-badge{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--blue);padding:5px 10px;border-radius:6px}
+.app-title{font-family:var(--font-display);font-size:22px;font-weight:600;letter-spacing:-.015em;color:var(--text);margin-top:12px}
+.app-sub{font-size:13.5px;color:var(--text-3);line-height:1.6;margin-top:6px}
+.app-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:20px}
+.app-item{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--surface-2);transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .28s,background .28s}
+.app-item b{display:block;font-size:14px;font-weight:600;color:var(--text);margin-top:12px}
+.app-item p{font-size:12.5px;color:var(--text-3);line-height:1.55;margin-top:4px}
+.app-ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--border-2);color:var(--blue-text);transition:background .28s,color .28s,border-color .28s}
+.app-ic svg{width:18px;height:18px}
+@media (hover:hover){.app-item:hover{transform:translateY(-3px);border-color:var(--border-hi);background:var(--surface)}.app-item:hover .app-ic{background:var(--blue);border-color:var(--blue);color:#fff}}
+@media(min-width:640px){.app-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.app-grid{grid-template-columns:repeat(4,1fr)}.app-panel{padding:30px}}
 </style>
 </head>
 <body>
@@ -1307,9 +1387,9 @@ footer {
 <div class="bg-layer">
   <div class="bg-glow"></div>
   <div class="bg-glow-2"></div>
-  <div class="bg-grid"></div>
   <div class="bg-noise"></div>
 </div>
+<div class="bg-spot"></div>
 
 <div class="page">
 
@@ -1363,15 +1443,16 @@ footer {
 
     <!-- START -->
     <div class="card" data-plan="Start" data-base-price="797.90">
-      <p class="plan-name">Start</p>
-      <p class="plan-tagline">Entrada estruturada</p>
+      <div class="plan-head"><span class="plan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"/><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"/><path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/></svg></span><div><p class="plan-name">Start</p>
+      <p class="plan-tagline">Entrada estruturada</p></div></div>
       <ul class="features">
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Gestão de Meta Ads (estrutura e campanhas)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Otimização contínua + monitoramento</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Dashboard semanal (KPIs essenciais)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Relatório mensal de performance</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Copy adaptada com base no desempenho</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>1 reunião mensal de alinhamento</li>
+        <li class="feat feat-app"><span class="feat-ic app"><svg viewBox="0 0 500 399" fill="currentColor"><path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z"/></svg></span><span class="feat-tx"><b>App Sales Growth <i class="feat-tag">Incluso</i></b><small>Relatórios, contratos e notas fiscais em um só lugar</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Gestão de Meta Ads</b><small>Estrutura de campanhas, públicos e orçamento</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Otimização contínua</b><small>Monitoramento e ajustes de verba e públicos</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Dashboard semanal</b><small>Os principais indicadores da semana no app</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Relatório mensal</b><small>Resultado do mês com leitura e próximos passos</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Copy adaptada</b><small>Textos ajustados pelo que está performando</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Reunião mensal</b><small>Alinhamento de resultados e prioridades</small></span></li>
       </ul>
       <div class="price-wrap">
         <p class="price-lbl">Por apenas</p>
@@ -1401,7 +1482,7 @@ footer {
         <p class="methods-note">Cartão de crédito com acréscimo</p>
       </div>
       <button type="button" class="addon-jump" onclick="openAddonsModal(this)">
-        <span>+ Adicionar algo a mais</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar algo a mais</span>
       </button>
       <a href="https://wa.me/5579998157108?text=Gabriel%2C%20me%20interessei%20pelo%20plano%20*Start*%20de%20gest%C3%A3o%20de%20tr%C3%A1fego%20pago%2C%20quero%20contratar%20esse%20plano." target="_blank" rel="noopener" class="btn btn-choose">
         <span>Escolher Start</span>
@@ -1412,15 +1493,16 @@ footer {
     <!-- PRO (center, highlighted) -->
     <div class="card pro" data-plan="Pro" data-base-price="1297.90">
       <div class="pro-badge">Mais completo</div>
-      <p class="plan-name">Pro</p>
-      <p class="plan-tagline">Escala com dados</p>
+      <div class="plan-head"><span class="plan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6 -6l4 4l8 -8"/><path d="M14 7l7 0l0 7"/></svg></span><div><p class="plan-name">Pro</p>
+      <p class="plan-tagline">Escala com dados</p></div></div>
       <span class="inherit">Tudo do Essencial +</span>
       <ul class="features">
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Google Analytics 4 (configuração + leitura de jornada)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>UTMs + eventos (rastreio e qualidade de dados)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Calendário de campanhas</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Acompanhamento comercial (script, objeções, follow-up, fechamento)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Reuniões semanais (acompanhamento de escala)</li>
+        <li class="feat feat-app"><span class="feat-ic app"><svg viewBox="0 0 500 399" fill="currentColor"><path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z"/></svg></span><span class="feat-tx"><b>App Sales Growth <i class="feat-tag">Incluso</i></b><small>Relatórios, contratos e notas fiscais em um só lugar</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Google Analytics 4</b><small>Configuração e leitura da jornada do cliente</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>UTMs e eventos</b><small>Rastreio confiável de cada origem de venda</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Calendário de campanhas</b><small>Datas e ofertas planejadas com antecedência</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Acompanhamento comercial</b><small>Script, objeções, follow-up e fechamento</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Reuniões semanais</b><small>Acompanhamento de perto na fase de escala</small></span></li>
       </ul>
       <div class="price-wrap">
         <p class="price-lbl">Por apenas</p>
@@ -1450,7 +1532,7 @@ footer {
         <p class="methods-note">Cartão de crédito com acréscimo</p>
       </div>
       <button type="button" class="addon-jump" onclick="openAddonsModal(this)">
-        <span>+ Adicionar algo a mais</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar algo a mais</span>
       </button>
       <a href="https://wa.me/5579998157108?text=Gabriel%2C%20me%20interessei%20pelo%20plano%20*Pro*%20de%20gest%C3%A3o%20de%20tr%C3%A1fego%20pago%2C%20quero%20contratar%20esse%20plano." target="_blank" rel="noopener" class="btn btn-choose btn-primary">
         <span>Escolher Pro</span>
@@ -1460,15 +1542,16 @@ footer {
 
     <!-- ESSENCIAL -->
     <div class="card" data-plan="Essencial" data-base-price="997.90">
-      <p class="plan-name">Essencial</p>
-      <p class="plan-tagline">Tração qualificada</p>
+      <div class="plan-head"><span class="plan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M12 7a5 5 0 1 0 5 5"/><path d="M13 3.055a9 9 0 1 0 7.941 7.945"/><path d="M15 6v3h3l3 -3h-3v-3z"/><path d="M15 9l-3 3"/></svg></span><div><p class="plan-name">Essencial</p>
+      <p class="plan-tagline">Tração qualificada</p></div></div>
       <span class="inherit">Tudo do Start +</span>
       <ul class="features">
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Estrutura de funil (captação + remarketing + conversão)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Estratégia de criativos (briefing + copy)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Testes A/B contínuos (criativo, copy, público e posicionamento)</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Plano de ação quinzenal</li>
-        <li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Reuniões quinzenais (decisão rápida com base em dados)</li>
+        <li class="feat feat-app"><span class="feat-ic app"><svg viewBox="0 0 500 399" fill="currentColor"><path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z"/></svg></span><span class="feat-tx"><b>App Sales Growth <i class="feat-tag">Incluso</i></b><small>Relatórios, contratos e notas fiscais em um só lugar</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Estrutura de funil</b><small>Captação, remarketing e conversão</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Estratégia de criativos</b><small>Briefing e copy pensados para cada anúncio</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Testes A/B contínuos</b><small>Criativo, copy, público e posicionamento</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Plano de ação quinzenal</b><small>O que muda nas campanhas a cada 15 dias</small></span></li>
+        <li class="feat"><span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="feat-tx"><b>Reuniões quinzenais</b><small>Decisões rápidas com base em dados</small></span></li>
       </ul>
       <div class="price-wrap">
         <p class="price-lbl">Por apenas</p>
@@ -1498,7 +1581,7 @@ footer {
         <p class="methods-note">Cartão de crédito com acréscimo</p>
       </div>
       <button type="button" class="addon-jump" onclick="openAddonsModal(this)">
-        <span>+ Adicionar algo a mais</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar algo a mais</span>
       </button>
       <a href="https://wa.me/5579998157108?text=Gabriel%2C%20me%20interessei%20pelo%20plano%20*Essencial*%20de%20gest%C3%A3o%20de%20tr%C3%A1fego%20pago%2C%20quero%20contratar%20esse%20plano." target="_blank" rel="noopener" class="btn btn-choose">
         <span>Escolher Essencial</span>
@@ -1508,9 +1591,24 @@ footer {
 
   </div><!-- /plans -->
 
+
   <!-- SECTION LABEL -->
   <div class="section-label">
     <span class="section-label-num">02</span>
+    <span>Incluso em todos os planos</span>
+  </div>
+  <div class="app-panel">
+    <div class="app-head">
+      <span class="app-badge">Sales Growth Insights</span>
+      <h2 class="app-title">Seu painel com tudo da sua conta</h2>
+      <p class="app-sub">Todo cliente Sales Growth tem acesso ao nosso aplicativo, do celular ou do computador.</p>
+    </div>
+    <div class="app-grid"><div class="app-item"><span class="app-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><b>Relatórios</b><p>Semanais e mensais de Meta Ads e Google Ads, sempre no mesmo lugar.</p></div><div class="app-item"><span class="app-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M9 13h6M9 17h4"/></svg></span><b>Contrato</b><p>Plano, vigência e documento do contrato para consultar quando quiser.</p></div><div class="app-item"><span class="app-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"/><path d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5M12 7v1M12 14v1"/></svg></span><b>Notas fiscais</b><p>Notas da gestão e dos anúncios organizadas por mês.</p></div><div class="app-item"><span class="app-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span><b>Seus resultados</b><p>Você registra as vendas da semana e acompanha o retorno real das campanhas.</p></div></div>
+  </div>
+
+  <!-- SECTION LABEL -->
+  <div class="section-label">
+    <span class="section-label-num">03</span>
     <span>Próximos passos</span>
   </div>
 
@@ -1923,5 +2021,35 @@ if ('IntersectionObserver' in window) {
 }
 </script>
 
+<script>
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seq=['.topbar','.portrait-wrap','.hero-name','.hero-handle','.hero-desc','.card'];
+  var els=[];seq.forEach(function(s){[].push.apply(els,document.querySelectorAll(s));});
+  if(!reduce){
+    els.forEach(function(el){el.classList.add('fx-in');});
+    requestAnimationFrame(function(){els.forEach(function(el,i){setTimeout(function(){el.classList.add('on');},120+i*80);});});
+    setTimeout(function(){els.forEach(function(el){el.classList.remove('fx-in','on');});},120+els.length*80+900);
+  }
+  function follow(sel,vx,vy){
+    [].forEach.call(document.querySelectorAll(sel),function(el){
+      function mv(e){var r=el.getBoundingClientRect();el.style.setProperty(vx,(e.clientX-r.left)+'px');el.style.setProperty(vy,(e.clientY-r.top)+'px');}
+      function out(){el.style.setProperty(vx,'-999px');el.style.setProperty(vy,'-999px');}
+      el.addEventListener('pointermove',mv);el.addEventListener('pointerdown',mv);
+      el.addEventListener('pointerleave',out);el.addEventListener('pointercancel',out);
+      el.addEventListener('pointerup',function(e){if(e.pointerType!=='mouse')setTimeout(out,350);});
+    });
+  }
+  follow('.card,.addon,.app-panel','--mx','--my');
+  follow('.btn-choose,.card.pro .btn,.btn-apply','--bx','--by');
+  if(reduce)return;
+  var root=document.documentElement,b=document.body,raf=0,x=0,y=0,cx=-1,cy=-1,t;
+  function set(){raf=0;cx=cx<0?x:cx+(x-cx)*.18;cy=cy<0?y:cy+(y-cy)*.18;root.style.setProperty('--gx',cx+'px');root.style.setProperty('--gy',cy+'px');if(Math.abs(x-cx)>.5||Math.abs(y-cy)>.5)raf=requestAnimationFrame(set);}
+  function mv(e){x=e.clientX;y=e.clientY;b.classList.add('spot-on');if(!raf)raf=requestAnimationFrame(set);if(e.pointerType&&e.pointerType!=='mouse'){clearTimeout(t);t=setTimeout(function(){b.classList.remove('spot-on');},1200);}}
+  window.addEventListener('pointermove',mv,{passive:true});
+  window.addEventListener('pointerdown',mv,{passive:true});
+  document.addEventListener('mouseleave',function(){b.classList.remove('spot-on');});
+})();
+</script>
 </body>
 </html>
