@@ -1,206 +1,397 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Fluxo Comercial Sales Growth</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fluxo Comercial · Sales Growth</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f6f7fb">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="14" fill="#0015FF"/%3E%3Cpath transform="translate(10.00 14.44) scale(0.088)" fill="#fff" d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L36.4463 348.376L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364H436.584C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589V244.59L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L411.683 48.208L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L83.2139 97.542L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z"/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAC7UlEQVRYhcWXW0hUURSGvz3OeClFqaYiLCHKqDATe5ghtQs9dJHE0i6CUYYPPSQREeRDGGhEGISCQnYRpLCH6qEiugghaBAiVpRmEz1Ug3gJR00zxrN7mNHjOOeczsCoP2zYe531r3+dtc9Zmy2YjmVyKQolwD5gLbCQ8MADdAJ3iacOlxiffCCmXOwyH7gFxIVJVA9dKOQyILrUBHzi9wMSml0MAE76xBfhL7trDt58Jt7TR7rFv+dzLQ6wCTuFFiB7HsQncUxgl8NA7DwlMCiwS2nGMyEeaq/CksXmoysKHDwBI7/1faxmg1WUwpFc8+IAdQ3G4gCmKpCyHtqbwGo6XRj0QLID+gaM/SxmglVdDk0c4FLl/8UxswX5+2H7VnXt9UJ9I7i+6XOGR+BGg7lEDbcgJho6WyEpUbWVlEL1TXPBzcCwAudPB4q/+wg1d4wDRkfBiuXq+s84uHv0/XUrsCoROltgQYxq25YDzW/0g1mt8PY5pKWoNilh92F48Vqbo/sRVpYFijc+MhYHOHU8UBxACLheDjabHssu5cyRkS2losgpjI5JmZQW7Dd9LEqWsv+X1MXZi9o8zS1oewnpqer6QjlcqTJ+++JCOJQTaNuVpc5/uGHl5mCe5ke48wBERPjmigKeIWPx1I2+Nj2d49gDERbYkeGzvWrW5po+C/Rgs0HTA8h0qLbb9+DkGbWDjo7BOif09AbzDX/D1UlQVKDfBYWALCc40lXb0DCUVvjmHzqhth6+/9QWx6gCQkDLU3BuMUoxGOfK4FqNuo6KBO8ETExo++tWoDA/dPHPruAuOf7XmKNZgbhY6GoN7GhmsPcoPGsKjaNZgUwHfOr2DbNo6whdHH8FBoH40KlhwZAF6JgncYCvFsDkyT0LEDwWIK3YaQdSTFDCCQ821lhAeJHk+a9LcwWJoAi36Pcdx/2iG4UM/w12tuFBkEeveEjwZVRGYqcYKAA2AAlhEh0BuhE8wUo1btE/+eAfNLAfzt5lx7cAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Sora:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: coluna única de leitura, abas fixas no topo, cada mensagem é um balão de WhatsApp com botão de copiar */
+*,::before,::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#030308; --s1:#08091a; --s2:#0b0d25; --s3:#101438;
-  --line:rgba(255,255,255,.07); --line-hi:rgba(0,64,255,.35);
-  --blue:#0015FF; --blue-t:#8aa3ff; --amber:#e8a864; --green:#4ade80;
-  --t1:#ffffff; --t2:#d0d3e0; --t3:#8a8ea0; --t4:#565a6e;
-  --bubble:#0b0d25; --bubble-line:rgba(0,64,255,.32);
-  --fd:"Inclusive Sans",system-ui,sans-serif; --fm:"Sora",ui-monospace,system-ui,sans-serif;
-  color-scheme:dark;
+  --bg:#f6f7fb;--surface:#ffffff;--surface-2:#f1f3fa;--surface-3:#e7ebfb;
+  --border:rgba(12,18,60,.08);--border-2:rgba(12,18,60,.13);--border-hi:rgba(0,21,255,.35);
+  --blue:#0015FF;--blue-2:#2a44ff;--blue-glow:rgba(0,21,255,.10);--blue-text:#1f33e6;
+  --text:#0b0d1f;--text-2:#3a3f57;--text-3:#62677f;--text-4:#8a8fa6;--green:#16a34a;
+  --font-display:'Inclusive Sans',system-ui,sans-serif;--font-body:'Inclusive Sans',-apple-system,sans-serif;--font-mono:'Sora',sans-serif;
+  --fs-1:10px;--fs-2:12px;--fs-3:13px;--fs-4:15px;--fs-5:19px;--fs-6:24px;--fs-7:32px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
 }
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--t2);font-family:var(--fd);font-size:15px;line-height:1.55;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.wrap{max-width:820px;margin:0 auto}
-header.top{padding-block:28px 18px;display:flex;flex-direction:column;gap:6px}
-.eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-t)}
-h1{font-size:clamp(26px,5vw,36px);line-height:1.1;color:var(--t1);margin:0;font-weight:400;text-wrap:balance}
-.lead{color:var(--t3);margin:0;max-width:62ch}
-.rules{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.chip{font-family:var(--fm);font-size:11.5px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--t2);background:var(--s1)}
-nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
-  display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
-nav.tabs::-webkit-scrollbar{display:none}
-.tab{font-family:var(--fm);font-size:12.5px;color:var(--t3);background:none;border:1px solid transparent;border-radius:8px;padding:8px 12px;cursor:pointer;white-space:nowrap}
-.tab .n{color:var(--t4);margin-right:6px}
-.tab[aria-selected="true"]{color:var(--t1);border-color:var(--line-hi);background:var(--s2)}
-.tab:focus-visible,.copy:focus-visible{outline:2px solid var(--blue-t);outline-offset:2px}
-section.sec{padding-top:24px}
-.sec-head h2{font-size:22px;color:var(--t1);margin:0 0 4px;font-weight:400}
-.sec-head p{margin:0;color:var(--t3);max-width:64ch}
-.group{margin-top:28px}
-.group > h3{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:0 0 4px;font-weight:500}
-.group > .gnote{color:var(--t3);margin:0 0 12px;font-size:14px}
-.item{border-top:1px solid var(--line);padding-block:16px;display:grid;gap:10px}
-.item-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
-.tag{font-family:var(--fm);font-size:11px;color:var(--blue-t);background:var(--s2);border:1px solid var(--line-hi);padding:2px 8px;border-radius:6px}
-.item-title{color:var(--t1);font-size:16px}
-.when{color:var(--t4);font-size:13px;width:100%}
-.bubbles{display:grid;gap:8px}
-.bubble{display:flex;gap:10px;align-items:flex-start;background:var(--bubble);border:1px solid var(--bubble-line);border-radius:12px 12px 4px 12px;padding:11px 12px;max-width:640px}
-.bubble p{margin:0;color:var(--t1);flex:1;min-width:0;white-space:pre-wrap}
-.part{font-family:var(--fm);font-size:10.5px;color:var(--blue-t);display:block;margin-bottom:3px;letter-spacing:.06em}
-.copy{font-family:var(--fm);font-size:11px;color:var(--t2);background:var(--s3);border:1px solid var(--line);border-radius:6px;padding:5px 9px;cursor:pointer;flex:none}
-.copy.ok{color:var(--blue-t);border-color:var(--bubble-line)}
-.next{display:flex;flex-wrap:wrap;gap:6px}
-.next span{font-size:12.5px;color:var(--t3);background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
-.next b{color:var(--t2);font-weight:500}
-.emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:12px}
-.emo{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
-.emo .e{font-size:20px;line-height:1}
-.emo small{color:var(--t3);font-size:13px}
-.foot{margin-top:40px;color:var(--t4);font-size:12px;font-family:var(--fm)}
-@media (prefers-reduced-motion:no-preference){.copy{transition:color .15s,border-color .15s}}
-</style>
+html{background:var(--bg);text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font-body);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
 
-<div class="wrap">
-  <header class="top">
-    <span class="eyebrow">Sales Growth · uso interno</span>
-    <h1>Fluxo Comercial</h1>
+/* fundo, igual ao bio-site */
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--bg)}
+.bg-glow{position:fixed;top:-320px;left:50%;width:900px;height:900px;background:radial-gradient(circle at 50% 35%,var(--blue-glow) 0%,rgba(0,21,255,.08) 32%,transparent 65%);z-index:0;pointer-events:none;filter:blur(20px);transform:translateX(-50%);animation:glowDrift1 22s ease-in-out infinite alternate}
+.bg-glow-2{position:fixed;bottom:-380px;right:-220px;width:700px;height:700px;background:radial-gradient(circle at 50% 50%,var(--blue-glow) 0%,transparent 60%);z-index:0;pointer-events:none;filter:blur(24px);animation:glowDrift2 26s ease-in-out infinite alternate}
+@keyframes glowDrift1{0%{transform:translateX(-50%) translateY(0) scale(1);opacity:.85}100%{transform:translateX(-46%) translateY(30px) scale(1.08);opacity:1}}
+@keyframes glowDrift2{0%{transform:translate(0,0) scale(1);opacity:.75}100%{transform:translate(-30px,-24px) scale(1.1);opacity:1}}
+.bg-grid{position:fixed;inset:-48px 0 0 -48px;z-index:0;pointer-events:none;background-image:linear-gradient(to right,var(--border) 1px,transparent 1px),linear-gradient(to bottom,var(--border) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse at 50% 15%,rgba(0,0,0,.85),transparent 68%);mask-image:radial-gradient(ellipse at 50% 15%,rgba(0,0,0,.85),transparent 68%);opacity:.5;animation:gridDrift 40s linear infinite}
+@keyframes gridDrift{0%{background-position:0 0,0 0}100%{background-position:48px 48px,48px 48px}}
+.bg-noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.02;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bg-spot{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,30%),rgba(0,21,255,.13),rgba(0,21,255,.04) 45%,transparent 70%)}
+body.spot-on .bg-spot{opacity:1}
+
+.page{position:relative;z-index:2;width:100%;max-width:640px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 40px) 20px 40px}
+
+/* topo */
+.hero{text-align:center;padding:8px 0 4px}
+.portrait-wrap{position:relative;width:72px;height:72px;margin:0 auto 18px;padding:4px;border-radius:20px;border:1px solid var(--border-hi);background:radial-gradient(circle at 50% 0%,rgba(0,21,255,.18),transparent 70%);transition:transform .4s var(--ease),box-shadow .4s}
+.portrait-wrap::after{content:"";position:absolute;inset:-6px;border-radius:24px;border:1px solid var(--blue);opacity:0;animation:ring 3.2s ease-out infinite;pointer-events:none}
+@keyframes ring{0%{transform:scale(.92);opacity:.55}100%{transform:scale(1.12);opacity:0}}
+.portrait-inner{width:100%;height:100%;border-radius:15px;overflow:hidden;background:#eef1ff}
+.portrait-inner svg{width:100%;height:100%;display:block;padding:14px}
+.hero-name{font-family:var(--font-display);font-size:var(--fs-7);font-weight:600;letter-spacing:-.02em;line-height:1.08;color:var(--text);margin-bottom:6px}
+.hero-handle{font-family:var(--font-mono);font-size:var(--fs-2);color:var(--blue-text);font-weight:500}
+
+/* nicho */
+.niche{display:flex;justify-content:center;margin-top:22px}
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:15px;background:var(--surface);border:1px solid var(--border-2)}
+.seg button{font-family:var(--font-body);font-size:var(--fs-3);font-weight:500;color:var(--text-3);background:transparent;border:1px solid transparent;border-radius:11px;padding:9px 18px;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.seg button:hover{color:var(--text)}
+.seg button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:rgba(255,255,255,.14);box-shadow:0 10px 24px -14px rgba(0,21,255,.7)}
+
+/* abas */
+.tabs-wrap{position:sticky;top:0;z-index:20;margin:26px calc(50% - 50vw) 0;padding:calc(env(safe-area-inset-top,0px) + 10px) 20px 10px;background:rgba(246,247,251,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;justify-content:flex-start;max-width:600px;margin:0 auto}
+.tabs::-webkit-scrollbar{display:none}
+@media (min-width:600px){.tabs{justify-content:center}}
+.tab{flex:0 0 auto;display:flex;align-items:center;gap:7px;font-family:var(--font-body);font-size:var(--fs-3);font-weight:500;color:var(--text-2);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;transition:border-color .25s,background .25s,color .25s,box-shadow .25s}
+.tab .n{font-family:var(--font-mono);font-size:var(--fs-1);font-weight:600;color:var(--text-4);letter-spacing:.06em}
+.tab:hover{border-color:var(--border-hi)}
+.tab[aria-selected="true"]{background:var(--blue);border-color:rgba(255,255,255,.14);color:#fff;box-shadow:0 10px 24px -14px rgba(0,21,255,.7)}
+.tab[aria-selected="true"] .n{color:rgba(255,255,255,.7)}
+
+/* seções */
+.section-label{display:flex;align-items:center;gap:10px;margin:32px 0 12px;font-family:var(--font-mono);font-size:var(--fs-1);letter-spacing:.18em;text-transform:uppercase;color:var(--text-4)}
+.section-label-num{color:var(--blue-text);font-weight:600}
+.section-label::after{content:"";flex:1 1 0%;height:1px;background:linear-gradient(to right,var(--border-2),transparent)}
+.cards{display:flex;flex-direction:column;gap:10px}
+
+/* card de mensagem */
+.card{--mx:-999px;--my:-999px;position:relative;display:grid;gap:12px;padding:16px 16px 16px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--border);background-image:radial-gradient(260px circle at var(--mx) var(--my),rgba(0,21,255,.12),rgba(0,21,255,.04) 45%,transparent 70%);transition:transform .28s var(--ease),border-color .28s,box-shadow .28s}
+.card>*{position:relative;z-index:1}
+.card-head{display:flex;align-items:center;gap:10px}
+.card-meta{flex:1 1 0%;min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px}
+.tag{flex-shrink:0;font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:rgba(0,21,255,.08);color:var(--blue-text);border:1px solid var(--border-hi)}
+.card-title{font-family:var(--font-display);font-size:var(--fs-4);font-weight:500;color:var(--text);letter-spacing:-.005em;line-height:1.3}
+.when{font-family:var(--font-mono);font-size:var(--fs-1);color:var(--text-4);letter-spacing:.04em}
+.copy{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--surface-3);border:1px solid var(--border-2);color:var(--blue-text);cursor:pointer;transition:background .25s,border-color .25s,color .25s,transform .25s var(--ease)}
+.copy svg{width:18px;height:18px}
+.copy .i-ok{display:none}
+.copy.ok{background:var(--green);border-color:var(--green);color:#fff}
+.copy.ok .i-copy{display:none}
+.copy.ok .i-ok{display:block}
+.msg{font-size:var(--fs-4);line-height:1.6;color:var(--text-2);white-space:pre-wrap;overflow-wrap:anywhere;padding:12px 14px;border-radius:13px;background:var(--surface-2);border:1px solid var(--border)}
+.msg+.msg{margin-top:-4px}
+.next{display:flex;flex-wrap:wrap;gap:6px}
+.next span{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2);color:var(--text-3);padding:4px 10px 4px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--border-2)}
+.next b{font-weight:500;color:var(--text)}
+.next svg{width:12px;height:12px;color:var(--text-4);flex-shrink:0}
+@media (hover:hover){
+  .card:hover{transform:translateY(-2px);border-color:var(--border-hi);box-shadow:0 18px 40px -22px rgba(0,21,255,.45)}
+  .copy:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.04)}
+  .portrait-wrap:hover{transform:translateY(-2px) rotate(-2deg);box-shadow:0 18px 40px -20px rgba(0,21,255,.55)}
+}
+.tab:focus-visible,.copy:focus-visible,.seg button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* rodapé */
+footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.footer-brand{display:flex;align-items:center;gap:8px}
+.footer-brand svg{width:16px;height:13px}
+.footer-brand-name{font-family:var(--font-mono);font-size:var(--fs-1);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:600}
+.footer-right{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.04em}
+
+/* aviso de cópia */
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:60;display:flex;align-items:center;gap:8px;padding:8px 14px 8px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--border-2);box-shadow:0 14px 34px -18px rgba(12,18,60,.35);font-family:var(--font-mono);font-size:var(--fs-1);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transform:translate(-50%,16px);opacity:0;visibility:hidden;transition:transform .3s var(--ease),opacity .3s,visibility .3s}
+.toast.on{transform:translate(-50%,0);opacity:1;visibility:visible}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+
+/* entrada */
+.fx-in{opacity:0;transform:translateY(14px)}
+.fx-in.on{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+
+@media (max-width:380px){.hero-name{font-size:26px}.card{padding:14px}}
+@media (prefers-reduced-motion:reduce){
+  .bg-glow,.bg-glow-2,.bg-grid,.portrait-wrap::after,.pulse-dot{animation:none}
+  .bg-spot{display:none}
+  .fx-in{opacity:1;transform:none}
+  .card:hover,.portrait-wrap:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-layer"><div class="bg-glow"></div><div class="bg-glow-2"></div><div class="bg-grid"></div><div class="bg-noise"></div></div>
+<div class="bg-spot"></div>
+
+<div class="page">
+  <header class="hero">
+    <div class="portrait-wrap"><div class="portrait-inner"><svg viewBox="0 0 500 399" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L36.4463 348.376L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364H436.584C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589V244.59L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L411.683 48.208L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L83.2139 97.542L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z" fill="url(#lgA)"/><defs><linearGradient id="lgA" x1="0" y1="399" x2="499" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#0011CE"/><stop offset="1" stop-color="#0015FF"/></linearGradient></defs></svg></div></div>
+    <h1 class="hero-name">Fluxo comercial</h1>
+    <div class="hero-handle">Sales Growth · uso interno</div>
+    <div class="niche">
+      <div class="seg" role="group" aria-label="Nicho">
+        <button type="button" data-n="ag" aria-pressed="true">Agência</button>
+        <button type="button" data-n="dt" aria-pressed="false">Dentista</button>
+      </div>
+    </div>
   </header>
 
-  <nav class="tabs" role="tablist" id="tabs"></nav>
+  <div class="tabs-wrap"><nav class="tabs" role="tablist" id="tabs" aria-label="Etapas"></nav></div>
+
   <main id="content"></main>
-  <p class="foot">Dias úteis, das 9h às 11h ou das 14h às 16h. Intervalo de 1 a 5 minutos entre conversas no WhatsApp Web.</p>
+
+  <footer>
+    <div class="footer-brand"><svg viewBox="0 0 500 399" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M398.9 242.694L313.317 389.479C310.061 395.063 304.07 398.5 297.589 398.5H17.2266C12.8078 398.5 10.0551 393.73 12.2686 389.926L36.4473 348.377L36.4463 348.376L58.6133 310.626C61.8763 305.069 67.8521 301.653 74.3135 301.653H243.389C256.915 301.653 269.415 294.464 276.186 282.791L299.439 242.694H398.9ZM436.583 151.364H436.584C439.959 151.377 443.76 151.065 447.198 151.458C450.62 151.849 453.479 152.923 455.026 155.568L494.515 223.07C496.188 225.93 497.942 229.94 498.857 233.939C499.778 237.962 499.825 241.859 498.231 244.589V244.59L487.823 262.54L457.9 313.803C456.785 315.708 455.003 316.643 453.242 316.651C451.483 316.66 449.701 315.743 448.584 313.842L403.163 236.508L403.019 236.261H303.14L347.592 160.354C350.815 154.85 356.702 151.436 363.097 151.364L387.041 151.095L436.583 151.364ZM153.926 0.5H429.591C434.014 0.50033 436.765 5.27893 434.543 9.08301L411.684 48.207L411.683 48.208L388.766 87.7314C385.515 93.3367 379.512 96.79 373.016 96.79H203.755C190.266 96.79 177.793 103.94 171.01 115.563L99.6777 237.794C96.4209 243.375 90.431 246.81 83.9521 246.81H6.24023C1.82059 246.81 -0.932039 242.038 1.2832 238.233L83.2129 97.541L83.2139 97.542L132.818 12.5967C137.192 5.1077 145.231 0.5 153.926 0.5Z" fill="url(#lgB)"/><defs><linearGradient id="lgB" x1="0" y1="399" x2="499" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#0011CE"/><stop offset="1" stop-color="#0015FF"/></linearGradient></defs></svg><span class="footer-brand-name">Sales Growth</span></div>
+    <div class="footer-right">Fluxo comercial · nov/2026</div>
+  </footer>
 </div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="pulse-dot"></span><span>Mensagem copiada</span></div>
 
 <script>
 const S = [
- {id:"abordagem", n:"01", label:"Abordagem", title:"Abordagem inicial",
-  intro:"Envie as três mensagens em sequência, uma de cada vez. Se a pessoa responder, pare e converse a partir da resposta.",
-  groups:[
+ {id:"abordagem", n:"01", label:"Abordagem", groups:[
    {title:"Primeiro contato", items:[
-     {tag:"Msg 01", title:"Abertura", parts:["Eiiii, tudo bem? Sou o Gabriel, da Sales Growth. Vi a agência de vocês aqui no Instagram e gostei muito do perfil e do posicionamento 👏🏼"]},
-     {tag:"Msg 02", title:"O que fazemos", parts:["E foi justamente por isso que te chamei. Um trabalho bom assim merece chegar em mais gente, e muita agência acaba ficando presa na indicação ou no orgânico pra vender 🫠"]},
-     {tag:"Msg 03", title:"Pergunta", parts:["Fiquei curioso pra saber como tá aí com vocês 👀\nHoje vocês já anunciam ou a procura vem mais de indicação?"],
-      next:[["Indicação ou não anunciam","seguir a conversa sobre anúncio"],["Já anunciam ou têm gestor","ir para a segunda etapa"]]}
+     {tag:"Abertura", title:"Sem anúncio ativo",
+      text:{ag:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra agência de viagem trazer cliente novo direto pro WhatsApp\nVi que vcs ainda não tão anunciando. Nunca chegaram a testar ou já testaram e não gostaram do resultado?",
+            dt:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra dentista trazer paciente novo direto pro WhatsApp do consultório\nVi que vc ainda não tá anunciando. Nunca chegou a testar ou já testou e não gostou do resultado?"},
+      next:[["Nunca testou","Resposta 1"],["Testou e não gostou","Resposta 2"],["Já tem gestor","Diagnóstico"],["Sem resposta","FU1"]]},
+     {tag:"Abertura", title:"Não conferido",
+      text:{ag:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra agência de viagem trazer cliente novo direto pro WhatsApp\nVcs já anunciam hoje ou ainda não?",
+            dt:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra dentista trazer paciente novo direto pro WhatsApp do consultório\nVc já anuncia hoje ou ainda não?"}}
    ]},
-   {title:"Segunda etapa · já têm gestor", note:"Primeiro entenda como os contatos são atendidos. Só depois apresente o CRM.", items:[
-     {tag:"Diagnóstico", title:"Entender o atendimento", when:"Logo após a resposta", parts:["Boa, então os anúncios já tão em boas mãos 👏🏻 E quando chega contato à noite ou no fim de semana, alguém consegue responder na hora ou fica pro dia seguinte?"],
-      next:[["Fica esperando","Apresentar o CRM"],["Já usam CRM","Alternativa"],["Responde na hora","Encerramento"]]},
-     {tag:"CRM", title:"Apresentar o CRM com IA", when:"Só depois da resposta sobre o atendimento", parts:["É bem aí que muita agência perde venda sem perceber 🫣","A gente implementa um atendente com IA no WhatsApp que responde na hora, faz as primeiras perguntas da viagem e ainda retoma quem pediu orçamento e sumiu. Quer que eu te mande um vídeo de 1 minutinho mostrando?"],
-      next:[["Quer ver","mandar o vídeo e propor 15 minutos"],["Sem resposta","follow-up do CRM"]]},
-     {tag:"Alternativa", title:"Já usam CRM ou automação", parts:["Show demais 👏🏻 E quem pediu orçamento e não fechou, o retorno é automático ou alguém da equipe precisa lembrar de chamar?"]},
-     {tag:"Encerramento", title:"Atendimento já funciona bem", parts:["Show, vocês tão bem organizados aí 👏🏻 Se um dia quiserem automatizar alguma parte do atendimento, é só me chamar 🙏🏼"]},
-     {tag:"Variação", title:"Não quer tráfego agora", parts:["Tranquilo! ☺️ Mesmo sem anúncio, muita agência já usa IA pra não perder os contatos que chegam. Se quiser, te mostro rapidinho como funciona, sem compromisso nenhum."]}
+   {title:"Respostas", items:[
+     {tag:"Resposta 1", title:"Nunca testou",
+      text:{ag:"Entendi. Te mando um áudio rapidinho explicando como funcionaria pra vcs? Aí vc vê se faz sentido agora",
+            dt:"Entendi. Te mando um áudio rapidinho explicando como funcionaria no seu consultório? Aí vc vê se faz sentido agora"},
+      next:[["Topou","Roteiro do áudio"],["Ouviu","Convite"]]},
+     {tag:"Resposta 2", title:"Testou e não gostou",
+      text:{ag:"Entendi. O que pegou no de vcs, veio pouca mensagem ou veio mensagem que não fechava?",
+            dt:"Entendi. O que pegou no seu, veio pouca mensagem ou veio paciente que não fechava?"},
+      next:[["Explicou","oferecer o áudio"]]},
+     {tag:"Convite", title:"Depois do áudio",
+      text:"Pra eu te mostrar como ficaria no seu caso, o melhor é uma conversa de 15 min. Qual dia fica bom pra vc essa semana?"}
    ]},
-   {title:"Follow-up do CRM", note:"Só para quem entrou na segunda etapa e parou de responder.", items:[
-     {tag:"D+2", title:"Sem resposta ao diagnóstico", parts:["Pergunto isso porque é bem nesses horários que muita agência perde orçamento sem perceber 🫣 Como funciona aí hoje?"]},
-     {tag:"D+2", title:"Sem resposta ao CRM · anexar o vídeo", parts:["Vou deixar o vídeo aqui pra quando tiver um tempinho ☺️ É rapidinho e mostra o atendente funcionando no WhatsApp."]},
-     {tag:"D+5", title:"Uma pergunta só", parts:["Só uma pergunta rapidinha. Quantos orçamentos por mês vocês acham que ficam sem retorno depois que o cliente some?"]},
-     {tag:"D+8", title:"Encerramento", parts:["Vou deixar vocês à vontade por aqui 🙏🏼 Se automatizar o atendimento entrar nas prioridades da agência, é só me chamar que te mostro como funciona."]}
+   {title:"Já tem gestor", items:[
+     {tag:"Diagnóstico", title:"Atendimento",
+      text:{ag:"Show, então essa parte tá coberta. E quando chega mensagem à noite ou no fim de semana, alguém responde na hora ou fica pro dia seguinte?",
+            dt:"Show, então essa parte tá coberta. E quando paciente chama à noite ou no fim de semana, alguém responde na hora ou fica pro dia seguinte?"},
+      next:[["Dia seguinte","IA"],["Já automatizam","Alternativa"],["Responde na hora","Encerramento"]]},
+     {tag:"IA", title:"Atendimento com IA",
+      text:{ag:"Entendi. Eu implemento um atendente com IA no WhatsApp que responde na hora, faz as primeiras perguntas da viagem e retoma quem pediu orçamento e sumiu. Quer ver um vídeo de 1 minuto dele funcionando?",
+            dt:"Entendi. Eu implemento um atendente com IA no WhatsApp que responde na hora, tira as primeiras dúvidas do paciente e retoma quem perguntou e sumiu. Quer ver um vídeo de 1 minuto dele funcionando?"},
+      next:[["Quer ver","vídeo + 15 min"]]},
+     {tag:"Alternativa", title:"Já automatizam",
+      text:{ag:"Show. E quem pediu orçamento e não fechou, o retorno é automático ou alguém precisa lembrar de chamar?",
+            dt:"Show. E quem perguntou e não marcou avaliação, o retorno é automático ou alguém precisa lembrar de chamar?"}},
+     {tag:"Encerramento", title:"Atendimento já funciona",
+      text:{ag:"Show, vcs tão bem organizados aí. Se um dia quiserem automatizar alguma parte, é só me chamar 🙏🏼",
+            dt:"Show, tá bem organizado aí. Se um dia quiser automatizar alguma parte, é só me chamar 🙏🏼"}},
+     {tag:"Variação", title:"Não quer anúncio agora",
+      text:{ag:"Tranquilo. Uma coisa que eu também faço é atendimento com IA no WhatsApp, pra responder quem chama na hora. Isso faria diferença aí hoje?",
+            dt:"Tranquilo. Uma coisa que eu também faço é atendimento com IA no WhatsApp, pra responder paciente na hora. Isso faria diferença aí hoje?"}}
+   ]},
+   {title:"Follow-up do gestor", items:[
+     {tag:"D+2", title:"Sem resposta ao diagnóstico", text:"Oiii, passando rapidinho. Quando chega mensagem fora do horário aí, quem responde?"},
+     {tag:"D+2", title:"Sem resposta ao vídeo", text:"Vou deixar o vídeo aqui pra quando tiver um tempinho. É de 1 minuto e mostra o atendente respondendo no WhatsApp ☺️"},
+     {tag:"D+5", title:"Último", text:"Oiii, última vez que te chamo sobre isso, prometo kkkk Se agora não for o momento, só me fala que eu entendo 🙏🏼"}
    ]}
-  ]},
- {id:"followup", n:"02", label:"Follow-up", title:"Sequência pós-abordagem",
-  intro:"Quatro mensagens para quem não respondeu à abordagem. Cada uma traz um ângulo novo. Se a pessoa responder, pare a sequência.",
-  groups:[{title:"Sem resposta à abordagem", items:[
-     {tag:"FU1 · D+1", title:"Retomada leve", parts:["Oii! Sei que a rotina de agência é corrida, então fica tranquilo ☺️ Quando tiver um tempinho, me conta como os clientes costumam chegar até vocês hoje?"]},
-     {tag:"FU2 · D+3", title:"Áudio de 20 a 30 segundos (preferir)", when:"Roteiro para gravar. Escolha áudio ou texto, nunca os dois.", parts:["Oi, tudo bem? Aqui é o Gabriel, da Sales Growth. Te chamei esses dias e resolvi mandar um áudio rapidinho. O que mais vejo por aí é agência com perfil muito bom, mas que ainda depende quase só de indicação pra vender. A ideia é levar gente que já tá procurando viagem direto pro WhatsApp de vocês. Se fizer sentido, me fala que te explico rapidinho como funciona."]},
-     {tag:"FU2 · D+3", title:"Versão em texto", parts:["Vejo muita agência com perfil muito bom que ainda depende quase só de indicação pra vender 🫣 Se fizer sentido trazer mais gente procurando viagem pro WhatsApp de vocês, me fala que te explico como funciona."]},
-     {tag:"FU3 · D+5", title:"Prova", parts:["Lembrei de vocês essa semana 👋🏻","Hoje a gente atende outras agências que estavam num momento bem parecido, dependendo só de indicação. Agora o anúncio virou mais um canal pra trazer cliente novo. Quer que eu te mostre como funciona?"]},
-     {tag:"FU4 · D+8", title:"Encerramento, pede sim ou não", parts:["Vou parar de te mandar mensagem pra não ficar chato 😆 Só me fala uma coisa, trazer mais clientes é algo que vocês querem olhar agora ou mais pra frente?"],
-      next:[["Agora","qualificar e chamar pra call"],["Mais pra frente","reativação em 15 dias"]]}
-  ]}]},
- {id:"objecoes", n:"03", label:"Objeções", title:"Objeções",
-  intro:"Cada resposta reabre a conversa sem discutir. Use só uma por conversa, a que mais encaixa no que a pessoa disse.",
-  groups:[{title:"Respostas de campo", items:[
-     {tag:"01", title:"Já fiz anúncio e não funcionou", parts:["Poxa, imagino a frustração. Na época, o que mais pegou, o custo, a quantidade de contatos ou o perfil de quem chegava?"]},
-     {tag:"02", title:"Já tenho gestor de tráfego", parts:["Boa, então os anúncios já tão em boas mãos 👏🏻 E no atendimento, quando chega contato à noite ou no fim de semana, alguém responde na hora?"]},
-     {tag:"03", title:"Não tenho interesse", parts:["Tranquilo, obrigado pelo retorno! Se em algum momento fizer sentido, é só me chamar. Sucesso aí 🙏🏼"]},
-     {tag:"04", title:"Não tenho verba agora", parts:["Entendo total 🙏🏼 O investimento precisa caber no momento de vocês. Hoje já tem alguma verba separada pra trazer cliente novo ou é algo pra mais pra frente?"]},
-     {tag:"05", title:"Agora não é o momento", parts:["Tranquilo, sem pressa nenhuma ☺️ Qual seria um momento melhor pra gente conversar, fim do mês ou começo do próximo?"]},
-     {tag:"06", title:"Fazemos anúncio internamente", parts:["Boa, faz sentido manter o que já funciona 👏🏻 Hoje o que vocês mais queriam melhorar, o custo por contato, a quantidade de gente chegando ou o perfil dela?"]},
-     {tag:"07", title:"Me manda mais informações", parts:["Mando sim! 🫡 Só pra te mandar algo que faça sentido, vocês já anunciam hoje ou seria a primeira vez?"]},
-     {tag:"08", title:"Me manda o preço primeiro", parts:["Te passo sim! 🫡 O valor muda de acordo com o momento da agência e o que a gente vai trabalhar. Vocês já anunciam hoje ou tão pensando em começar agora?"]},
-     {tag:"09", title:"Não tenho tempo pra isso agora", parts:["Entendo demais, rotina de agência é puxada. A ideia é justamente tirar isso das suas costas, eu cuido das campanhas e te mostro o que tá trazendo. Topa uma conversa rápida de 15 minutos?"]},
-     {tag:"10", title:"Preciso falar com meu sócio", parts:["Claro, faz todo sentido alinhar com ele. Se ajudar, explico numa call rápida com vocês dois. Quando fica bom pra vocês?"]},
-     {tag:"11", title:"Já estou bem com indicações", parts:["Indicação é ótimo sinal, mostra que quem viaja com vocês volta satisfeito 👏🏻 O ponto é que ela depende de quem já conhece a agência. Faz sentido chegar também em quem ainda não conhece?"]},
-     {tag:"12", title:"Não confio em anúncio", parts:["Entendo a desconfiança, tem muita promessa por aí. Prefiro te mostrar como eu analisaria público, investimento e resultado antes de qualquer coisa. Faz sentido?"]},
-     {tag:"13", title:"Vou pensar e te dou um retorno", parts:["Claro, sem pressa ☺️ Só pra eu te ajudar, o que você quer avaliar com mais calma, o investimento, o público ou o resultado esperado?"]},
-     {tag:"14", title:"Minha agência é pequena demais", parts:["Entendo. Na verdade o tamanho da agência só muda o investimento e o escopo. Hoje quantos clientes novos por mês fariam diferença pra vocês?"]},
-     {tag:"15", title:"Não sei se anúncio funciona pra viagem", parts:["Faz sentido a dúvida. Quem planeja viagem pesquisa muito antes de fechar, por isso o anúncio precisa acertar destino, público e momento. Vocês já anunciaram algum destino ou pacote?"]}
-  ]}]},
- {id:"reativacao", n:"04", label:"Reativação", title:"Conversas que esfriaram",
-  intro:"Espere no mínimo 15 dias. Escolha o cenário do histórico e mude o ângulo a cada reativação da mesma pessoa.",
-  groups:[{title:"Cenários", items:[
-     {tag:"01", title:"Sumiu sem motivo", parts:["Oii, tudo certo por aí? 👋🏻 Lembrei de vocês essa semana. Faz sentido a gente retomar aquela conversa sobre trazer mais clientes pra agência?"]},
-     {tag:"02", title:"Faltou na call", parts:["Oi, tudo bem? Sem problema, acontece ☺️ Ainda faz sentido a gente conversar? Se sim, me fala um horário melhor pra você."]},
-     {tag:"03", title:"Esfriou depois do preço", parts:["Oi, tudo bem? Posso te perguntar uma coisa? O que pesou mais depois da nossa conversa, o investimento, o valor da gestão ou o momento de vocês?"]},
-     {tag:"04", title:"Próxima temporada", parts:["Oii, tudo bem? 👋🏻 Se vocês já tão planejando a próxima temporada, agora é uma boa hora pra preparar os anúncios dos destinos que querem vender. Faz sentido retomar?"]},
-     {tag:"05", title:"Revisão do público", parts:["Oi! Lembrei de vocês porque às vezes o ponto não é anunciar mais, e sim ajustar quem o anúncio atrai. Hoje os contatos que chegam têm o perfil de viagem que vocês querem vender?"]},
-     {tag:"06", title:"Tentativa final", parts:["Tranquilo, vou encerrar por aqui pra não te incomodar. Quando quiser conversar sobre trazer mais clientes pra agência, é só me chamar 🙏🏼"]}
-  ]}]},
- {id:"poscall", n:"05", label:"Pós-call", title:"Depois da reunião",
-  intro:"Cada situação pede um ângulo diferente. Leia o contexto antes de escolher.",
-  groups:[
+ ]},
+ {id:"followup", n:"02", label:"Follow-up", groups:[
+   {title:"Sem resposta", items:[
+     {tag:"FU1 · D+2 úteis", title:"Oferecer o áudio",
+      text:"Oiii, passando rapidinho\nSe ficar mais fácil pra vc, te mando um áudio de 1 minuto explicando como funcionaria, sem precisar marcar reunião. Pode ser?",
+      next:[["Topou","Roteiro do áudio"],["Sem resposta","FU2"]]},
+     {tag:"FU2 · D+5 úteis", title:"Último",
+      text:"Oiii, última vez que te chamo sobre isso, prometo kkkk\nSe não for vc que cuida da divulgação aí, me passa pra pessoa certa? E se agora não for o momento, só me fala que eu entendo 🙏🏼",
+      next:[["Passou o contato","abertura"],["Sem resposta","parar · volta em 60 dias"]]}
+   ]},
+   {title:"Áudio", items:[
+     {tag:"Até 1 min", title:"Roteiro do áudio",
+      text:{ag:"Oi, tudo bem? Aqui é o Gabriel. Te explico rapidinho. Eu cuido dos anúncios da agência pra levar gente que já tá pensando em viajar direto pro WhatsApp de vcs. Eu monto as campanhas, escolho pra quem o anúncio aparece e acompanho de perto o que tá chegando de contato, pra ajustar o que não tá funcionando. Vcs ficam com o atendimento e a venda. Pra eu te mostrar como ficaria no caso de vcs, o ideal é uma conversa de 15 minutos. Me fala um dia bom que eu me encaixo.",
+            dt:"Oi, tudo bem? Aqui é o Gabriel. Te explico rapidinho. Eu cuido dos anúncios do consultório pra levar paciente que já tá procurando tratamento direto pro seu WhatsApp. Eu monto as campanhas, escolho pra quem o anúncio aparece e acompanho de perto o que tá chegando de contato, pra ajustar o que não tá funcionando. Vc fica com o atendimento e a avaliação. Pra eu te mostrar como ficaria no seu caso, o ideal é uma conversa de 15 minutos. Me fala um dia bom que eu me encaixo."}}
+   ]}
+ ]},
+ {id:"objecoes", n:"03", label:"Objeções", groups:[
+   {title:"Objeções", items:[
+     {tag:"01", title:"Já fiz anúncio e não funcionou",
+      text:{ag:"Entendi. O que pegou mais na época, veio pouca mensagem ou veio gente que não fechava?",
+            dt:"Entendi. O que pegou mais na época, veio pouca mensagem ou veio paciente que não fechava?"}},
+     {tag:"02", title:"Já tenho gestor de tráfego",
+      text:{ag:"Show, então essa parte tá coberta. E quando chega mensagem à noite ou no fim de semana, alguém responde na hora?",
+            dt:"Show, então essa parte tá coberta. E quando paciente chama à noite ou no fim de semana, alguém responde na hora?"},
+      next:[["Respondeu","Abordagem · Já tem gestor"]]},
+     {tag:"03", title:"Não tenho interesse", text:"Imagina, obrigado pelo retorno 🙏🏼 Se um dia fizer sentido, é só me chamar por aqui"},
+     {tag:"04", title:"Não tenho verba agora", text:"Entendo. Vc imagina ter verba pra isso nos próximos meses ou só mais pra frente?"},
+     {tag:"05", title:"Agora não é o momento", text:"Tranquilo ☺️ Faz sentido eu te chamar de novo no começo do mês que vem?"},
+     {tag:"06", title:"Fazemos anúncio por conta própria",
+      text:{ag:"Show. E hoje o que vcs mais queriam melhorar, a quantidade de mensagem ou o perfil de quem chega?",
+            dt:"Show. E hoje o que vc mais queria melhorar, a quantidade de mensagem ou o perfil de quem chega?"}},
+     {tag:"07", title:"Me manda mais informações", text:"Mando sim 🫡 Fica mais fácil eu te mandar um áudio de 1 minuto explicando, pode ser?"},
+     {tag:"08", title:"Me manda o preço primeiro", text:"Te passo sim. O valor muda conforme o escopo, então numa conversa de 15 min eu já te falo o número certinho. Qual dia fica bom pra vc?"},
+     {tag:"09", title:"Não tenho tempo pra isso", text:"Entendo. A ideia é justamente tirar isso das suas costas, eu cuido das campanhas e te mostro o que tá trazendo. Te mando um áudio de 1 minuto explicando, pode ser?"},
+     {tag:"10", title:"Preciso falar com meu sócio", text:"Claro. Se ajudar, explico numa conversa rápida com vcs dois. Qual dia fica bom?"},
+     {tag:"11", title:"Já estou bem com indicações",
+      text:{ag:"Que bom, indicação é sinal de cliente satisfeito 👏🏻 O anúncio entra pra chegar em quem ainda não conhece vcs. Faz sentido testar isso agora?",
+            dt:"Que bom, indicação é sinal de paciente satisfeito 👏🏻 O anúncio entra pra chegar em quem ainda não te conhece. Faz sentido testar isso agora?"}},
+     {tag:"12", title:"Não confio em anúncio", text:"Entendo, tem muita promessa por aí. Por isso eu prefiro te mostrar como eu faria antes de qualquer coisa. Topa uma conversa de 15 min?"},
+     {tag:"13", title:"Vou pensar e te dou um retorno", text:"Claro, sem pressa ☺️ Ficou alguma dúvida que eu consiga responder agora?"},
+     {tag:"14", title:"Sou pequeno demais pra isso",
+      text:{ag:"Entendo. O tamanho da agência só muda o investimento e o escopo. Quantos clientes novos por mês fariam diferença pra vcs hoje?",
+            dt:"Entendo. O tamanho do consultório só muda o investimento e o escopo. Quantos pacientes novos por mês fariam diferença pra vc hoje?"}},
+     {tag:"15", title:"Não sei se funciona no meu ramo",
+      text:{ag:"Faz sentido a dúvida. Quem planeja viagem pesquisa bastante antes de fechar, então o anúncio precisa aparecer pro público certo na hora certa. Quais destinos vcs mais querem vender hoje?",
+            dt:"Faz sentido a dúvida. O anúncio precisa falar do tratamento certo pro público certo. Qual tratamento vc mais quer trazer paciente hoje?"}},
+     {tag:"16", title:"Me manda por e-mail", text:"Consigo te explicar melhor por aqui mesmo. Te mando um áudio de 1 minuto, pode ser?"}
+   ]}
+ ]},
+ {id:"reativacao", n:"04", label:"Reativação", groups:[
+   {title:"Conversas que esfriaram", items:[
+     {tag:"01", title:"Sumiu no meio da conversa", when:"15+ dias",
+      text:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. A gente tinha conversado sobre anúncio um tempo atrás e acabou ficando parado\nAinda faz sentido pra vc retomar agora ou prefere deixar pra outro momento?"},
+     {tag:"02", title:"Faltou na call", text:"Oiii, tudo bem?? Acontece ☺️ Ainda faz sentido a gente conversar? Se sim, me fala um horário melhor pra vc"},
+     {tag:"03", title:"Esfriou depois do preço", text:"Oiii, tudo bem?? Me tira uma dúvida, o que pesou mais na sua decisão, o valor ou o momento?"},
+     {tag:"04", title:"Época boa pra começar",
+      text:{ag:"Oiii, tudo bem?? Se vcs já tão planejando a próxima temporada, agora é uma boa hora pra preparar os anúncios dos destinos que querem vender. Faz sentido retomar?",
+            dt:"Oiii, tudo bem?? Se vc quer começar o ano com a agenda mais cheia, agora é uma boa hora pra preparar os anúncios. Faz sentido retomar?"}},
+     {tag:"05", title:"Nunca respondeu", when:"60+ dias",
+      text:{ag:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra agência de viagem trazer cliente novo direto pro WhatsApp\nVcs já anunciam hoje ou ainda não?",
+            dt:"Oiii, tudo bem?? Aqui é o Gabriel, da Sales Growth. Eu faço anúncio pra dentista trazer paciente novo direto pro WhatsApp do consultório\nVc já anuncia hoje ou ainda não?"}},
+     {tag:"06", title:"Tentativa final", text:"Oiii, vou encerrar por aqui pra não te incomodar. Quando quiser falar sobre anúncio, é só me chamar 🙏🏼"}
+   ]}
+ ]},
+ {id:"poscall", n:"05", label:"Pós-call", groups:[
    {title:"Sumiu depois da reunião", items:[
-     {tag:"Msg 1", title:"Check-in", when:"3 a 5 dias sem retorno", parts:["Oii, tudo bem? 👋🏻 Depois da nossa reunião, ficou alguma dúvida sobre a estratégia, o investimento ou os próximos passos?"]},
-     {tag:"Msg 2", title:"Tirar o obstáculo", when:"3 dias depois", parts:["Passando aqui rapidinho. O que travou foi o investimento, o momento ou alguma dúvida sobre o que a gente faria? Pode falar com tranquilidade ☺️"]},
-     {tag:"Msg 3", title:"Fechar o ciclo", when:"4 dias depois", parts:["Tudo bem, vou deixar vocês à vontade 🙏🏼 Se fizer sentido retomar em outro momento, é só me chamar."]}
+     {tag:"Msg 1", title:"Check-in", when:"3 a 5 dias", text:"Oiii, tudo bem?? Ficou alguma dúvida depois da nossa conversa?"},
+     {tag:"Msg 2", title:"Tirar o obstáculo", when:"+3 dias", text:"Passando rapidinho. O que travou, o investimento ou o momento? Pode falar tranquilo ☺️"},
+     {tag:"Msg 3", title:"Fechar o ciclo", when:"+4 dias", text:"Tudo bem, vou deixar vc à vontade 🙏🏼 Se fizer sentido retomar depois, é só me chamar"}
    ]},
    {title:"Outras situações", items:[
-     {tag:"Retorno", title:"Prometeu retornar e sumiu", when:"Dia seguinte ao prazo", parts:["Oi, tudo bem? Você tinha comentado que me daria um retorno ☺️ Ainda faz sentido a gente seguir com o que conversamos ou a prioridade mudou por aí?"]},
-     {tag:"Proposta", title:"Logo depois de enviar", parts:["Acabei de te mandar a proposta com tudo que a gente conversou 🫡 Chegou certinho? Quando acha que consegue dar uma olhada?"]},
-     {tag:"Proposta", title:"Sem resposta em 2 dias", parts:["Oii, só confirmando se a proposta chegou certinho. Ficou alguma dúvida?"]},
-     {tag:"Sócio", title:"No dia combinado", parts:["Oi, tudo bem? Conseguiu conversar com seu sócio sobre a proposta? Me conta o que vocês acharam ☺️"]},
-     {tag:"Sócio", title:"Sem resposta em 2 dias", parts:["Se ajudar na conversa com seu sócio, posso fazer um resumo rapidinho da estratégia e do investimento, ou explicar numa call com vocês dois."]},
-     {tag:"Desconto", title:"Pediu um valor menor", parts:["Entendo. O valor é em cima do escopo que a gente conversou. Antes de pensar em ajuste, bora ver juntos o que é prioridade agora? O que pesou mais pra vocês?"]},
-     {tag:"Desconto", title:"Insistiu no desconto", parts:["Nesse escopo não consigo baixar sem mexer na entrega. Mas posso montar uma versão mais enxuta com o que for prioridade pra vocês agora. Faz sentido?"]},
-     {tag:"Fechou", title:"Agendou ou fechou", parts:["Prontooo, combinado 🙌🏻"]}
+     {tag:"Retorno", title:"Prometeu retornar e sumiu", when:"dia seguinte ao prazo", text:"Oiii, tudo bem?? Vc tinha comentado que me daria um retorno. Ainda faz sentido seguir ou a prioridade mudou aí?"},
+     {tag:"Proposta", title:"Logo depois de enviar", text:"Te mandei a proposta com tudo que a gente conversou 🫡 Quando vc consegue dar uma olhada?"},
+     {tag:"Proposta", title:"Sem resposta", when:"2 dias", text:"Oiii, conseguiu ver a proposta? Ficou alguma dúvida?"},
+     {tag:"Sócio", title:"No dia combinado", text:"Oiii, tudo bem?? Conseguiu conversar com seu sócio sobre a proposta?"},
+     {tag:"Sócio", title:"Sem resposta", when:"2 dias", text:"Se ajudar, explico numa call rápida com vcs dois. Qual dia fica bom?"},
+     {tag:"Desconto", title:"Pediu um valor menor", text:"Entendo. O valor é em cima do escopo que a gente conversou. O que pesou mais pra vc?"},
+     {tag:"Desconto", title:"Insistiu no desconto", text:"Nesse escopo não consigo baixar sem mexer na entrega. Mas consigo montar uma versão mais enxuta com o que for prioridade agora. Faz sentido?"},
+     {tag:"Fechou", title:"Agendou ou fechou", text:"Prontooo, combinado 🙌🏻"}
    ]}
-  ]},
- {id:"tom", n:"06", label:"Tom e emojis", title:"Tom e emojis",
-  intro:"Como o Gabriel escreve. No máximo um emoji por mensagem, sempre no fim. Mensagem séria (preço, desconto, frustração) vai sem emoji. Nunca 😊 nem 😅.",
-  emojis:[["🙏🏼","Agradecer, encerrar e o \"é só me chamar\". O mais usado."],["☺️","Acolher: fica tranquilo, sem pressa, acontece."],["👏🏻","Elogiar a pessoa ou o trabalho dela."],["🫣","Curiosidade ou ponto sensível."],["🫡","Mando sim, pode deixar, proposta enviada."],["👋🏻","Retomar contato: lembrei de vocês."],["😉 👍🏼","Combinado, confirmação leve."],["😆","Humor leve: pra não ficar chato."],["🙌🏻 🥳","Comemorar: agendou, fechou, deu certo."],["💙 🥰","Só com cliente. Nunca com prospect."]]}
+ ]}
 ];
 
-const tabs=document.getElementById('tabs'), content=document.getElementById('content');
-const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function render(sec){
-  let h=`<section class="sec" id="${sec.id}"><div class="sec-head"><h2>${sec.title}</h2><p>${sec.intro}</p></div>`;
-  if(sec.emojis){
-    h+=`<div class="emoji-grid">${sec.emojis.map(([e,t])=>`<div class="emo"><span class="e">${e}</span><small>${esc(t)}</small></div>`).join('')}</div>`;
-  }
-  (sec.groups||[]).forEach(g=>{
-    h+=`<div class="group"><h3>${g.title}</h3>${g.note?`<p class="gnote">${g.note}</p>`:''}`;
-    g.items.forEach(it=>{
-      h+=`<div class="item"><div class="item-head"><span class="tag">${it.tag}</span><span class="item-title">${it.title}</span>${it.when?`<span class="when">${it.when}</span>`:''}</div><div class="bubbles">`;
-      it.parts.forEach((p,i)=>{
-        h+=`<div class="bubble"><p>${it.parts.length>1?`<span class="part">PARTE ${i+1}</span>`:''}${esc(p)}</p><button class="copy" type="button" data-t="${encodeURIComponent(p)}">Copiar</button></div>`;
-      });
-      h+=`</div>`;
-      if(it.next) h+=`<div class="next">${it.next.map(([a,b])=>`<span><b>${a}</b> → ${b}</span>`).join('')}</div>`;
-      h+=`</div>`;
-    });
-    h+=`</div>`;
-  });
-  return h+`</section>`;
-}
-function show(id){
-  const sec=S.find(s=>s.id===id)||S[0];
-  content.innerHTML=render(sec);
-  [...tabs.children].forEach(b=>b.setAttribute('aria-selected',b.dataset.id===sec.id));
-  try{localStorage.setItem('fluxo-tab',sec.id)}catch(e){}
-}
-S.forEach(s=>{const b=document.createElement('button');b.className='tab';b.type='button';b.setAttribute('role','tab');b.dataset.id=s.id;b.innerHTML=`<span class="n">${s.n}</span>${s.label}`;b.onclick=()=>{show(s.id);window.scrollTo({top:0})};tabs.appendChild(b)});
-content.addEventListener('click',e=>{
-  const b=e.target.closest('.copy'); if(!b) return;
-  const t=decodeURIComponent(b.dataset.t);
-  const done=()=>{b.textContent='Copiado';b.classList.add('ok');setTimeout(()=>{b.textContent='Copiar';b.classList.remove('ok')},1500)};
-  const fallback=()=>{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado';};
-  try{navigator.clipboard.writeText(t).then(done,fallback)}catch(err){fallback()}
-});
-let start=(location.hash||'').slice(1);
-if(!S.some(s=>s.id===start)){try{start=localStorage.getItem('fluxo-tab')||'abordagem'}catch(e){start='abordagem'}}
-show(start);
-</script>
+const I_COPY = '<svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9.667a2.667 2.667 0 0 1 2.667-2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1-2.667 2.667h-8.666a2.667 2.667 0 0 1-2.667-2.667z"/><path d="M4.012 16.737a2 2 0 0 1-1.012-1.737v-10c0-1.1.9-2 2-2h10c.75 0 1.158.385 1.5 1"/></svg>';
+const I_OK = '<svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5l10-10"/></svg>';
+const I_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 
-</body></html>
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let niche = 'ag', current = 'abordagem';
+try { niche = localStorage.getItem('fluxo-nicho') === 'dt' ? 'dt' : 'ag'; } catch (e) {}
+const tabs = document.getElementById('tabs'), content = document.getElementById('content'), toast = document.getElementById('toast');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pick = x => (x && typeof x === 'object') ? (x[niche] || x.ag) : x;
+
+function render(sec){
+  return sec.groups.map((g, gi) => {
+    const cards = g.items.map(it => {
+      const t = pick(it.text);
+      return `<article class="card"><div class="card-head"><div class="card-meta"><span class="tag">${esc(it.tag)}</span><span class="card-title">${esc(pick(it.title))}</span>${it.when ? `<span class="when">${esc(it.when)}</span>` : ''}</div><button class="copy" type="button" aria-label="Copiar mensagem" data-t="${encodeURIComponent(t)}">${I_COPY}${I_OK}</button></div><p class="msg">${esc(t)}</p>${it.next ? `<div class="next">${it.next.map(([a,b]) => `<span><b>${esc(a)}</b>${I_ARROW}${esc(b)}</span>`).join('')}</div>` : ''}</article>`;
+    }).join('');
+    return `<div class="section-label"><span class="section-label-num">${String(gi+1).padStart(2,'0')}</span><span>${esc(g.title)}</span></div><div class="cards">${cards}</div>`;
+  }).join('');
+}
+function reveal(els, base){
+  if (reduce) return;
+  els.forEach(el => el.classList.add('fx-in'));
+  requestAnimationFrame(() => els.forEach((el, i) => setTimeout(() => el.classList.add('on'), (base||0) + Math.min(i, 10) * 55)));
+  setTimeout(() => els.forEach(el => el.classList.remove('fx-in','on')), (base||0) + Math.min(els.length, 10) * 55 + 800);
+}
+function show(id, animate){
+  const sec = S.find(s => s.id === id) || S[0];
+  current = sec.id;
+  content.innerHTML = render(sec);
+  [...tabs.children].forEach(b => b.setAttribute('aria-selected', b.dataset.id === sec.id));
+  try { localStorage.setItem('fluxo-tab', sec.id); history.replaceState(null, '', '#' + sec.id); } catch (e) {}
+  if (animate !== false) reveal([...content.querySelectorAll('.section-label, .card')]);
+}
+S.forEach(s => {
+  const b = document.createElement('button');
+  b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.id = s.id;
+  b.innerHTML = `<span class="n">${s.n}</span>${esc(s.label)}`;
+  b.onclick = () => {
+    show(s.id);
+    const top = document.querySelector('.tabs-wrap').offsetTop;
+    if (window.scrollY > top) window.scrollTo({top, behavior: reduce ? 'auto' : 'smooth'});
+    b.scrollIntoView({block:'nearest', inline:'center', behavior: reduce ? 'auto' : 'smooth'});
+  };
+  tabs.appendChild(b);
+});
+document.querySelectorAll('.seg button').forEach(b => {
+  b.setAttribute('aria-pressed', b.dataset.n === niche);
+  b.onclick = () => {
+    if (niche === b.dataset.n) return;
+    niche = b.dataset.n;
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x.dataset.n === niche));
+    try { localStorage.setItem('fluxo-nicho', niche); } catch (e) {}
+    show(current);
+  };
+});
+
+let toastT;
+content.addEventListener('click', e => {
+  const b = e.target.closest('.copy'); if (!b) return;
+  const t = decodeURIComponent(b.dataset.t);
+  const done = () => {
+    b.classList.add('ok'); setTimeout(() => b.classList.remove('ok'), 1400);
+    toast.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('on'), 1600);
+  };
+  const fallback = () => {
+    const ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (err) {}
+    ta.remove();
+  };
+  try { navigator.clipboard.writeText(t).then(done, fallback); } catch (err) { fallback(); }
+});
+
+/* brilho que segue o ponteiro no card */
+function cardGlow(e){
+  const c = e.target.closest && e.target.closest('.card'); if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}
+content.addEventListener('pointermove', cardGlow);
+content.addEventListener('pointerdown', cardGlow);
+content.addEventListener('pointerout', e => {
+  const c = e.target.closest && e.target.closest('.card');
+  if (c && !c.contains(e.relatedTarget)) { c.style.setProperty('--mx','-999px'); c.style.setProperty('--my','-999px'); }
+});
+
+/* luz de fundo que segue o ponteiro, igual ao bio-site */
+(function(){
+  if (reduce) return;
+  const root = document.documentElement, body = document.body;
+  let raf = 0, x = 0, y = 0, cx = -1, cy = -1, t;
+  function set(){ raf = 0; cx = cx < 0 ? x : cx + (x - cx) * .18; cy = cy < 0 ? y : cy + (y - cy) * .18; root.style.setProperty('--gx', cx + 'px'); root.style.setProperty('--gy', cy + 'px'); if (Math.abs(x - cx) > .5 || Math.abs(y - cy) > .5) raf = requestAnimationFrame(set); }
+  function mv(e){ x = e.clientX; y = e.clientY; body.classList.add('spot-on'); if (!raf) raf = requestAnimationFrame(set); if (e.pointerType && e.pointerType !== 'mouse'){ clearTimeout(t); t = setTimeout(() => body.classList.remove('spot-on'), 1200); } }
+  window.addEventListener('pointermove', mv, {passive:true});
+  window.addEventListener('pointerdown', mv, {passive:true});
+  document.addEventListener('mouseleave', () => body.classList.remove('spot-on'));
+})();
+
+let start = (location.hash || '').slice(1);
+if (!S.some(s => s.id === start)) { try { start = localStorage.getItem('fluxo-tab') || 'abordagem'; } catch (e) { start = 'abordagem'; } }
+if (!S.some(s => s.id === start)) start = 'abordagem';
+show(start, false);
+reveal([...document.querySelectorAll('.portrait-wrap, .hero-name, .hero-handle, .niche, .tabs-wrap, #content .section-label, #content .card')], 100);
+</script>
+</body>
+</html>
